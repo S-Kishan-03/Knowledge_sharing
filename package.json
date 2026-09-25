@@ -1,0 +1,16 @@
+{
+  "name": "mechwiki",
+  "version": "1.0.0",
+  "description": "Mechanical Engineering Knowledge Hub",
+  "type": "module",
+  "scripts": {
+    "build:search": "node scripts/build-search-index.js",
+    "validate": "node scripts/validate-topics.js",
+    "new-topic": "node scripts/new-topic.js",
+    "build:seo": "node scripts/generate-sitemap.js"
+  },
+  "devDependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1"
+  }
+}

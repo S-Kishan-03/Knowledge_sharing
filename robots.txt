@@ -1,0 +1,8 @@
+# MechWiki - Robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 10

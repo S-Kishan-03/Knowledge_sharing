@@ -1,0 +1,74 @@
+{
+  "id": "quality-control-and-spc",
+  "title": "Quality Control & SPC",
+  "category": "Manufacturing & CAM",
+  "categoryId": "manufacturing",
+  "readTime": "8 min",
+  "difficulty": "Intermediate",
+  "icon": "quality",
+  "summary": "Cp/Cpk process capability, X-bar & R control charts, common vs special cause, and the Six Sigma ppm scale for production quality.",
+  "infobox": {
+    "title": "Quality & SPC",
+    "imageSymbol": "✅",
+    "keyFormulas": [
+      {
+        "label": "Capability Index",
+        "math": "C_p = \\frac{USL - LSL}{6\\sigma}"
+      },
+      {
+        "label": "Capability (centered)",
+        "math": "C_{pk} = \\min\\left(\\frac{USL - \\bar{x}}{3\\sigma}, \\frac{\\bar{x} - LSL}{3\\sigma}\\right)"
+      },
+      {
+        "label": "X-bar Chart Limits",
+        "math": "CL = \\bar{\\bar{x}} \\pm A_2 \\bar{R}"
+      }
+    ],
+    "siUnits": "index (dimensionless), sigma units"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "Quality Is Process, Not Inspection",
+      "content": "Inspection finds bad parts; **quality control** prevents them. The shift is statistical: every process has natural variation, and the job of SPC is to distinguish the *normal* spread from a *changing* process — and to act on the change before bad parts exist. The two questions of quality engineering: *Can this process hold the tolerance?* (capability) and *Is the process staying on target?* (control). Capability is designed in; control is managed daily."
+    },
+    {
+      "id": "capability",
+      "heading": "Cp & Cpk: Can the Process Hold It?",
+      "content": "Capability compares the **specification width** to the **natural process spread** (6σ, which contains ~99.7% of a normal process):\n\n$$C_p = \\frac{USL - LSL}{6\\sigma}$$\n\n$C_p$ measures spread only — it says nothing about centering. The centered version:\n\n$$C_{pk} = \\min\\left(\\frac{USL - \\bar{x}}{3\\sigma}, \\frac{\\bar{x} - LSL}{3\\sigma}\\right)$$\n\nExample — spec 10 ± 0.1 mm (USL = 10.1, LSL = 9.9), sample σ = 0.03 mm, mean = 10.02 mm:\n\n$$C_p = \\frac{0.2}{6 \\times 0.03} = 1.11, \\qquad C_{pk} = \\min\\left(\\frac{0.08}{0.09}, \\frac{0.12}{0.09}\\right) = \\min(0.89, 1.33) = 0.89$$\n\nThe process spread is fine ($C_p = 1.11$) but **off-center** ($C_{pk} = 0.89 < 1$): ~0.4% of parts exceed the upper limit. Industry norms: $C_{pk} \\geq 1.33$ for normal production (0.1 ppm at 4σ), 1.67 for safety-critical. A capability study is only valid for a **stable** (in-control) process — capability measured on an uncontrolled process is fiction."
+    },
+    {
+      "id": "control-charts",
+      "heading": "X-bar & R Control Charts",
+      "content": "Control charts track the process over time. For variables (measured dimensions), the pair is **X-bar** (mean of subgroups) and **R** (range within subgroup):\n\n$$CL_{X} = \\bar{\\bar{x}} \\pm A_2 \\bar{R}, \\qquad CL_R = D_3 \\bar{R} \\text{ to } D_4 \\bar{R}$$\n\n($A_2$, $D_3$, $D_4$ are constants from subgroup size.) The chart is read for **signals**:\n\n- One point beyond 3σ control limits — likely special cause (tool wear spike, material change).\n- **Run of 7+ points** on one side of the center line, or 7 rising/falling — drift, not noise (tool wear ramping, coolant temperature).\n- Other runs tests (2 of 3 beyond 2σ, 4 of 5 beyond 1σ) add sensitivity at the cost of alarms.\n\nThe rule: **common cause** variation (inherent, stable) is reduced by process *improvement*; **special cause** variation (assignable — a crashed insert, a new batch, a mis-set fixture) is removed by *action*. Charting without acting on special causes is theater."
+    },
+    {
+      "id": "process-vs-spec",
+      "heading": "Control & Capability Are Different",
+      "content": "A process can be **in control but out of spec** — tight, stable, and wrong: the classic case of a process centered at the wrong nominal with $C_{pk} < 1$. Conversely, a process can be in spec on average yet out of control — unstable, drifting within the limits until it doesn't.\n\nThe hierarchy: first **remove special causes** (stabilize the chart), then **improve the common-cause spread** (process change: better tooling, material, method — see [[machining-fundamentals|machining]] for the lever list), then **re-center** if $C_{pk} < C_p$. Only then quote $C_{pk} \\geq 1.33$ with confidence. And remember the measurement system must be sound before any of this means anything (see [[metrology-and-inspection|gauge R&R]])."
+    },
+    {
+      "id": "six-sigma",
+      "heading": "The Six Sigma Scale",
+      "content": "The Six Sigma movement formalized a defect scale. With a 1.5σ mean shift allowed (the standard assumption), process spread vs expected defect rate:\n\n| Process level (spread) | ppm out of spec |\n|---|---|\n| ±1σ | 317 000 |\n| ±2σ | 45 500 |\n| ±3σ | 2 700 |\n| ±4σ | 63 |\n| ±5σ | 0.57 |\n| ±6σ | 0.002 (the famous \"3.4\" with shift) |\n\nPerspective: ±3σ (a Cpk of 1.0 with shift) already means ~2700 defective ppm — visible on any production line. Six Sigma quality is not a moral ideal; it is a **cost decision** about scrap, rework, and warranty, made with exactly these numbers. Most well-managed machining runs land Cpk 1.33–1.67 — the corridor between \"competent\" and \"exceptional\"."
+    },
+    {
+      "id": "inspection-strategy",
+      "heading": "Sampling, AQL & the Inspection Strategy",
+      "content": "Control charts earn their keep by **reducing inspection**:\n\n- A **capable, in-control** process needs only sampling (typically 3–8 pieces per shift with charts) — 100% inspection is a symptom of an uncontrolled process.\n- For attribute (go/no-go) checks, **AQL sampling plans** (ISO 2859) fix sample size and acceptance numbers by lot size and AQL level: accepting a 1.0% AQL plan means lots with ≤1% defectives are accepted most of the time.\n- **100% inspection** stays justified for safety-critical features, Cpk < 1.0 processes, or where defect cost is huge — but it is ~85–90% effective at best (operator fatigue); automated vision re-raises it.\n- The loop closes with **reaction plans**: an out-of-control signal triggers containment (quarantine, 100% check), correction (root cause), and validation — then the chart resumes. Quality is closed-loop, not a report."
+    }
+  ],
+  "keyTakeaways": [
+    "Capability: Cp = (USL−LSL)/6σ and Cpk vs centering; require Cpk ≥ 1.33 for stable production.",
+    "Control charts separate common cause (improve the process) from special cause (act now).",
+    "In-control ≠ in-spec: stabilize first, then reduce spread, then re-center.",
+    "SPC sampling replaces 100% inspection once the process is capable; close the loop with reaction plans."
+  ],
+  "relatedTopics": [
+    "metrology-and-inspection",
+    "gdnt-fundamentals",
+    "manufacturing-process-selection",
+    "tolerance-stack-up-analysis",
+    "machining-fundamentals"
+  ]
+}

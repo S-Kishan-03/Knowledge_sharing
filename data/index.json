@@ -1,0 +1,410 @@
+{
+  "siteTitle": "MechWiki | Mechanical Engineering Knowledge Base",
+  "subtitle": "Interactive, Data-Driven Mechanical Engineering Reference Hub",
+  "categories": [
+    {
+      "id": "thermal",
+      "name": "Thermal & Energy Engineering",
+      "description": "Thermodynamics, heat transfer, power cycles, and energy conservation.",
+      "icon": "flame"
+    },
+    {
+      "id": "fluids",
+      "name": "Fluid Mechanics & Hydraulics",
+      "description": "Fluid dynamics, pressure distribution, pipe flow, and turbomachinery.",
+      "icon": "droplet"
+    },
+    {
+      "id": "solids",
+      "name": "Solid Mechanics & Materials",
+      "description": "Stress-strain analysis, elasticity, failure theories, and material science.",
+      "icon": "shield"
+    },
+    {
+      "id": "machine-design",
+      "name": "Machine Design & Kinematics",
+      "description": "Gears, linkages, power transmission, bearings, and mechanical systems.",
+      "icon": "cog"
+    },
+    {
+      "id": "product-design",
+      "name": "Product Design & CAD",
+      "description": "Geometric dimensioning, CAD modeling, and new product development workflows.",
+      "icon": "design"
+    },
+    {
+      "id": "cae",
+      "name": "Simulation & Analysis (CAE)",
+      "description": "Finite element analysis, structural simulation, and virtual design validation.",
+      "icon": "computer"
+    },
+    {
+      "id": "manufacturing",
+      "name": "Manufacturing & CAM",
+      "description": "CNC machining, toolpath generation, and computer-aided manufacturing.",
+      "icon": "factory"
+    }
+  ],
+  "topics": [
+    {
+      "id": "thermodynamics-laws",
+      "title": "Laws of Thermodynamics & Power Cycles",
+      "category": "Thermal & Energy Engineering",
+      "categoryId": "thermal",
+      "readTime": "8 min",
+      "difficulty": "Intermediate",
+      "icon": "zap",
+      "summary": "Core principles governing energy conservation, entropy, Carnot efficiency, and thermal systems.",
+      "tags": ["Thermodynamics", "Energy", "Entropy", "Carnot Cycle", "Heat Transfer"],
+      "lastUpdated": "2026-09-23"
+    },
+    {
+      "id": "bernoulli-fluid-mechanics",
+      "title": "Fluid Dynamics & Bernoulli's Principle",
+      "category": "Fluid Mechanics & Hydraulics",
+      "categoryId": "fluids",
+      "readTime": "7 min",
+      "difficulty": "Beginner",
+      "icon": "waves",
+      "summary": "Conservation of energy in fluid flow, pressure heads, Venturi meters, and flow rate calculations.",
+      "tags": ["Fluid Mechanics", "Bernoulli Equation", "Pressure", "Flow Rate", "Hydraulics"],
+      "lastUpdated": "2026-09-23"
+    },
+    {
+      "id": "stress-strain-analysis",
+      "title": "Stress, Strain & Hooke's Law",
+      "category": "Solid Mechanics & Materials",
+      "categoryId": "solids",
+      "readTime": "9 min",
+      "difficulty": "Beginner",
+      "icon": "activity",
+      "summary": "Normal and shear stresses, Young's Modulus, Hooke's Law, Poisson's ratio, and stress-strain curves.",
+      "tags": ["Solid Mechanics", "Stress", "Strain", "Hooke's Law", "Elasticity", "Materials"],
+      "lastUpdated": "2026-09-23"
+    },
+    {
+      "id": "spur-gear-design",
+      "title": "Spur Gear Kinematics & Design Ratios",
+      "category": "Machine Design & Kinematics",
+      "categoryId": "machine-design",
+      "readTime": "10 min",
+      "difficulty": "Advanced",
+      "icon": "settings",
+      "summary": "Gear tooth terminology, module calculations, pitch diameter, gear ratios, and torque transmission.",
+      "tags": ["Machine Design", "Gears", "Kinematics", "Torque", "Velocity Ratio"],
+      "lastUpdated": "2026-09-23"
+    },
+    {
+      "id": "gdnt-fundamentals",
+      "title": "Geometric Dimensioning & Tolerancing (GD&T)",
+      "category": "Product Design & CAD",
+      "categoryId": "product-design",
+      "readTime": "10 min",
+      "difficulty": "Intermediate",
+      "icon": "ruler",
+      "summary": "The GD&T language for defining and controlling form, orientation, location, profile, and runout using datums and feature control frames.",
+      "tags": ["GD&T", "Tolerancing", "Datums", "ASME Y14.5", "MMC", "Quality"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "new-product-design",
+      "title": "New Product Design & Development",
+      "category": "Product Design & CAD",
+      "categoryId": "product-design",
+      "readTime": "9 min",
+      "difficulty": "Beginner",
+      "icon": "bulb",
+      "summary": "The structured NPD workflow: voice of customer, concept generation, DFM/DFA, prototyping, and design reviews.",
+      "tags": ["Product Design", "NPD", "DFM", "DFA", "Prototyping", "FMEA"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "cad-computer-aided-design",
+      "title": "Computer-Aided Design (CAD)",
+      "category": "Product Design & CAD",
+      "categoryId": "product-design",
+      "readTime": "8 min",
+      "difficulty": "Beginner",
+      "icon": "pen",
+      "summary": "Parametric 3D modeling, wireframe/surface/solid paradigms, assemblies, drawings, and STEP/IGES data exchange.",
+      "tags": ["CAD", "Parametric Modeling", "3D Modeling", "STEP", "Design"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "cae-analysis",
+      "title": "Computer-Aided Engineering & FEA",
+      "category": "Simulation & Analysis (CAE)",
+      "categoryId": "cae",
+      "readTime": "11 min",
+      "difficulty": "Advanced",
+      "icon": "trend",
+      "summary": "Finite element analysis workflow, meshing, boundary conditions, and interpretation of structural, modal, and thermal simulations.",
+      "tags": ["CAE", "FEA", "Simulation", "Meshing", "Von Mises", "Convergence"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "cam-computer-aided-manufacturing",
+      "title": "Computer-Aided Manufacturing (CAM)",
+      "category": "Manufacturing & CAM",
+      "categoryId": "manufacturing",
+      "readTime": "9 min",
+      "difficulty": "Intermediate",
+      "icon": "robot",
+      "summary": "Toolpath generation, CNC programming, G-code fundamentals, post-processing, and machine simulation.",
+      "tags": ["CAM", "CNC", "G-Code", "Toolpaths", "Post-Processor"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "machining-fundamentals",
+      "title": "Machining & Cutting Fundamentals",
+      "category": "Manufacturing & CAM",
+      "categoryId": "manufacturing",
+      "readTime": "10 min",
+      "difficulty": "Intermediate",
+      "icon": "machining",
+      "summary": "Material removal processes, cutting speed, feed, and depth of cut parameters, tooling, and surface finish control.",
+      "tags": ["Machining", "Turning", "Milling", "Cutting Speed", "MRR", "Tooling"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "engineering-specifications",
+      "title": "Engineering Specifications & Requirements",
+      "category": "Product Design & CAD",
+      "categoryId": "product-design",
+      "readTime": "7 min",
+      "difficulty": "Beginner",
+      "icon": "spec",
+      "summary": "Turning functional requirements into measurable engineering specifications with design inputs, outputs, and spec sheets.",
+      "tags": ["Specifications", "Requirements", "Design Inputs", "QFD", "Documentation"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "tolerance-stack-up-analysis",
+      "title": "Tolerance Stack-Up Analysis",
+      "category": "Product Design & CAD",
+      "categoryId": "product-design",
+      "readTime": "9 min",
+      "difficulty": "Intermediate",
+      "icon": "scale",
+      "summary": "Worst-case, RSS, and Monte Carlo analysis of dimension chains to verify assemblies meet fit and function.",
+      "tags": ["Tolerance", "Stack-Up", "RSS", "Dimension Chain", "GD&T"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "engineering-drawings-and-bom",
+      "title": "Engineering Drawings & BOM",
+      "category": "Product Design & CAD",
+      "categoryId": "product-design",
+      "readTime": "7 min",
+      "difficulty": "Beginner",
+      "icon": "blueprint",
+      "summary": "Orthographic views, section views, title blocks, dimensioning rules, and bill of materials for manufacturing release.",
+      "tags": ["Drawings", "BOM", "Orthographic", "Title Block", "Documentation"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "iso-fits-and-surface-finish",
+      "title": "ISO Fits & Surface Finish",
+      "category": "Product Design & CAD",
+      "categoryId": "product-design",
+      "readTime": "7 min",
+      "difficulty": "Beginner",
+      "icon": "microscope",
+      "summary": "ISO 286 hole and shaft tolerance systems, limit fits, tolerance grades, and surface finish Ra/Rz per process.",
+      "tags": ["Fits", "ISO 286", "H7", "Surface Finish", "Tolerances"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "prototype-testing-and-validation",
+      "title": "Prototype Testing & Validation",
+      "category": "Product Design & CAD",
+      "categoryId": "product-design",
+      "readTime": "9 min",
+      "difficulty": "Intermediate",
+      "icon": "flask",
+      "summary": "DVP&R test planning, functional and environmental testing, instrumentation, and design validation sign-off.",
+      "tags": ["Prototyping", "DVP&R", "Validation", "Testing", "FMEA"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "bearings-and-shafts",
+      "title": "Bearings & Shaft Design",
+      "category": "Machine Design & Kinematics",
+      "categoryId": "machine-design",
+      "readTime": "9 min",
+      "difficulty": "Intermediate",
+      "icon": "bearing",
+      "summary": "Bearing types, L10 life rating, equivalent load, and combined bending-torsion shaft design.",
+      "tags": ["Bearings", "Shafts", "L10 Life", "Machine Design", "Torque"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "fasteners-and-threaded-joints",
+      "title": "Fasteners & Threaded Joints",
+      "category": "Machine Design & Kinematics",
+      "categoryId": "machine-design",
+      "readTime": "8 min",
+      "difficulty": "Beginner",
+      "icon": "bolt",
+      "summary": "Thread terminology, ISO metric fasteners, torque-preload relations, and joint locking methods.",
+      "tags": ["Fasteners", "Bolts", "Threads", "Preload", "Torque"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "springs-seals-and-keys",
+      "title": "Springs, Seals & Key Connections",
+      "category": "Machine Design & Kinematics",
+      "categoryId": "machine-design",
+      "readTime": "9 min",
+      "difficulty": "Intermediate",
+      "icon": "coil",
+      "summary": "Helical spring rate and stress, O-ring gland design, and parallel key shear strength for torque transmission.",
+      "tags": ["Springs", "Seals", "Keys", "Machine Design", "Elasticity"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "mechanical-power-transmission",
+      "title": "Mechanical Power Transmission",
+      "category": "Machine Design & Kinematics",
+      "categoryId": "machine-design",
+      "readTime": "9 min",
+      "difficulty": "Intermediate",
+      "icon": "chain",
+      "summary": "Belt and chain drives, speed ratios, tension relationships, couplings, and torque-power-speed conversions.",
+      "tags": ["Belts", "Chains", "Couplings", "Power Transmission", "Speed Ratio"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "mechanism-and-kinematics-analysis",
+      "title": "Mechanisms & Kinematics",
+      "category": "Machine Design & Kinematics",
+      "categoryId": "machine-design",
+      "readTime": "10 min",
+      "difficulty": "Advanced",
+      "icon": "linkage",
+      "summary": "Degrees of freedom, four-bar linkages, Grashof criterion, cam followers, and slider-crank kinematics.",
+      "tags": ["Mechanisms", "Kinematics", "Four-Bar", "Cams", "DOF"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "fatigue-and-failure-analysis",
+      "title": "Fatigue & Failure Analysis",
+      "category": "Simulation & Analysis (CAE)",
+      "categoryId": "cae",
+      "readTime": "10 min",
+      "difficulty": "Advanced",
+      "icon": "fatigue",
+      "summary": "S-N curves, endurance limit, Goodman criteria, Miner's rule, and stress concentration in cyclic loading design.",
+      "tags": ["Fatigue", "S-N Curve", "Goodman", "Miner", "Endurance Limit"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "thermal-and-cfd-analysis",
+      "title": "Thermal & CFD Analysis",
+      "category": "Simulation & Analysis (CAE)",
+      "categoryId": "cae",
+      "readTime": "9 min",
+      "difficulty": "Intermediate",
+      "icon": "thermometer",
+      "summary": "Conduction, convection, and radiation modes, thermal resistance networks, and CFD fundamentals with Reynolds classification.",
+      "tags": ["Heat Transfer", "CFD", "Thermal", "Navier-Stokes", "Reynolds"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "metrology-and-inspection",
+      "title": "Metrology & Inspection",
+      "category": "Manufacturing & CAM",
+      "categoryId": "manufacturing",
+      "readTime": "8 min",
+      "difficulty": "Intermediate",
+      "icon": "target",
+      "summary": "Measurement instruments, uncertainty, CMM inspection, gauge R&R, and calibration for verifying manufactured parts.",
+      "tags": ["Metrology", "Inspection", "CMM", "Uncertainty", "Calibration"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "sheet-metal-manufacturing",
+      "title": "Sheet Metal Manufacturing",
+      "category": "Manufacturing & CAM",
+      "categoryId": "manufacturing",
+      "readTime": "7 min",
+      "difficulty": "Beginner",
+      "icon": "clamp",
+      "summary": "Shearing, punching, bending with K-factor, springback, nesting, and tolerances for sheet metal parts.",
+      "tags": ["Sheet Metal", "Bending", "K-Factor", "Nesting", "Fabrication"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "casting-forging-and-molding",
+      "title": "Casting, Forging & Molding",
+      "category": "Manufacturing & CAM",
+      "categoryId": "manufacturing",
+      "readTime": "9 min",
+      "difficulty": "Intermediate",
+      "icon": "forge",
+      "summary": "Sand, investment, and die casting; hot and cold forging; injection molding; shrinkage, draft, and defect control.",
+      "tags": ["Casting", "Forging", "Injection Molding", "Shrinkage", "Defects"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "welding-and-joining",
+      "title": "Welding & Joining",
+      "category": "Manufacturing & CAM",
+      "categoryId": "manufacturing",
+      "readTime": "8 min",
+      "difficulty": "Intermediate",
+      "icon": "weld",
+      "summary": "Arc welding processes, weld symbols, joint design, heat input, distortion control, and weld inspection.",
+      "tags": ["Welding", "Joining", "SMAW", "GMAW", "Heat Input"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "manufacturing-process-selection",
+      "title": "Manufacturing Process Selection",
+      "category": "Manufacturing & CAM",
+      "categoryId": "manufacturing",
+      "readTime": "10 min",
+      "difficulty": "Intermediate",
+      "icon": "compass",
+      "summary": "Process capability tables, quantity-driven process choice, cost break-even, and DFM-informed selection logic.",
+      "tags": ["Process Selection", "Capability", "Cost", "DFM", "Manufacturing"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "quality-control-and-spc",
+      "title": "Quality Control & SPC",
+      "category": "Manufacturing & CAM",
+      "categoryId": "manufacturing",
+      "readTime": "9 min",
+      "difficulty": "Intermediate",
+      "icon": "quality",
+      "summary": "Cp/Cpk capability indices, control charts, common vs special cause, Six Sigma, and inspection strategies.",
+      "tags": ["Quality", "SPC", "Cpk", "Control Charts", "Six Sigma"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "additive-manufacturing",
+      "title": "Additive Manufacturing (3D Printing)",
+      "category": "Manufacturing & CAM",
+      "categoryId": "manufacturing",
+      "readTime": "8 min",
+      "difficulty": "Beginner",
+      "icon": "printer",
+      "summary": "FDM, SLA, SLS, and metal AM processes, design rules, orientation, supports, and post-processing.",
+      "tags": ["3D Printing", "Additive", "FDM", "SLS", "DMLS"],
+      "lastUpdated": "2026-09-24"
+    },
+    {
+      "id": "cad-customization-automation",
+      "title": "CAD Customization & Automation Across Platforms",
+      "category": "Product Design & CAD",
+      "categoryId": "product-design",
+      "readTime": "15 min",
+      "difficulty": "Advanced",
+      "icon": "code",
+      "summary": "Compare NXOpen, Creo TOOLKIT/OTK, SolidWorks API, CATIA CAA/3DX, and Inventor iLogic APIs. Covers architecture, code examples, licensing, kernel access, PLM integration, and selection criteria.",
+      "tags": ["CAD Automation", "NXOpen", "Creo", "SolidWorks API", "CATIA", "Inventor iLogic", "PLM"],
+      "lastUpdated": "2026-09-25"
+    }
+  ]
+}

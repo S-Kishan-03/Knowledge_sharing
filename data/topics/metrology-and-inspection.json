@@ -1,0 +1,79 @@
+{
+  "id": "metrology-and-inspection",
+  "title": "Metrology & Inspection",
+  "category": "Manufacturing & CAM",
+  "categoryId": "manufacturing",
+  "readTime": "8 min",
+  "difficulty": "Intermediate",
+  "icon": "target",
+  "summary": "Measurement instruments, accuracy vs precision, measurement uncertainty, gauge R&R, and planning inspection around key characteristics.",
+  "infobox": {
+    "title": "Metrology",
+    "imageSymbol": "🎯",
+    "keyFormulas": [
+      {
+        "label": "Expanded Uncertainty",
+        "math": "U = k \\, u_c"
+      },
+      {
+        "label": "Gauge R&R %",
+        "math": "\\%GRR = \\frac{GRR}{TV} \\times 100"
+      },
+      {
+        "label": "Resolution Rule",
+        "math": "\\text{Instrument resolution} \\leq \\frac{tol}{10}"
+      }
+    ],
+    "siUnits": "mm, µm (resolution), % (GRR)"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "Measurement Is a Process",
+      "content": "Inspection answers the question a drawing poses: *does this part meet its tolerances?* (see [[gdnt-fundamentals|GD&T]] and [[iso-fits-and-surface-finish|ISO fits]] for how tolerances are defined). But a measurement is itself a **process** with variability — instrument, operator, environment, and method all contribute. \"The part is 25.00 mm\" is incomplete; the honest statement is \"25.00 mm ± measurement uncertainty under stated conditions\". Metrology is the discipline of making that statement trustworthy."
+    },
+    {
+      "id": "instruments",
+      "heading": "Instrument Range & Resolution",
+      "content": "Choose the instrument by the tolerance it must judge. Typical order-of-magnitude capabilities:\n\n| Instrument | Typical resolution / accuracy |\n|---|---|\n| Steel rule / tape | ±0.5 mm |\n| Vernier caliper | ±0.02 mm |\n| Micrometer | ±0.001 mm (1 µm) |\n| Dial indicator | 0.01 mm (2 µm typical) |\n| Bore / inside micrometer | ±0.005 mm |\n| Height gauge | ±0.01 mm |\n| CMM (scanning) | ±(2–5) µm typical, better in lab |\n| Laser / vision systems | ±(1–10) µm, application-dependent |\n\nThe **10:1 rule of thumb**: instrument resolution should be ≤ 1/10 of the tolerance under check. For a ±0.02 mm fit tolerance (see [[iso-fits-and-surface-finish|fits]]), a caliper is statistically blind — you need a micrometer or better. Matching instrument to tolerance is the cheapest quality improvement in manufacturing."
+    },
+    {
+      "id": "accuracy-vs-precision",
+      "heading": "Accuracy, Precision & Repeatability",
+      "content": "Three words that carry the whole science:\n\n- **Accuracy** — how close measurements come to the *true* value (systematic error; correctable by calibration).\n- **Precision** — how close repeated measurements are to *each other* (random error).\n- **Resolution** — the smallest increment the instrument displays.\n\nThe classic targets: accurate + precise = good (cluster centered on bullseye); precise but inaccurate = consistent and wrong (calibration needed); accurate but imprecise = right on average, useless per-part (needs better method).\n\n**Repeatability** (same operator, same part, same setup) vs **reproducibility** (different operators/setups) — the two components of gauge R&R — are what make \"precise\" trustworthy across a production line, not just in one lab."
+    },
+    {
+      "id": "uncertainty",
+      "heading": "Measurement Uncertainty (GUM)",
+      "content": "The GUM (Guide to the Expression of Uncertainty in Measurement) formalizes the uncertainty budget. Sources: instrument calibration error, resolution, repeatability, temperature effects, thermal expansion of part and gauge, operator technique, and datum setup. Combine them:\n\n$$u_c = \\sqrt{\\sum u_i^2}, \\qquad U = k \\, u_c$$\n\nwith $k = 2$ for ~95% confidence (the default reporting level). Example budget for an outside micrometer checking Ø25 ± 0.02 mm:\n\n- Calibration: $u_1 = 1$ µm; resolution (0.001 mm): $u_2 = 0.3$ µm; repeatability: $u_3 = 1.5$ µm; temperature (ΔT = 2 K, steel, 25 mm): $u_4 = 0.6$ µm → $u_c = \\sqrt{1^2+0.3^2+1.5^2+0.6^2} = 1.9$ µm → $U = 3.8$ µm ≈ **19% of the tolerance band**.\n\nGuidance: keep $U$ under ~10–25% of the tolerance; when uncertainty eats more, either tighten the measurement method (controlled temperature room at 20 °C, better gauge, more repeats) or relax the tolerance — never decide pass/fail on a measurement whose uncertainty rivals the feature tolerance."
+    },
+    {
+      "id": "grr",
+      "heading": "Gauge R&R Studies",
+      "content": "A **gauge R&R** (repeatability & reproducibility) study quantifies how much of the total observed variation comes from the measurement system itself. With 2–3 operators, 2–3 trials, and 10 parts spanning the tolerance range, ANOVA splits the variance into: part-to-part, operator (reproducibility), and equipment (repeatability). The decision metric:\n\n$$\\%GRR = \\frac{GRR}{TV} \\times 100$$\n\n- **< 10%** — measurement system acceptable.\n- **10–30%** — acceptable conditionally; improve or accept after risk review.\n- **> 30%** — measurement system unacceptable; do not use it to judge parts.\n\nA failing GRR is almost never \"the gauge is bad\" in isolation — it is operator training, missing fixtures, datum ambiguity, or temperature. Fix the method, re-run the study. GRR data also feeds straight into [[quality-control-and-spc|SPC]]: control charts are meaningless if the measurement system inflates the process variation."
+    },
+    {
+      "id": "inspection-planning",
+      "heading": "Planning the Inspection",
+      "content": "Inspection must be planned, not improvised:\n\n- **Identify key characteristics** — the features that affect function and assembly (from GD&T and the spec sheet, see [[engineering-specifications|specifications]]). Not everything gets measured 100%.\n- **First-article inspection (FAI)** — full dimensional verification of the first part against every drawing callout, before production runs. This is where tolerance and GD&T errors are caught cheapest.\n- **Datum setup discipline** — on a CMM, simulate the drawing datum frame exactly: 3-2-1 alignment, same datum sequence, same material-condition modifiers; otherwise the numbers will disagree with the drawing.\n- **Statistical vs 100%** — 100% inspection catches outliers but is slow and error-prone; SPC sampling (see [[quality-control-and-spc|SPC]]) catches *process* drift early, which is what actually makes bad parts.\n- **Environmental control** — the standard temperature for dimensional metrology is 20 °C; aluminium grows ~23 µm per metre per 10 K, so a 2-m part measured 10 K off-standard moves more than many tolerances."
+    },
+    {
+      "id": "calibration",
+      "heading": "Calibration & Traceability",
+      "content": "Calibration chains make measurements comparable across time and geography:\n\n- **Traceability** — the instrument is calibrated against a standard that is itself calibrated against a higher-level standard, ultimately to national/international standards (SI via the metrology institute).\n- **Calibration interval** — set by usage, stability, and risk; drifting instruments need shorter intervals, environmental stress shortens them further.\n- **Calibration records** — certificate with measured values, uncertainty, and environmental conditions; keep them for as long as the product liability window.\n- **Gauge management** — every gauge in the shop has a tag, an interval, and a status; a \"calibrated\" sticker past its due date is the fastest way to lose any quality-audit argument.\n\nCalibration is not optional paperwork — it is the guarantee that a part measured in your shop today agrees with the same part measured at the customer's CMM next week."
+    }
+  ],
+  "keyTakeaways": [
+    "Instrument resolution should be ≤ 1/10 of the tolerance (10:1 rule).",
+    "Accuracy is systematic (fixable by calibration); precision is random; GRR separates repeatability from reproducibility.",
+    "Report measurement uncertainty (U = k·uc, k=2 ≈ 95%); keep U under ~10–25% of the tolerance.",
+    "Do first-article inspection, plan around key characteristics, and keep metrology at 20 °C."
+  ],
+  "relatedTopics": [
+    "gdnt-fundamentals",
+    "iso-fits-and-surface-finish",
+    "quality-control-and-spc",
+    "tolerance-stack-up-analysis",
+    "machining-fundamentals"
+  ]
+}

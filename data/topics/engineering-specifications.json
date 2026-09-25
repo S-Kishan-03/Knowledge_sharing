@@ -1,0 +1,74 @@
+{
+  "id": "engineering-specifications",
+  "title": "Engineering Specifications & Requirements",
+  "category": "Product Design & CAD",
+  "categoryId": "product-design",
+  "readTime": "7 min",
+  "difficulty": "Beginner",
+  "icon": "spec",
+  "summary": "Turning product needs into measurable, testable engineering specifications with requirement decomposition, spec sheets, and QFD prioritization.",
+  "infobox": {
+    "title": "Engineering Specifications",
+    "imageSymbol": "📋",
+    "keyFormulas": [
+      {
+        "label": "QFD Importance Weight",
+        "math": "W_j = \\sum_i r_{ij} \\cdot w_i"
+      },
+      {
+        "label": "Specification Band",
+        "math": "X \\pm t"
+      },
+      {
+        "label": "Design Inputs → Outputs",
+        "math": "CR_i \\rightarrow SR_j"
+      }
+    ],
+    "siUnits": "Mixed: mm, N, °C, W, m/s per parameter"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "Why Specifications Matter",
+      "content": "A specification is a **measurable, unambiguous technical contract** between design intent and the rest of the product lifecycle — manufacturing, inspection, suppliers, and testing. Without specifications, requirements live in someone's head, and every downstream decision (tolerance, tooling, test plan) becomes a guess that gets discovered at the worst possible time: in production.\n\nThe rule of thumb: **if you cannot write the acceptance criterion for a requirement, you do not have a requirement — you have an opinion.** A spec must state the parameter, the unit, the numerical limit or band, the condition under which it applies, and the method used to verify it."
+    },
+    {
+      "id": "functional-to-technical",
+      "heading": "From Function to Number",
+      "content": "Product development starts with **customer/functional requirements (CR)** — qualitative statements of what the product must do — and ends with **engineering specifications (SR)** — quantitative statements that can be measured.\n\nExample decomposition for a hand crank assembly:\n\n| Customer/functional requirement | Engineering specification |\n|---|---|\n| The crank must not wobble | Shaft runout ≤ 0.05 mm at bearing seat, per ASME B89 |\n| It must be easy to turn | Operating torque ≤ 2.0 N·m at 20 °C |\n| It must survive daily use | 50 000 cycles, load 150 N, no failure per DVP-R |\n\nEach functional requirement should map to **at least one** engineering specification, and every specification should trace back to a requirement. This two-way traceability is the basis of requirements management in formal product development."
+    },
+    {
+      "id": "spec-sheet-structure",
+      "heading": "Anatomy of a Specification Sheet",
+      "content": "A mature spec sheet records these fields for each parameter:\n\n- **Parameter** — what is controlled (e.g. flatness, pull-out force).\n- **Nominal value and tolerance band** — written as $X \\pm t$ or as a limit (min/max).\n- **Unit** — never omit; a missing unit has caused real spacecraft failures.\n- **Condition** — environmental or state context (temperature, humidity, load case, orientation).\n- **Acceptance method** — the instrument and procedure: CMM, gauge, torque wrench, test rig.\n- **Reference standard** — ISO, ASME, ASTM, or internal test method number.\n- **Revision and owner** — who may change it and when it was last reviewed.\n\nWrite the band to be **achievable by the chosen process** — a specification is not a wish; it is a commitment the process must hold. Linking each line to process capability (see [[quality-control-and-spc|SPC]] and [[iso-fits-and-surface-finish|ISO fits]]) keeps specs realistic."
+    },
+    {
+      "id": "qfd-prioritization",
+      "heading": "QFD & the House of Quality",
+      "content": "When requirements multiply, **Quality Function Deployment (QFD)** prioritizes them so engineering effort follows customer value. The House of Quality matrix rows are customer requirements, columns are engineering specifications, and each cell holds a relationship rating $r_{ij}$ (e.g. 1 = weak, 3 = medium, 9 = strong).\n\nThe **importance weight** of each engineering specification is:\n\n$$W_j = \\sum_i r_{ij} \\cdot w_i$$\n\nwhere $w_i$ is the customer importance of requirement $i$. The roof of the house captures trade-offs between specifications (improving one may worsen another — e.g. strength vs mass) — these conflicts are exactly the decisions design reviews must resolve deliberately."
+    },
+    {
+      "id": "verification-loop",
+      "heading": "Verification & the DVP",
+      "content": "A specification is only as good as its verification. The **Design Verification Plan & Report (DVP-R)** lists each critical specification with:\n\n1. **Item** — the specification or feature under test.\n2. **Test method** — rig, procedure, standard, sample size.\n3. **Conditions** — load, temperature, cycles, media.\n4. **Acceptance criteria** — the spec values from the sheet.\n5. **Result & status** — pass/fail with evidence, and who signed it.\n\nEarly prototypes are verified against **critical specifications first** (see [[prototype-testing-and-validation|prototype testing]]); production then keeps those same specs alive through SPC and incoming inspection ([[metrology-and-inspection|metrology]]). A spec that is never verified should be deleted — it adds cost without value."
+    },
+    {
+      "id": "common-pitfalls",
+      "heading": "Common Specification Failures",
+      "content": "Real projects fail specifications in a handful of repeatable ways:\n\n- **Vague adjectives** — \"smooth surface\", \"strong enough\" — always translate to numbers (Ra 1.6 µm, safety factor 2).\n- **Mixed target and limit** — decide per parameter: is $X \\pm t$ a target with tolerance, or a one-sided limit (max 2 N·m)?\n- **Missing units or conditions** — the spec must be valid at a stated temperature, humidity, and load case.\n- **Over-constraining** — every extra tolerance costs money; specify only features that affect function or assembly (see [[tolerance-stack-up-analysis|tolerance stacks]]).\n- **No verification method** — if it cannot be measured, it cannot be bought or released.\n\nReview the spec sheet at every design gate, and let manufacturing challenge any band that exceeds demonstrated capability before tooling is cut."
+    }
+  ],
+  "keyTakeaways": [
+    "A specification must be measurable, unambiguous, and tied to a verification method.",
+    "Trace every engineering specification back to a customer/functional requirement.",
+    "Use QFD importance weights W_j = sum of r_ij × w_i to prioritize specifications.",
+    "Unverifiable or unachievable specifications are worse than none — delete or renegotiate them."
+  ],
+  "relatedTopics": [
+    "new-product-design",
+    "tolerance-stack-up-analysis",
+    "engineering-drawings-and-bom",
+    "prototype-testing-and-validation",
+    "gdnt-fundamentals"
+  ]
+}

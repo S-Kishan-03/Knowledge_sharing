@@ -1,0 +1,60 @@
+{
+  "id": "stress-strain-analysis",
+  "title": "Stress, Strain & Hooke's Law",
+  "category": "Solid Mechanics & Materials",
+  "categoryId": "solids",
+  "readTime": "9 min",
+  "difficulty": "Beginner",
+  "icon": "activity",
+  "summary": "Normal and shear stresses, Young's Modulus, Hooke's Law, Poisson's ratio, and stress-strain curves.",
+  "infobox": {
+    "title": "Solid Mechanics Quick Specs",
+    "imageSymbol": "🏗️⚙️",
+    "keyFormulas": [
+      { "label": "Normal Stress", "math": "\\sigma = \\frac{F}{A}" },
+      { "label": "Normal Strain", "math": "\\varepsilon = \\frac{\\Delta L}{L_0}" },
+      { "label": "Hooke's Law", "math": "\\sigma = E \\cdot \\varepsilon" }
+    ],
+    "siUnits": "Pascal (Pa), N/mm², Dimensionless (strain)",
+    "primaryFields": "Structural Engineering, Machine Components, Material Science",
+    "keyConstants": "Structural Steel E ≈ 200 GPa, Aluminum E ≈ 70 GPa"
+  },
+  "sections": [
+    {
+      "id": "definition-stress",
+      "heading": "Understanding Stress (σ & τ)",
+      "content": "Stress represents internal resistive forces per unit area within a deformable body subjected to external loads.\n\n### Normal Stress ($\\sigma$)\nActs perpendicular to the cross-sectional area:\n\n$$\\sigma = \\frac{F}{A}$$\n\nWhere:\n- $F$ is axial force ($N$)\n- $A$ is cross-sectional area ($m^2$ or $mm^2$)\n- Units: Pascal ($1 \\text{ Pa} = 1 \\text{ N/m}^2$) or Megapascal ($1 \\text{ MPa} = 1 \\text{ N/mm}^2$)\n\n### Shear Stress ($\\tau$)\nActs tangential to the cross-sectional surface:\n\n$$\\tau = \\frac{V}{A}$$"
+    },
+    {
+      "id": "definition-strain",
+      "heading": "Understanding Strain (ε & γ)",
+      "content": "Strain is the measure of deformation or relative displacement of particles within a material caused by stress.\n\n$$\\varepsilon = \\frac{\\Delta L}{L_0}$$\n\nWhere:\n- $\\Delta L$ is change in length ($m$)\n- $L_0$ is original length ($m$)\n- Strain is a **dimensionless ratio** (often expressed in $\\text{mm/mm}$ or percentage)."
+    },
+    {
+      "id": "hookes-law",
+      "heading": "Hooke's Law & Modulus of Elasticity",
+      "content": "Within the elastic limit of a material, stress is directly proportional to strain. This linear relationship is governed by **Hooke's Law**:\n\n$$\\sigma = E \\cdot \\varepsilon$$\n\nWhere $E$ is **Young's Modulus** (Modulus of Elasticity), representing the material stiffness.\n\nCombining formulas yields total axial deformation:\n\n$$\\Delta L = \\frac{F \\cdot L_0}{A \\cdot E}$$"
+    },
+    {
+      "id": "interactive-calculator",
+      "heading": "Interactive Stress-Strain & Deformation Calculator",
+      "content": "Input force, cross-sectional diameter, material Young's Modulus, and bar length to calculate normal stress, strain, and elongation.",
+      "calculator": "stress_calculator"
+    },
+    {
+      "id": "stress-strain-diagram",
+      "heading": "The Tensile Stress-Strain Diagram",
+      "content": "A standardized tensile test reveals key material regions:\n\n1. **Proportional Limit**: Maximum stress where Hooke's law remains strictly linear.\n2. **Elastic Limit**: Maximum stress before permanent plastic deformation occurs.\n3. **Yield Point ($\\sigma_y$)**: Stress at which material undergoes noticeable plastic deformation without load increase.\n4. **Ultimate Tensile Strength (UTS)**: Maximum stress the material can sustain.\n5. **Fracture/Rupture Point**: Point where specimen fractures."
+    }
+  ],
+  "keyTakeaways": [
+    "Stress is force divided by area (Pa or MPa).",
+    "Strain is fractional elongation (dimensionless).",
+    "Young's Modulus E measures material stiffness in the elastic region.",
+    "Factor of Safety (FoS) = Ultimate Stress / Allowable Stress."
+  ],
+  "relatedTopics": [
+    "spur-gear-design",
+    "thermodynamics-laws"
+  ]
+}

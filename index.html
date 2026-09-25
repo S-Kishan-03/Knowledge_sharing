@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechWiki | Mechanical Engineering Knowledge Hub</title>
+  <meta name="description" content="A modern, data-driven, interactive Mechanical Engineering wiki and reference platform hosted on GitHub Pages.">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- KaTeX for LaTeX Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Marked.js for Markdown Parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div id="app-layout">
+    <!-- Top Glassmorphism Navigation Bar -->
+    <header class="app-header">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button id="sidebar-toggle-btn" class="btn-icon" aria-label="Toggle Navigation Sidebar" aria-expanded="false" aria-controls="app-sidebar">☰</button>
+        <a class="brand-logo" onclick="Router.navigate('home')">
+          <div class="brand-icon">⚙️</div>
+          <div class="brand-title">Mech<span>Wiki</span></div>
+        </a>
+      </div>
+
+      <div class="header-center">
+        <div class="search-box">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input type="text" id="global-search-input" placeholder="Search topics, formulas, or keywords (e.g., stress, bernoulli, Carnot)..." aria-label="Search topics, formulas, or keywords" aria-autocomplete="list" aria-controls="search-results">
+        </div>
+        <div id="search-results" class="search-results" aria-live="polite" aria-atomic="true" hidden></div>
+      </div>
+
+      <div class="header-actions">
+        <button id="theme-toggle-btn" class="btn-icon" title="Toggle Light/Dark Theme" aria-label="Toggle Theme">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Application Container -->
+    <div class="app-body">
+      <!-- Left Category & Topic Navigation Sidebar -->
+      <aside id="app-sidebar" class="app-sidebar">
+        <div id="sidebar-categories">
+          <!-- Populated dynamically by app.js -->
+        </div>
+      </aside>
+
+      <!-- Main Content View -->
+      <main id="main-content" class="app-main">
+        <!-- Rendered dynamically by renderer.js -->
+      </main>
+    </div>
+  </div>
+
+  <!-- Application Scripts -->
+  <script src="js/calculators.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

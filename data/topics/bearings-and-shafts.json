@@ -1,0 +1,74 @@
+{
+  "id": "bearings-and-shafts",
+  "title": "Bearings & Shafts",
+  "category": "Machine Design & Kinematics",
+  "categoryId": "machine-design",
+  "readTime": "9 min",
+  "difficulty": "Intermediate",
+  "icon": "bearing",
+  "summary": "Bearing types, L10 fatigue life and equivalent load rating, plus combined bending-torsion shaft design for rotating assemblies.",
+  "infobox": {
+    "title": "Bearings & Shafts",
+    "imageSymbol": "🛞",
+    "keyFormulas": [
+      {
+        "label": "Basic Rating Life",
+        "math": "L_{10} = \\left( \\frac{C}{P} \\right)^p \\times 10^6"
+      },
+      {
+        "label": "Equivalent Load",
+        "math": "P = XF_r + YF_a"
+      },
+      {
+        "label": "Von Mises (bend+torsion)",
+        "math": "\\sigma_v = \\sqrt{\\sigma_b^2 + 3\\tau_t^2}"
+      }
+    ],
+    "siUnits": "kN (load), kN·m (moment), mm (diameter), rpm"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "The Rotating Joint",
+      "content": "A bearing is the machine element that permits **relative rotation with low, predictable friction** while carrying load. Its selection is one of the most consequential decisions in machine design: it sets the shaft size, housing geometry, lubrication, and the machine's service life. Bearings fail by **fatigue spalling** (material flaking off raceways), by contamination wear, and by misinstallation — in that rough order of frequency.\n\nThe design loop couples bearing and shaft: the shaft needs a diameter the bearing can mount on (see [[iso-fits-and-surface-finish|ISO fits]]), and the bearing load determines the reactions the shaft must survive."
+    },
+    {
+      "id": "bearing-types",
+      "heading": "Choosing the Bearing Type",
+      "content": "Match the bearing to the dominant load direction and misalignment:\n\n| Type | Carries | Typical use |\n|---|---|---|\n| Deep-groove ball | Radial + moderate axial | General purpose, high speed |\n| Angular-contact ball | Combined radial + axial | Gear shafts, preloaded pairs |\n| Cylindrical roller | High radial | Medium-heavy shafts |\n| Spherical roller | Heavy radial + misalignment | Mills, crushers, fans |\n| Tapered roller | High combined radial + axial | Automotive hubs, gearboxes |\n| Thrust ball/roller | Primarily axial | Screw drives, vertical shafts |\n\nSelection order: decide the **axial capacity** needed (does the shaft push against something?), the radial load magnitude, speed (rolling-element bearings have speed limits per the manufacturer's n·dM reference), and misalignment tolerance. A spherical or self-aligning bearing forgives housing bore alignment errors; a rigid deep-groove does not."
+    },
+    {
+      "id": "bearing-life",
+      "heading": "L10 Fatigue Life",
+      "content": "Rolling-element bearings are rated by the **basic dynamic load rating C** — the constant radial load under which 90% of an apparently identical bearing population survives 1 million revolutions. The **basic rating life** is:\n\n$$L_{10} = \\left( \\frac{C}{P} \\right)^p \\times 10^6 \\text{ revolutions}$$\n\nwith $p = 3$ for ball bearings and $p = 10/3$ for roller bearings. In hours:\n\n$$L_{10h} = \\frac{10^6}{60 \\, n} \\left( \\frac{C}{P} \\right)^p$$\n\nExample: a bearing with $C = 29.5$ kN carrying $P = 8$ kN at 1500 rpm:\n\n$$L_{10} = \\left( \\frac{29.5}{8} \\right)^3 \\times 10^6 = 50.2 \\times 10^6 \\text{ rev} \\quad \\rightarrow \\quad L_{10h} = \\frac{50.2 \\times 10^6}{60 \\times 1500} = 558 \\, \\text{hours}$$\n\nDouble the load and life drops to 1/8 — bearing life is brutally load-sensitive, which is why preload and alignment (see fatigue basics in [[fatigue-and-failure-analysis|fatigue & failure]]) matter so much."
+    },
+    {
+      "id": "equivalent-load",
+      "heading": "Equivalent Dynamic Load",
+      "content": "Real bearings carry **combined radial and axial loads**. The rating equation uses an equivalent load:\n\n$$P = XF_r + YF_a$$\n\nwhere $F_r$ is radial and $F_a$ axial force, and $X$, $Y$ are factors from the bearing table determined by the ratio $F_a/F_r$ versus a threshold $e$. Rules of thumb:\n\n- If $F_a / F_r \\leq e$: pure radial treatment, $X = 1$, $Y = 0$ (axial load negligible).\n- Beyond the threshold, $X$, $Y$ come from the manufacturer's table per bearing series.\n- Never forget **dynamic effects**: transmitted gear forces change direction as the gear rotates, so use the maximum resultant, and include rotor unbalance and gyroscopic moments on high-speed shafts.\n\nPreloaded bearing pairs (DB/DF mounting) change the effective $P$; follow the application engineering guidance for the specific pair configuration."
+    },
+    {
+      "id": "shaft-design",
+      "heading": "Shaft Design: Bending + Torsion",
+      "content": "A shaft carries bending moment $M$ (from transverse loads — gears, belt pull) and torque $T$ (from power transmission). Combined stress is handled by **von Mises**:\n\n$$\\sigma_v = \\sqrt{\\sigma_b^2 + 3\\tau_t^2} \\leq \\frac{S_y}{n}$$\n\nwith $\\sigma_b = 32M/(\\pi d^3)$ and $\\tau_t = 16T/(\\pi d^3)$ for a solid circular shaft.\n\nExample: shaft Ø30 mm with $M = 120$ N·m, $T = 200$ N·m:\n\n$$\\sigma_b = \\frac{32 \\times 120\\,000}{\\pi \\times 30^3} = 45.3 \\text{ MPa}, \\qquad \\tau_t = \\frac{16 \\times 200\\,000}{\\pi \\times 30^3} = 37.7 \\text{ MPa}$$\n$$\\sigma_v = \\sqrt{45.3^2 + 3 \\times 37.7^2} = 79.5 \\text{ MPa}$$\n\nDesign practice: size the shaft for **fatigue** (stress concentrations at shoulders, keyways, and fillets dominate — see [[fatigue-and-failure-analysis|fatigue]]), pick the bearing bore to match, then re-check the shaft deflection at bearings (angular misalignment limit ≈ 0.04° for ball bearings) and the critical speed."
+    },
+    {
+      "id": "fits-and-mounting",
+      "heading": "Fits, Locking & Mounting",
+      "content": "Rotation and forces transfer through the **interference fit** between bearing inner ring and shaft, and outer ring and housing:\n\n- Inner ring on shaft: rotating load → **k6, m6** (light interference); shaft stationary and load rotating → j6, h6.\n- Outer ring in housing: rotating outer ring → **M7, N7**; stationary outer ring with local loading → H7.\n- **H7/k6** is the everyday default for ball bearings in general machinery; deviate only with a documented reason (see [[iso-fits-and-surface-finish|ISO fits]]).\n\nMounting rules: press on the **ring that turns** (never transmit force through the balls), support the inner ring when pressing onto a shaft, use an oil bath or induction heater for larger bearings (max ~110 °C), and fit seals properly — see [[springs-seals-and-keys|springs, seals & keys]] for keyway load transfer and seal selection that completes the assembly."
+    }
+  ],
+  "keyTakeaways": [
+    "L10 life is load to the 3rd power (balls) or 10/3 (rollers): L10 = (C/P)^p × 10^6 rev.",
+    "Select bearing type by axial capacity, load magnitude, speed, and misalignment tolerance.",
+    "Size shafts with von Mises combined bending-torsion, then check deflection and critical speed.",
+    "Mount by pressing the rotating ring; use k6/m6 shaft fits and H7 housing fits as the default."
+  ],
+  "relatedTopics": [
+    "iso-fits-and-surface-finish",
+    "mechanical-power-transmission",
+    "fatigue-and-failure-analysis",
+    "springs-seals-and-keys",
+    "spur-gear-design"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "id": "engineering-drawings-and-bom",
+  "title": "Engineering Drawings & BOM",
+  "category": "Product Design & CAD",
+  "categoryId": "product-design",
+  "readTime": "7 min",
+  "difficulty": "Beginner",
+  "icon": "blueprint",
+  "summary": "Orthographic projection, section views, dimensioning rules, title blocks, and bill-of-materials structure for clear manufacturing drawings.",
+  "infobox": {
+    "title": "Engineering Drawings",
+    "imageSymbol": "🗺️",
+    "keyFormulas": [
+      {
+        "label": "Drawing Scale",
+        "math": "S = \\frac{D_{drawing}}{D_{actual}}"
+      },
+      {
+        "label": "Blind-Hole Tap Depth",
+        "math": "L_{tap} = L_{engage} + 3P"
+      }
+    ],
+    "siUnits": "Millimetre (mm), scale ratios"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "The Drawing as a Contract",
+      "content": "An engineering drawing is the **legal technical communication** between design and manufacturing: it fully defines geometry, size, surface finish, material, and tolerances so a part can be produced and inspected without the designer present. A good drawing is complete but not cluttered — every line answers a question, and no feature is left to interpretation.\n\nDrawings are the input to machining (see [[machining-fundamentals|machining]]), inspection ([[metrology-and-inspection|metrology]]), and purchasing. Ambiguity here is paid for later, in scrap and rework."
+    },
+    {
+      "id": "orthographic-projections",
+      "heading": "Orthographic Projection",
+      "content": "Orthographic views project the part onto mutually perpendicular planes. Almost every production drawing uses **first-angle** (ISO) or **third-angle** (ASME) projection — the projection symbol in the title block tells which. In third-angle (common in the US), the right-side view sits to the right of the front view; in first-angle it is mirrored.\n\nStandard practice:\n\n- Front view shows the **most characteristic shape** — the one that would be chosen to describe the part in one sentence.\n- Add side and top views only if they carry **new information**. A cylindrical shaft needs one view plus a diameter symbol.\n- **Hidden lines** (dashed) show internal features in views where they are not sectioned; too many hidden lines reduce clarity.\n- Use **center lines** for axes, bolt circles, and symmetry."
+    },
+    {
+      "id": "sections-detailing",
+      "heading": "Section & Detail Views",
+      "content": "Sections reveal internal geometry without hidden-line clutter:\n\n- **Full section** — cutting plane passes entirely through the part (typical for housings).\n- **Half section** — one half exterior, one half cut; ideal for symmetrical parts (flanges, bosses).\n- **Offset section** — the cutting plane steps to pass through multiple features (holes, slots).\n- **Revolved & broken-out sections** — local reveals for ribs, webs, and small pockets.\n\nSection rules: hatch the solid material with fine parallel lines (or ANSI/ISO patterns per material), never hatch through the cutting-plane line, and label the cutting plane (A–A) with the section name. A **detail view** enlarges a small or complex region (e.g. a thread, a groove) with a reference circle and callout."
+    },
+    {
+      "id": "dimensioning-rules",
+      "heading": "Dimensioning Conventions",
+      "content": "Dimensions are placed to be **readable and functional**:\n\n- Dimension from **datum features and functional surfaces**, never from invisible or irregular edges.\n- **Baseline dimensioning** (all features from one datum) holds relative position better than **chain dimensioning**, where tolerances accumulate feature-to-feature.\n- Never create a **closed loop** (over-dimensioning) — one dimension must be left as the resultant or the stack conflicts with itself.\n- Use feature-based dimensioning for holes (⌀ + position, see [[gdnt-fundamentals|GD&T]]) and keep dimensions off the part outline where possible.\n- Thread callouts read major diameter first: M8 × 1.25. For blind tapped holes apply the engagement rule $L_{tap} = L_{engage} + 3P$ (engagement length plus three pitches of run-out) so the tap never bottoms out.\n\nApply the same standards in CAD so the model, drawing, and 3D annotations stay in sync (see [[cad-computer-aided-design|CAD]])."
+    },
+    {
+      "id": "title-block-and-bom",
+      "heading": "Title Block & Bill of Materials",
+      "content": "The **title block** is the drawing's identity card: part name and number, material, scale, sheet size, drafter and checker, date, and the **tolerance block** (general tolerances, angular tolerances, and standard referenced). Never leave the general tolerance block empty — a drawing without stated general tolerances is unbuildable.\n\nThe **Bill of Materials (BOM)** lists every component of an assembly: item number, part number, description, quantity, material, and source. Good BOM practice:\n\n- Use an **indented (parent-child) structure** for subassemblies so a top-level BOM rolls up correctly.\n- Keep **part numbers drawn, not described** — two parts with different revisions must have different numbers.\n- Reference the BOM items on the assembly drawing by balloon numbers so the drawing and list are mutually traceable."
+    },
+    {
+      "id": "revision-control",
+      "heading": "Revision & Change Control",
+      "content": "A drawing that can change without traceability is a liability. Every drawing carries a **revision table**: revision letter, description of change, date, and approver. The change itself flows through an **Engineering Change Order (ECO/ECN)** that records what changed, why, and the disposition of affected stock (use-up, rework, scrap).\n\nIn a CAD/PDM environment, revision control also guards the **3D model and drawing pair** — only released revisions may be issued to manufacturing, and a change to the model without the drawing (or vice versa) is a configuration error. Mature shops tie the ECO to the BOM so a drawing change automatically flags every assembly that uses the part."
+    }
+  ],
+  "keyTakeaways": [
+    "A drawing must fully define geometry, material, finish, and tolerances so a part is buildable without the designer present.",
+    "Use third-angle (or consistently first-angle) projection with the projection symbol shown.",
+    "Dimension from functional datums, avoid closed loops, and never omit the general tolerance block.",
+    "Maintain revision tables and ECO discipline so model, drawing, and BOM never diverge."
+  ],
+  "relatedTopics": [
+    "cad-computer-aided-design",
+    "gdnt-fundamentals",
+    "engineering-specifications",
+    "iso-fits-and-surface-finish"
+  ]
+}

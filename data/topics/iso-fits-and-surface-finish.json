@@ -1,0 +1,79 @@
+{
+  "id": "iso-fits-and-surface-finish",
+  "title": "ISO Fits & Surface Finish",
+  "category": "Product Design & CAD",
+  "categoryId": "product-design",
+  "readTime": "7 min",
+  "difficulty": "Beginner",
+  "icon": "microscope",
+  "summary": "The ISO 286 fit system (clearance, transition, interference), tolerance grades, and Ra/Rz surface finish parameters for machined parts.",
+  "infobox": {
+    "title": "ISO Fits & Finishes",
+    "imageSymbol": "🔬",
+    "keyFormulas": [
+      {
+        "label": "Arithmetic Mean Roughness",
+        "math": "R_a = \\frac{1}{L} \\int_0^L |y(x)| \\, dx"
+      },
+      {
+        "label": "Max Clearance",
+        "math": "C_{max} = D_{max} - d_{min}"
+      },
+      {
+        "label": "Min Clearance",
+        "math": "C_{min} = D_{min} - d_{max}"
+      }
+    ],
+    "siUnits": "Millimetre (mm), micrometre (µm) for Ra/Rz"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "Fits: The Language of Mating",
+      "content": "A **fit** is the intentional relationship between two mating parts — hole and shaft — expressed through their size tolerances. The ISO system (ISO 286) turns \"snug\", \"sliding\", or \"press\" into written codes that any machine shop in the world can interpret: **Ø25 H7/g6** says everything needed to manufacture and inspect the pair.\n\nSurface finish lives in the same family of concerns: the microscopic texture of the surface controls friction, sealing, fatigue life, and how fits behave in service."
+    },
+    {
+      "id": "iso-286-system",
+      "heading": "The ISO 286 System",
+      "content": "An ISO fit code has two parts: a **fundamental deviation** (letter, upper/lower case for shaft/hole, A–ZC) that fixes the zone position, and a **tolerance grade** (IT5–IT18) that fixes the zone width.\n\n- **Ø25 H7** → hole, fundamental deviation H (zero lower deviation), grade IT7.\n- **Ø25 g6** → shaft, deviation g (below nominal), grade IT6.\n- Grades: IT5–IT6 precision (gauges, bearings), IT7–IT8 general machining, IT10+ rough (casting, forming).\n\nRead \"H7/g6\" as: hole zone H allows only plus sizes; shaft zone g allows only minus sizes; together they guarantee a **clearance fit** — the zones cannot overlap."
+    },
+    {
+      "id": "fit-types",
+      "heading": "Clearance, Transition & Interference",
+      "content": "The three fit families are chosen by what the joint must do:\n\n- **Clearance fit** (zones never overlap) — freely rotating or sliding parts. Typical codes: H7/g6 (lubricated slide), H8/e8 (plain bearing), H7/f7 (rapid rotation).\n- **Transition fit** (zones may just overlap) — tight location with light assembly: H7/k6 (locating, can be hand-fitted), H7/n6 (press-location without high force).\n- **Interference fit** (zones always overlap) — permanent joints transmitting load by friction alone: H7/p6 (light press), H7/s6 (heavy press/shrink for gears on shafts).\n\n**Hole-basis** (H-hole, standard) is preferred — the hole tooling stays constant and the shaft adjusts to suit the application. **Shaft-basis** is used when the shaft is standard stock (e.g. a purchased motor shaft)."
+    },
+    {
+      "id": "fit-example",
+      "heading": "Worked Example: Ø25 H7/g6",
+      "content": "ISO table values (mm, at Ø25):\n\n- **H7 hole**: 25.000 to 25.021 (grade IT7 = 21 µm, zero lower deviation).\n- **g6 shaft**: 24.980 to 24.993 (deviation g = −7 µm, grade IT6 = 13 µm).\n\nClearance limits:\n\n$$C_{max} = D_{max} - d_{min} = 25.021 - 24.980 = 0.041 \\text{ mm}$$\n$$C_{min} = D_{min} - d_{max} = 25.000 - 24.993 = 0.007 \\text{ mm}$$\n\nResult: a guaranteed clearance **0.007–0.041 mm** — a precise sliding fit, e.g. a shaft in a bronze bush with lubrication. Notice how the tolerance grades tighten near the fit surfaces (IT6/IT7) while the rest of the shaft can stay at general shop tolerances (IT9–IT11): fits concentrate cost exactly where function demands it."
+    },
+    {
+      "id": "surface-finish-parameters",
+      "heading": "Ra, Rz & Roughness Parameters",
+      "content": "Surface texture is described by amplitude parameters measured over a **sampling length**:\n\n- **Ra** — arithmetic mean deviation of the profile:\n\n$$R_a = \\frac{1}{L} \\int_0^L |y(x)| \\, dx$$\n\n- **Rz** — average of the five highest peaks to five deepest valleys; more sensitive to isolated scratches than Ra.\n- **Rmax/Rt** — single worst peak-to-valley height; used for sealing and fatigue-critical faces.\n\nRule of thumb: $Rz \\approx 4 \\times Ra$ to $\\approx 7 \\times Ra$ for typical turned/milled surfaces. Specify finish where it matters — bearing journals, seal seats, sliding faces — and leave the rest at the general finish implied by the process."
+    },
+    {
+      "id": "finish-by-process",
+      "heading": "Achievable Finish by Process",
+      "content": "Specify a finish the process can actually hold (typical Ra bands, µm):\n\n| Process | Typical Ra (µm) |\n|---|---|\n| Grinding | 0.1 – 1.6 |\n| Turning / boring | 0.8 – 6.3 |\n| Milling | 1.6 – 6.3 |\n| EDM | 0.8 – 3.2 |\n| Sheet metal | 1.6 – 6.3 |\n| Forging / casting | 3.2 – 25 |\n\nA 0.4 µm Ra callout on a casting face is not \"tight\" — it is unbuildable at that stage. Match the finish to the process sequence: rough processes set shape and size, finish processes set texture, and the **finishing allowance** on the drawing must be large enough to clean up the prior surface (usually ≥ 5 × prior Ra)."
+    },
+    {
+      "id": "drawing-symbols",
+      "heading": "Finish Symbols on Drawings",
+      "content": "ISO 1302 symbols tell the shop exactly what is needed:\n\n- **Basic symbol** (check mark) — surface left as produced, no finish requirement.\n- **Symbol with value** — e.g. \"Ra 1.6\" means arithmetic mean roughness must not exceed 1.6 µm over the sampling length.\n- **Symbol with triangle** — machining allowance to be removed (older practice; state the allowance in mm).\n- **Lay symbols** — perpendicular, parallel, circular, or crossed lay direction, controlling the *texture direction* (critical for sealing rings and sliding faces).\n\nCombine finish callouts with fits: a H7/g6 fit surface normally carries Ra 0.8–1.6 µm on the shaft journal and Ra 1.6 µm on the bore, while the unmated shoulders stay above 3.2 µm. Finish and fit are two halves of one decision — see [[bearings-and-shafts|bearings & shafts]] for how they combine in rotating assemblies."
+    }
+  ],
+  "keyTakeaways": [
+    "ISO fit codes (e.g. Ø25 H7/g6) fully define hole and shaft tolerance zones from tables.",
+    "Clearance fits allow motion, transition fits locate, interference fits transmit load without fasteners.",
+    "Hole-basis (H-hole) is standard; fits concentrate tight grades only at mating surfaces.",
+    "Match Ra/Rz callouts to process capability and specify finish only where function demands it."
+  ],
+  "relatedTopics": [
+    "gdnt-fundamentals",
+    "tolerance-stack-up-analysis",
+    "metrology-and-inspection",
+    "machining-fundamentals",
+    "bearings-and-shafts"
+  ]
+}

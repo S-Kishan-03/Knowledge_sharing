@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://mechwiki.dev/schema/topic.schema.json",
+  "title": "MechWiki Topic Schema",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "category",
+    "categoryId",
+    "readTime",
+    "difficulty",
+    "icon",
+    "summary",
+    "infobox",
+    "sections",
+    "keyTakeaways"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique slug identifier (lowercase, hyphens only)"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Thermal & Energy Engineering",
+        "Fluid Mechanics & Hydraulics",
+        "Solid Mechanics & Materials",
+        "Machine Design & Kinematics",
+        "Product Design & CAD",
+        "Simulation & Analysis (CAE)",
+        "Manufacturing & CAM"
+      ]
+    },
+    "categoryId": {
+      "type": "string",
+      "enum": ["thermal", "fluids", "solids", "machine-design", "product-design", "cae", "manufacturing"]
+    },
+    "readTime": {
+      "type": "string",
+      "pattern": "^\\d+ min$"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["Beginner", "Intermediate", "Advanced"]
+    },
+    "icon": {
+      "type": "string",
+      "description": "Icon key from Renderer.getIcon()"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 300
+    },
+    "tags": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 10,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO date string (YYYY-MM-DD)"
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1,
+      "default": 1
+    },
+    "infobox": {
+      "type": "object",
+      "required": ["title", "imageSymbol", "keyFormulas", "siUnits"],
+      "properties": {
+        "title": { "type": "string" },
+        "imageSymbol": { "type": "string" },
+        "keyFormulas": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "object",
+            "required": ["label", "math"],
+            "properties": {
+              "label": { "type": "string" },
+              "math": { "type": "string", "description": "LaTeX math expression" }
+            }
+          }
+        },
+        "siUnits": { "type": "string" },
+        "primaryFields": { "type": "string" },
+        "keyConstants": { "type": "string" }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "heading", "content"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "heading": { "type": "string" },
+          "content": { "type": "string" },
+          "calculator": {
+            "type": "string",
+            "enum": [
+              "carnot_calculator",
+              "bernoulli_calculator",
+              "stress_calculator",
+              "gear_calculator",
+              "machining_calculator",
+              "gdnt_position_calculator"
+            ]
+          }
+        }
+      }
+    },
+    "keyTakeaways": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": { "type": "string", "minLength": 5 }
+    },
+    "relatedTopics": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9-]+$" }
+    }
+  },
+  "additionalProperties": false
+}

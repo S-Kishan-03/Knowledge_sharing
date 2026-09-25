@@ -1,0 +1,69 @@
+{
+  "id": "mechanical-power-transmission",
+  "title": "Mechanical Power Transmission",
+  "category": "Machine Design & Kinematics",
+  "categoryId": "machine-design",
+  "readTime": "8 min",
+  "difficulty": "Intermediate",
+  "icon": "chain",
+  "summary": "Power, torque and speed fundamentals, belt tension ratios, chain drives, and couplings for transmitting rotation between shafts.",
+  "infobox": {
+    "title": "Power Transmission",
+    "imageSymbol": "⛓️",
+    "keyFormulas": [
+      {
+        "label": "Power from Torque",
+        "math": "P = T \\, \\omega = \\frac{2\\pi N T}{60}"
+      },
+      {
+        "label": "Belt Tension Ratio",
+        "math": "\\frac{T_1}{T_2} = e^{\\mu \\theta}"
+      },
+      {
+        "label": "Speed Ratio",
+        "math": "i = \\frac{n_1}{n_2} = \\frac{d_2}{d_1}"
+      }
+    ],
+    "siUnits": "kW (power), N·m (torque), rpm, rad/s"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "Getting Power From A to B",
+      "content": "Power transmission moves torque and speed from a driver (motor, engine) to a driven machine, usually changing the speed ratio in the process. The fundamental relation connects everything:\n\n$$P = T \\, \\omega = \\frac{2\\pi N T}{60}$$\n\nwith $P$ in watts, $T$ in N·m, $\\omega$ in rad/s, $N$ in rpm. Example — a 10 kW motor at 1440 rpm:\n\n$$T = \\frac{60 \\times 10\\,000}{2\\pi \\times 1440} = 66.3 \\text{ N·m}$$\n\nThe same power at half speed needs **double the torque** — which is why speed reducers are big, and why gearbox output shafts carry much larger forces than motor shafts."
+    },
+    {
+      "id": "belt-drives",
+      "heading": "Belt Drives",
+      "content": "Belts transmit power by **friction** between belt and pulley. The classic **Euler–Eytelwein** relation ties the tight and slack side tensions $T_1$, $T_2$ to the wrap angle $\\theta$ and friction coefficient $\\mu$:\n\n$$\\frac{T_1}{T_2} = e^{\\mu \\theta}$$\n\nand the transmitted power is $P = (T_1 - T_2)\\,v$, with $v$ the belt speed. Practical points:\n\n- **V-belts** (wedge in groove) roughly triple the effective friction vs flat belts — the standard for industrial drives.\n- **Timing (toothed) belts** transmit by positive engagement: no slip, constant ratio, used in engines and motion control.\n- **Sheaves/pulleys**: minimum pulley diameter limits belt fatigue; speed ratio $i = n_1/n_2 = d_2/d_1$ (belt speed is common to both pulleys).\n- **Belt speed limit**: above ~25–30 m/s centrifugal force unloads the belt from the pulley and grip collapses.\n- Belt drives absorb shock and slip (torque limiting) — a feature, not always a bug, compared to positive drives."
+    },
+    {
+      "id": "chain-drives",
+      "heading": "Chain Drives",
+      "content": "Chains transmit by **positive engagement** — no slip, higher torque density than belts, tolerant of moderate misalignment and dirty environments (the classic motorcycle/industrial drive):\n\n- **Roller chain** (ISO 606): pitch P, roller diameter, breaking load. Speed ratio from sprocket teeth: $i = n_1/n_2 = z_2/z_1$.\n- **Wear** stretches the chain (pin/bushing wear): a stretched chain climbs the sprocket teeth and skips. Lubricate properly; run a **slack span** on the drivable side.\n- **Number of teeth**: minimum ~17–19 teeth for smooth running; odd tooth counts on one sprocket + even chain link count reduce resonant wear patterns.\n- **Sag/tensioner**: too tight → sprocket and bearing overload; too loose → slapping and chain whip. Maintain ~2–4% of center distance as sag.\n- Speed limit: roller chains get noisy and hammer above ~10 m/s; beyond that, toothed belts or gears.\n\nChains are a deliberate middle ground: more positive than belts, cheaper than gears, and they do not need the precise alignment gears demand."
+    },
+    {
+      "id": "couplings",
+      "heading": "Couplings & Shaft Alignment",
+      "content": "Where two shaft ends must connect — motor to gearbox, gearbox to machine — a **coupling** transmits torque while accommodating **misalignment** to protect the bearings (see [[bearings-and-shafts|bearings]]):\n\n| Coupling | Misalignment capacity | Notes |\n|---|---|---|\n| Rigid flange | None (needs alignment) | Large torque, stiff systems |\n| Jaw (spider) | Angular, parallel, axial | Cheap, damps shock; elastomer wears |\n| Gear coupling | High angular/axial | Heavy industry, high torque |\n| Curved-tooth gear | Highest angular | Mill drives, long spans |\n| Oldham | High parallel | Light, cleanroom |\n| Bellows / diaphragm | Zero backlash | Precision motion control |\n\nRules of thumb: keep **angular misalignment ≤ 0.5°** at couplings for long bearing life; laser-align rotating machinery (alignment is the top cause of vibration and premature bearing death); select coupling torque rating ≥ 1.5× nominal for steady drives, ≥ 2–3× for shock loads; and for **soft-start** duty consider fluid or centrifugal couplings. The coupling is a mechanical fuse — oversizing it merely moves the failure to the next-weakest element."
+    },
+    {
+      "id": "integrated-selection",
+      "heading": "Choosing the Transmission System",
+      "content": "Selection order for a real drive train:\n\n1. **Define duty** — power, speed range, shock factor, hours/day, reversals.\n2. **Final ratio** from the driven machine; split it across stages (belt + gearbox) to keep each stage reasonable.\n3. **Belt** for long center distances, shock absorption, and cheap speed reduction; **chain** for positive drive in dirty environments; **gears** (see [[spur-gear-design|spur gears]]) when ratio accuracy, compactness, and high torque density rule.\n4. **Coupling** the motor to the first reducer stage, sized for the starting torque and misalignment budget.\n5. **Verification** — compute bearing reactions at every shaft via the transmitted torque and geometry (see [[bearings-and-shafts|bearing loads]]), then check shaft fatigue.\n\nEfficiency tiers (typical): gears 97–99%, chains 96–98%, belts 93–97%, plus each bearing pair ~99%. At 10 kW, a 5%-inefficient drive wastes 500 W continuously — in long-running plants the efficiency choice often dominates the capital cost choice."
+    }
+  ],
+  "keyTakeaways": [
+    "P = T·ω = 2πNT/60: higher reduction means higher torque on the slow shaft.",
+    "Belt grip follows T1/T2 = e^(μθ); V-belts triple friction; belts slip by design.",
+    "Chains transmit positively without gear alignment precision; watch chain stretch and sprocket skip.",
+    "Select couplings for the misalignment, not just the torque; laser-align rotating machinery."
+  ],
+  "relatedTopics": [
+    "bearings-and-shafts",
+    "spur-gear-design",
+    "springs-seals-and-keys",
+    "fasteners-and-threaded-joints",
+    "machining-fundamentals"
+  ]
+}

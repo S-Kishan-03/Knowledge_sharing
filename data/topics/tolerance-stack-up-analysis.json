@@ -1,0 +1,74 @@
+{
+  "id": "tolerance-stack-up-analysis",
+  "title": "Tolerance Stack-Up Analysis",
+  "category": "Product Design & CAD",
+  "categoryId": "product-design",
+  "readTime": "9 min",
+  "difficulty": "Intermediate",
+  "icon": "scale",
+  "summary": "Worst-case and statistical (RSS) tolerance stack analysis of dimension chains to guarantee assembly fit and function.",
+  "infobox": {
+    "title": "Stack-Up Methods",
+    "imageSymbol": "⚖️",
+    "keyFormulas": [
+      {
+        "label": "Worst-Case Total",
+        "math": "T_{WC} = \\sum |t_i|"
+      },
+      {
+        "label": "RSS Total (±3σ)",
+        "math": "T_{RSS} = \\sqrt{\\sum t_i^2}"
+      },
+      {
+        "label": "Bonus @ MMC",
+        "math": "T_{bonus} = D_{actual} - D_{MMC}"
+      }
+    ],
+    "siUnits": "Millimetre (mm)"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "Why Stacks Matter",
+      "content": "Every dimension on a drawing carries a tolerance, and tolerances **accumulate** along chains of parts. A stack-up analysis answers: *what is the worst (or likely) gap, interference, or total dimension when all tolerances combine?* — the question that decides whether a bearing seat actually holds, whether a cover closes, or whether a shaft engages its coupling.\n\nSkipping the analysis is the classic cause of parts that pass inspection individually but fail as an assembly — each component in spec, the product out of spec."
+    },
+    {
+      "id": "dimension-chains",
+      "heading": "Building the Dimension Chain",
+      "content": "A stack-up starts with a **loop diagram**: draw the chain of dimensions from one reference surface to the other, through every part in the assembly, including the closing (resultant) dimension you care about.\n\nRules for a clean loop:\n\n- Define a **positive direction** around the loop; dimensions opposing it are negative.\n- Convert every dimension to **bilateral ± form** before summing (e.g. 20 +0.1/+0.2 becomes 20.15 ± 0.05; a limit dimension like 10.0 max becomes nominal with one-sided tolerance only if treated as such).\n- Include **all** contributors: machined lengths, manufactured thicknesses, part seating shifts, and thermal growth if the operating range is wide.\n- Name the **closing dimension** — the gap or interference the design actually cares about — it is never a drawn dimension."
+    },
+    {
+      "id": "worst-case",
+      "heading": "Worst-Case Method",
+      "content": "The **worst-case (WC) method** assumes every tolerance arrives at its extreme simultaneously. The total is simply the sum of absolute tolerances, and the nominal is the sum of nominals:\n\n$$T_{WC} = \\sum |t_i|$$\n\nExample — three parts stacked to a closing height:\n\n| Part | Nominal ± tol (mm) |\n|---|---|\n| Housing | 20 ± 0.10 |\n| Spacer | 30 ± 0.20 |\n| Cover | 10 ± 0.15 |\n\nNominal total = 60 mm;  $T_{WC} = 0.10 + 0.20 + 0.15 = 0.45$ mm → closing dimension **60 ± 0.45 mm**.\n\nWC guarantees 100% assembly — every pair of parts fits, always. The cost is tight individual tolerances. Use WC when failure is unacceptable (safety-critical, hard interference, one-of-a-kind) or when part counts are small."
+    },
+    {
+      "id": "rss-method",
+      "heading": "Statistical (RSS) Method",
+      "content": "The **root-sum-square (RSS)** method recognizes that independent processes rarely hit extremes together. Assuming each tolerance band holds ±3σ and tolerances are independent and centered, the combined band is:\n\n$$T_{RSS} = \\sqrt{\\sum t_i^2}$$\n\nFor the same three parts:  $T_{RSS} = \\sqrt{0.10^2 + 0.20^2 + 0.15^2} = \\sqrt{0.0725} = 0.269$ mm → closing dimension **60 ± 0.269 mm**.\n\nThe RSS result is about **40% tighter** than worst case — identical design, looser (cheaper) part tolerances. The trade: a small fraction of assemblies (roughly 0.27% beyond ±3σ combined) may not fit, so RSS is chosen where a rework or selective-assembly strategy exists, or where many parts make WC absurdly conservative. Since real processes shift and are not perfectly centered, many organizations apply RSS with a **safety factor (1.5–2)** or use Monte-Carlo simulation when part distributions are known."
+    },
+    {
+      "id": "gdt-interplay",
+      "heading": "GD&T & MMC in Stacks",
+      "content": "Coordinate tolerances treat size and location independently; GD&T lets them interact. For a hole controlled with position at **maximum material condition**, the effective location tolerance grows by the bonus as the hole departs from MMC:\n\n$$T_{bonus} = D_{actual} - D_{MMC}$$\n\nso the **virtual condition** (worst-case mating boundary) of a hole is $VC = D_{MMC} - T_{spec}$. When a stack-up involves GD&T-controlled features, include the **worst-case virtual condition** in WC analysis — it is the correct boundary for mating. Floating vs fixed fastener cases also change how the closing gap is computed; derive the loop from the assembly function, not from the drawing layout."
+    },
+    {
+      "id": "practical-tips",
+      "heading": "Practical Stack-Up Tips",
+      "content": "Field experience with stacks, condensed:\n\n- **Walk the shortest path** — the closing dimension should pass through the fewest contributors; redesign can shorten the chain and loosen every tolerance.\n- **Keep a spreadsheet discipline** — named contributors, formula cells, and a clearly flagged closing dimension make the analysis auditable in review.\n- **Convert everything to bilateral first** — asymmetric tolerances hide bias; restating them as ± exposes the true nominal.\n- **Watch out for repeated features** — bearing clearances, bolt-hole patterns, and gasket stacks multiply nominals even though tolerances add linearly.\n- **Validate with a trial build** — a physical stack of as-produced parts remains the ground truth; feed measured distributions back into RSS inputs (see [[quality-control-and-spc|SPC]]."
+    }
+  ],
+  "keyTakeaways": [
+    "Tolerances accumulate: always analyze the dimension chain for the closing dimension.",
+    "Worst-case (sum of tolerances) guarantees fit but tightens parts; RSS (sqrt of sum of squares) loosens parts but accepts a small non-fit tail.",
+    "Convert all dimensions to bilateral ± form before summing.",
+    "Use virtual condition (MMC/GD&T) for mating boundaries, and validate stacks with a real trial build."
+  ],
+  "relatedTopics": [
+    "gdnt-fundamentals",
+    "iso-fits-and-surface-finish",
+    "engineering-specifications",
+    "engineering-drawings-and-bom",
+    "quality-control-and-spc"
+  ]
+}

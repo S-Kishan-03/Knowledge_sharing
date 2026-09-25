@@ -1,0 +1,70 @@
+{
+  "id": "thermodynamics-laws",
+  "title": "Laws of Thermodynamics & Power Cycles",
+  "category": "Thermal & Energy Engineering",
+  "categoryId": "thermal",
+  "readTime": "8 min",
+  "difficulty": "Intermediate",
+  "icon": "zap",
+  "summary": "Core principles governing energy conservation, entropy, Carnot efficiency, and thermal systems.",
+  "infobox": {
+    "title": "Thermodynamics Quick Specs",
+    "imageSymbol": "🔥⚡",
+    "keyFormulas": [
+      { "label": "First Law", "math": "\\Delta U = Q - W" },
+      { "label": "Entropy Definition", "math": "dS = \\frac{dQ_{rev}}{T}" },
+      { "label": "Carnot Efficiency", "math": "\\eta = 1 - \\frac{T_C}{T_H}" }
+    ],
+    "siUnits": "Joule (J), Kelvin (K), Watt (W)",
+    "primaryFields": "Heat Transfer, Engines, HVAC, Power Plants",
+    "keyConstants": "Gas Constant R = 8.314 J/(mol·K)"
+  },
+  "sections": [
+    {
+      "id": "overview",
+      "heading": "Overview of Thermodynamics",
+      "content": "Thermodynamics is the branch of mechanical engineering and physics that deals with heat, work, temperature, and energy. It describes how thermal energy is converted to and from other forms of energy and how energy affects matter."
+    },
+    {
+      "id": "zeroth-law",
+      "heading": "The Zeroth Law: Thermal Equilibrium",
+      "content": "If two systems are each in thermal equilibrium with a third system, they are in thermal equilibrium with each other. This fundamental principle allows us to define and measure **temperature** using thermometers."
+    },
+    {
+      "id": "first-law",
+      "heading": "The First Law: Conservation of Energy",
+      "content": "Energy can neither be created nor destroyed; it can only change form. For a closed thermodynamic system undergoing a process:\n\n$$\\Delta U = Q - W$$\n\nWhere:\n- $\\Delta U$ is the change in internal energy ($J$)\n- $Q$ is heat added to the system ($J$)\n- $W$ is work done by the system ($J$)\n\n### Sign Conventions\n- **$Q > 0$**: Heat is added to the system.\n- **$Q < 0$**: Heat is extracted from the system.\n- **$W > 0$**: Work is done **by** the system (expansion).\n- **$W < 0$**: Work is done **on** the system (compression)."
+    },
+    {
+      "id": "second-law",
+      "heading": "The Second Law & Entropy",
+      "content": "The Second Law states that the total entropy of an isolated system always increases over time. It dictates the direction of natural processes and sets limits on engine efficiency.\n\n### Kelvin-Planck Statement\nIt is impossible to construct a heat engine that operates in a cycle and produces no effect other than the extraction of heat from a reservoir and the performance of an equivalent amount of work.\n\n### Clausius Statement\nIt is impossible to construct a device operating in a cycle that transfers heat from a colder body to a hotter body without external work input."
+    },
+    {
+      "id": "carnot-cycle",
+      "heading": "The Carnot Cycle & Maximum Efficiency",
+      "content": "The **Carnot cycle** is an ideal thermodynamic cycle consisting of two reversible isothermal processes and two reversible adiabatic processes. It provides the maximum theoretical efficiency limit for any heat engine operating between two temperature reservoirs $T_H$ (hot) and $T_C$ (cold):\n\n$$\\eta_{Carnot} = 1 - \\frac{T_C}{T_H}$$\n\n*Note: Temperatures must be in absolute Kelvin ($K = ^\\circ C + 273.15$).*"
+    },
+    {
+      "id": "interactive-calculator",
+      "heading": "Interactive Carnot Efficiency Calculator",
+      "content": "Use the interactive tool below to experiment with hot and cold reservoir temperatures to calculate the maximum theoretical efficiency and work output of a heat engine.",
+      "calculator": "carnot_calculator"
+    },
+    {
+      "id": "third-law",
+      "heading": "The Third Law: Absolute Zero",
+      "content": "As the temperature of a system approaches absolute zero ($0 \\text{ K}$ or $-273.15^\\circ\\text{C}$), the entropy of a pure crystalline substance approaches zero.\n\n$$\\lim_{T \\to 0} S = 0$$"
+    }
+  ],
+  "keyTakeaways": [
+    "Energy is conserved in all thermodynamic processes (First Law).",
+    "Heat cannot spontaneously flow from cold to hot without work input (Second Law).",
+    "No real heat engine can exceed the efficiency of a Carnot engine.",
+    "Always convert temperatures to Kelvin when calculating thermal efficiencies."
+  ],
+  "relatedTopics": [
+    "bernoulli-fluid-mechanics",
+    "stress-strain-analysis"
+  ]
+}

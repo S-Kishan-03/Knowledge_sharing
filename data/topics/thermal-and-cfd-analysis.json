@@ -1,0 +1,69 @@
+{
+  "id": "thermal-and-cfd-analysis",
+  "title": "Thermal & CFD Analysis",
+  "category": "Simulation & Analysis (CAE)",
+  "categoryId": "cae",
+  "readTime": "9 min",
+  "difficulty": "Intermediate",
+  "icon": "thermometer",
+  "summary": "Conduction and convection fundamentals, thermal resistance networks, and when to use CFD for flow and heat problems.",
+  "infobox": {
+    "title": "Thermal & CFD",
+    "imageSymbol": "🌡️",
+    "keyFormulas": [
+      {
+        "label": "Fourier's Law",
+        "math": "q = -k \\, \\frac{dT}{dx}"
+      },
+      {
+        "label": "Newton's Cooling",
+        "math": "q = h \\, \\Delta T"
+      },
+      {
+        "label": "Reynolds Number",
+        "math": "Re = \\frac{\\rho v D}{\\mu}"
+      }
+    ],
+    "siUnits": "W/m² (heat flux), W/m·K (conductivity), W/m²·K (film coefficient)"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "Where Heat Meets Flow",
+      "content": "Every machine sheds heat — from bearings, motors, brakes, combustion, or electronics — and every fluid system has a flow field that shapes it. **Thermal analysis** predicts temperatures (does the gearbox stay under its oil limit? will the PCB junction exceed 85 °C?), and **CFD** predicts the flow and conjugate heat transfer that hand calculations cannot reach. The two belong together: temperature limits decide material and lubrication choices throughout the machine (see [[machining-fundamentals|machining]] for cutting heat, [[bearings-and-shafts|bearings]] for grease temperature)."
+    },
+    {
+      "id": "conduction-convection",
+      "heading": "Conduction & Convection Basics",
+      "content": "Heat moves by three modes; most engineering problems are **conduction + convection** (radiation joins in at high temperature or in vacuum).\n\n**Conduction** through a wall of thickness $L$ (Fourier):\n\n$$q = -k \\, \\frac{dT}{dx} \\quad \\Rightarrow \\quad q = k \\, \\frac{\\Delta T}{L} \\; \\left[\\text{W/m}^2\\right]$$\n\nExample — wall 0.2 m, $k = 0.5$ W/m·K, $\\Delta T = 40$ K:  $q = 0.5 \\times 40/0.2 = 100$ W/m².\n\n**Convection** at a surface (Newton):\n\n$$q = h \\, \\Delta T$$\n\nwith film coefficient $h$: natural air 3–15, forced air 10–100, forced water 500–10 000, boiling 3000–100 000 W/m²·K. The $h$-value is the big uncertainty — correlations (or CFD) supply it, never guess it for a design."
+    },
+    {
+      "id": "resistance-networks",
+      "heading": "Thermal Resistance Networks",
+      "content": "Steady conduction/convection through layered systems works exactly like Ohm's law — each layer is a resistance:\n\n$$R_{cond} = \\frac{L}{kA}, \\qquad R_{conv} = \\frac{1}{hA}, \\qquad Q = \\frac{\\Delta T_{total}}{\\sum R}$$\n\nExample — composite wall: 10 mm steel ($k = 45$) + 50 mm insulation ($k = 0.04$), inside-to-outside $\\Delta T = 60$ K:\n\n$$R'' = \\frac{0.01}{45} + \\frac{0.05}{0.04} = 0.0002 + 1.25 = 1.250 \\text{ m²K/W} \\quad \\Rightarrow \\quad q = \\frac{60}{1.25} = 48 \\text{ W/m²}$$\n\nThe insulation dominates — a trivial observation with a serious consequence: **series networks are only as good as their worst resistor**, and contact resistance at bolted/jointed interfaces is often the missing series resistor in real assemblies (add thermal paste or machined mating faces where it counts). Parallel heat paths (fins, heat pipes) add conductances; extended surfaces multiply $A$ where $h$ is low — the fin efficiency question decides whether fins help at all."
+    },
+    {
+      "id": "reynolds-cfd",
+      "heading": "From Hand Calc to CFD",
+      "content": "When geometry is complex or flow is central, hand correlations break down and **CFD** takes over. The flow regime is set by the **Reynolds number**:\n\n$$Re = \\frac{\\rho v D}{\\mu}$$\n\nLaminar below ~2300 (pipe flow), turbulent above ~4000. Turbulence is chaotic at small scales — CFD resolves what it can and **models** the rest with turbulence models (k-ε, k-ω SST, LES). The incompressible Navier–Stokes equations (conservation of mass and momentum) are the governing core:\n\n$$\\nabla \\cdot \\mathbf{v} = 0, \\qquad \\rho\\left(\\frac{\\partial \\mathbf{v}}{\\partial t} + \\mathbf{v}\\cdot\\nabla\\mathbf{v}\\right) = -\\nabla p + \\mu\\nabla^2\\mathbf{v} + \\mathbf{f}$$\n\nA sound CFD workflow: clean geometry → mesh the fluid domain (boundary layer: $y^+ \\approx 1$ for near-wall turbulence, inflation layers) → set physics (material properties, boundary conditions, turbulence model) → solve → **verify with grid independence** (mesh twice, compare key answers)."
+    },
+    {
+      "id": "when-cfd",
+      "heading": "When to Use CFD (and When Not To)",
+      "content": "CFD is powerful but not free — hours of meshing, solver time, and a specialist's judgment. Decision guide:\n\n- **Use hand calculation / resistance networks** for: flat walls, finned heatsinks in known correlations, simple ducts, steady-state checks, and any first-order pass to size the problem.\n- **Use CFD for**: complex internal flow (manifolds, junctions), natural convection in enclosures, fan/blower interaction, conjugate heat transfer in electronics, mixing, external aerodynamics, and anything where the flow *governs* the performance (see [[cae-analysis|CAE]] for the general simulation workflow).\n- **Validation beats both**: every analysis — hand or CFD — needs a test anchor (thermocouples, flow meters) before it earns design authority; see [[prototype-testing-and-validation|prototype testing]].\n\nCommon CFD failure modes: trusting one mesh, wrong turbulence model for the regime (k-ε overpredicts recirculation), missing buoyancy in natural convection, and mesh-dependent \"results that look great\". Always converge the answer, not just the residuals."
+    }
+  ],
+  "keyTakeaways": [
+    "q = k·ΔT/L for conduction, q = h·ΔT for convection — h is the big unknown, never guess it.",
+    "Thermal networks are Ohm's law with R = L/(kA) and R = 1/(hA); worst series resistor governs.",
+    "Re decides regime; turbulence needs modeling (y+ ≈ 1 first-cell height for wall-resolved CFD).",
+    "Hand calc first, CFD for complex flows, always validate with measurement."
+  ],
+  "relatedTopics": [
+    "thermodynamics-laws",
+    "bernoulli-fluid-mechanics",
+    "cae-analysis",
+    "stress-strain-analysis",
+    "prototype-testing-and-validation"
+  ]
+}

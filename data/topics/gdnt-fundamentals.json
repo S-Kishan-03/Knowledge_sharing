@@ -1,0 +1,72 @@
+{
+  "id": "gdnt-fundamentals",
+  "title": "Geometric Dimensioning & Tolerancing (GD&T)",
+  "category": "Product Design & CAD",
+  "categoryId": "product-design",
+  "readTime": "10 min",
+  "difficulty": "Intermediate",
+  "icon": "ruler",
+  "summary": "The GD&T language for defining and controlling form, orientation, location, profile, and runout using datums and feature control frames.",
+  "infobox": {
+    "title": "GD&T Quick Reference",
+    "imageSymbol": "📏⚙️",
+    "keyFormulas": [
+      { "label": "Fixed Fastener Rule", "math": "T \\geq H - F" },
+      { "label": "Bonus @ MMC", "math": "T_{bonus} = D_{actual} - D_{MMC}" },
+      { "label": "Virtual Condition (Hole)", "math": "VC = D_{MMC} - T_{spec}" }
+    ],
+    "siUnits": "Millimetre (mm) or inch (in)",
+    "primaryFields": "Design, Quality, Manufacturing, Inspection",
+    "keyConstants": "ASME Y14.5-2018 / ISO 1101"
+  },
+  "sections": [
+    {
+      "id": "overview",
+      "heading": "Why GD&T Beats Coordinate Tolerancing",
+      "content": "Conventional (coordinate) dimensioning places a tolerance on each linear dimension independently, creating a square tolerance zone and leaving form, orientation, and datums implicit. **Geometric Dimensioning & Tolerancing (GD&T)** instead uses a precise symbolic language to define *functional* tolerance zones with clear datums, so a hole's location is controlled by a cylindrical zone rather than an ambiguous square.\n\nGD&T answers three questions a coordinate drawing cannot:\n1. **What is the tolerance zone shape?** (cylinder, plane, surface, profile)\n2. **What is it referenced to?** (a datum reference frame)\n3. **Can the tolerance grow when the part departs from MMC?** (bonus tolerance)"
+    },
+    {
+      "id": "datum-reference-frames",
+      "heading": "Datum Reference Frames (DRF)",
+      "content": "A **datum** is a theoretically exact plane, axis, or point established from a *datum feature* (the physical surface on the part). The **Datum Reference Frame** is the coordinate system the tolerances are measured from, built using the **3-2-1 rule**:\n\n- **Primary datum** — contacts at least 3 points (a plane)\n- **Secondary datum** — contacts at least 2 points (aligns one axis)\n- **Tertiary datum** — contacts at least 1 point (locks rotation)\n\nIn a feature control frame, datums appear in order of precedence, e.g. `A | B | C`. Always prefer datums on **functional surfaces** — mating faces, bearing seats, or locating features — never on surfaces that carry no assembly relationship."
+    },
+    {
+      "id": "feature-control-frames",
+      "heading": "Anatomy of a Feature Control Frame",
+      "content": "The **feature control frame** is the heart of GD&T. Reading it left to right:\n\n| Compartment | Contents | Example |\n|---|---|---|\n| 1 | Geometric characteristic symbol | ⌀ position (⌖) |\n| 2 | Total tolerance value + diameter modifier | `⌀ 0.1` |\n| 3 | Material condition modifier | `M` (MMC), `L` (LMC), blank (RFS) |\n| 4+ | Datum references in precedence order | `A │ B │ C` |\n\nA typical control for a bolt-hole pattern reads:\n\n`⌖  ⌀0.1(M)  A  B  C`\n\nmeaning: the hole axis must lie inside a `⌀0.1` cylindrical tolerance zone, located from datum frame A-B-C, evaluated at Maximum Material Condition (so the zone can grow by the bonus tolerance)."
+    },
+    {
+      "id": "tolerance-categories",
+      "heading": "The Five Tolerance Categories",
+      "content": "All 14 GD&T symbols (ASME Y14.5) fall into five functional groups:\n\n| Category | Symbols | What it controls |\n|---|---|---|\n| **Form** | Straightness, Flatness, Circularity, Cylindricity | Shape of a feature alone, no datums |\n| **Orientation** | Perpendicularity, Angularity, Parallelism | Angle of a feature relative to a datum |\n| **Location** | Position, Concentricity, Symmetry | Placement of features relative to datums |\n| **Profile** | Profile of a line, Profile of a surface | Outline or surface in 2D / 3D |\n| **Runout** | Circular runout, Total runout | Composite deviation of a surface of revolution |\n\n**Design guidance:** location and orientation controls are referenced to datums; form controls (flatness, straightness) are *independent* — they apply within the size tolerance and do not reference datums."
+    },
+    {
+      "id": "material-condition",
+      "heading": "MMC, LMC & Bonus Tolerance",
+      "content": "Material condition modifiers let a tolerance **grow** when the feature departs from its worst-case size:\n\n- **Maximum Material Condition (MMC)** — the size at which the feature holds the most material: the smallest hole / largest pin.\n- **Least Material Condition (LMC)** — the size at which the feature holds the least material: the largest hole / smallest pin.\n- **Regardless of Feature Size (RFS)** — no modifier; the tolerance does not change with size.\n\nFor a hole callout `⌀0.1(M)` with a `⌀10.0` MMC size: if the machined hole measures `⌀10.15`, the **bonus tolerance** is:\n\n$$T_{bonus} = D_{actual} - D_{MMC} = 10.15 - 10.00 = 0.15 \\text{ mm}$$\n\nThe **total allowable position tolerance** becomes $0.1 + 0.15 = 0.25$ mm — exactly why GD&T is more economical than a fixed coordinate tolerance: it rewards features that naturally arrive at less-critical sizes."
+    },
+    {
+      "id": "position-calculator",
+      "heading": "Interactive Position Tolerance @ MMC Calculator",
+      "content": "Use the tool below to compute the bonus tolerance and the total allowable position tolerance for a hole at Maximum Material Condition, then check whether a measured position error passes.",
+      "calculator": "gdnt_position_calculator"
+    },
+    {
+      "id": "gdnt-in-practice",
+      "heading": "GD&T in the Manufacturing Loop",
+      "content": "GD&T is not just a drawing language — it drives **inspection**. A coordinate measuring machine (CMM) or optical comparator evaluates features against the feature control frame, applying the same MMC bonus logic the designer intended.\n\nPractical rules for the design loop:\n- Apply GD&T to **functional interfaces only** — over-tolerancing inflates cost.\n- Reference **machined datum features**, not raw cast surfaces.\n- Use the fixed-fastener rule $T \\geq H - F$ when sizing clearance holes for bolt patterns.\n- Pass GD&T data into [[cad-computer-aided-design|CAD drawings]], verify fit in CAE assembly analysis, and communicate critical features to [[machining-fundamentals|machining]] and inspection."
+    }
+  ],
+  "keyTakeaways": [
+    "GD&T replaces ambiguous square coordinate zones with functional cylindrical or planar tolerance zones.",
+    "A Datum Reference Frame (3-2-1 rule) is required for orientation, location, profile, and runout controls.",
+    "MMC modifiers award bonus tolerance when the feature departs from its maximum-material size.",
+    "The fixed fastener rule T ≥ H - F is the quickest way to size clearance-hole patterns.",
+    "Always evaluate GD&T callouts at inspection time using the same logic the designer specified."
+  ],
+  "relatedTopics": [
+    "cad-computer-aided-design",
+    "machining-fundamentals",
+    "spur-gear-design"
+  ]
+}

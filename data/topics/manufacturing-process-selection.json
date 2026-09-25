@@ -1,0 +1,74 @@
+{
+  "id": "manufacturing-process-selection",
+  "title": "Manufacturing Process Selection",
+  "category": "Manufacturing & CAM",
+  "categoryId": "manufacturing",
+  "readTime": "8 min",
+  "difficulty": "Intermediate",
+  "icon": "compass",
+  "summary": "Matching tolerance, material, quantity, and cost to the right process with capability tables and break-even analysis.",
+  "infobox": {
+    "title": "Process Selection",
+    "imageSymbol": "🧭",
+    "keyFormulas": [
+      {
+        "label": "Break-Even Quantity",
+        "math": "N_{BE} = \\frac{F_2 - F_1}{u_1 - u_2}"
+      },
+      {
+        "label": "Unit Cost",
+        "math": "C_{unit} = u + \\frac{F}{N}"
+      },
+      {
+        "label": "Material Utilization",
+        "math": "\\eta = \\frac{m_{part}}{m_{blank}}"
+      }
+    ],
+    "siUnits": "pieces (quantity), currency (cost), mm/µm (capability)"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "The Selection Problem",
+      "content": "Almost every part can be made several ways — machined, cast, forged, bent, molded, printed — and each route changes **cost, quality, lead time, and design freedom**. Process selection is the decision that turns a shape on a screen into a manufacturable, affordable part. The classic method: fix the **constraints first** (materials, tolerances, quantity), then pick the process that satisfies them at minimum cost — and only then design the details to suit that process."
+    },
+    {
+      "id": "capability",
+      "heading": "Capability by Process",
+      "content": "Every process has a **capability envelope** of tolerance and finish it holds economically. Typical bands:\n\n| Process | Machining tolerance | Surface (Ra µm) |\n|---|---|---|\n| CNC machining | ±0.005–0.05 mm | 0.4–1.6 |\n| Injection molding | ±0.1–0.5 mm | 0.8–1.6 |\n| Die casting | ±0.05–0.1 mm | 1.6–6.3 |\n| Investment casting | ±0.1–0.2 mm | 1.6–6.3 |\n| Sheet metal | ±0.1–0.3 mm | 1.6–6.3 |\n| Forging | ±0.5–1.5 mm | 3.2–12.5 |\n| Sand casting | ±0.5–2 mm | 6.3–25 |\n| Additive (polymer) | ±0.1–0.3 mm | 3–12 |\n\nRead this table top-down: tighter tolerance and finish are bought with **more expensive processes**. The cheapest way to manufacture a part is almost always to relax the tolerance — so the drawing (see [[engineering-specifications|specifications]]) and the process table must be negotiated together, not sequentially."
+    },
+    {
+      "id": "quantity",
+      "heading": "Quantity Drives the Economics",
+      "content": "Processes differ mainly in **tooling (fixed) vs unit (variable) cost**. The break-even quantity between two routes:\n\n$$N_{BE} = \\frac{F_2 - F_1}{u_1 - u_2}$$\n\nwith $F$ fixed tooling/setup and $u$ unit cost. Example — machining vs die casting:\n\n| Route | Tooling F | Unit u |\n|---|---|---|\n| CNC machining | 2 000 | 12 |\n| Die casting | 60 000 | 4 |\n\n$$N_{BE} = \\frac{60\\,000 - 2\\,000}{12 - 4} = 7\\,250 \\text{ pieces}$$\n\nBelow ~7 250 parts, machining is cheaper; above it, the die-casting tooling pays for itself. Rough quantity bands: **1–100** → machining, fabrication, additive; **100–10 000** → soft tooling, investment casting, low-volume molding; **10 000+** → die casting, injection molding, forging, progressive stamping. The crossover shifts with part complexity — the table is a starting point, the break-even formula is the truth."
+    },
+    {
+      "id": "material",
+      "heading": "Material–Process Compatibility",
+      "content": "Materials constrain processes hard:\n\n- **Machining**: everything machinable, but machinability varies wildly — free-cutting steels vs titanium (see [[machining-fundamentals|machining fundamentals]]).\n- **Casting**: any castable alloy — grey/ductile iron, steel, aluminium, brass, zinc; not high-alloy wrought grades, and cast properties differ from wrought (lower ductility, directional solidification effects).\n- **Forging**: wrought alloys shine — all structural steels, aluminium 6061/7075, titanium, nickel alloys; the flow-formed **grain alignment** is the point.\n- **Injection molding**: thermoplastics only (ABS, PC, nylon, PP, POM…); thermosets and rubbers go to their own processes (compression, transfer, RIM).\n- **Additive**: polymers (FDM/SLA/SLS) and metals (SLM/DED) but with **anisotropy** — printed parts are weaker across layers (see [[additive-manufacturing|additive]]).\n\nMatch the alloy to its **natural process family**: don't design a forging around a cast-only grade, and don't specify a wrought airplane alloy for a sand casting — either the process or the material must change."
+    },
+    {
+      "id": "geometry",
+      "heading": "Geometry & Feature Constraints",
+      "content": "Shape features are the third hard filter (after capability and material):\n\n- **Internal channels** — castable/moldable with cores; additive makes them free (conformal cooling!); machining needs access from outside (gun drills, EDM).\n- **Undercuts** — cost tooling complexity in molding/casting (side-actions, cores) and are impossible in simple 2-axis stamping; additive ignores them.\n- **Thin walls** — die casting and IM do 1–2.5 mm; sand casting needs 3–5 mm; machining needs stiffness for cutting.\n- **Deep features / high aspect ratios** — forging and casting love them; machining needs tool reach (see [[cam-computer-aided-manufacturing|CAM]] for tooling constraints).\n- **Axisymmetric hollow** — turning and tube forming dominate on cost; additive is the fallback for odd internal geometry.\n\nPrinciple: **design the part for the least-cost process that meets function** — a bracket does not need ±0.02 mm mating faces everywhere; only the functional features do (see [[gdnt-fundamentals|GD&T]] for putting tolerance exactly where it counts)."
+    },
+    {
+      "id": "decision-workflow",
+      "heading": "The Selection Workflow",
+      "content": "A repeatable order of operations:\n\n1. **Function & tolerances** — critical dimensions from the spec sheet; separate functional from cosmetic features.\n2. **Material** — from loading, environment, and cost; restrict to the process-appropriate alloy family.\n3. **Quantity & forecast** — including growth; the break-even curve decides the tooling appetite.\n4. **Shape screening** — internal channels, undercuts, walls, drafts: which processes are geometrically possible?\n5. **Surface & finish** — Ra and appearance; cosmetic finishes may need post-processing (painting, anodizing) regardless of base process.\n6. **Cost build-up** — tooling amortized over quantity: $C_{unit} = u + F/N$, plus lead time and risk.\n7. **Validate with prototypes** — the chosen process's first article, before tooling commitment (see [[prototype-testing-and-validation|prototype testing]]).\n\nIterate: relaxing one tolerance often moves the whole part to a cheaper process family — the single highest-leverage manufacturing conversation in design."
+    }
+  ],
+  "keyTakeaways": [
+    "Capability tables (tolerance + finish by process) are the first filter; relax tolerances and the process options widen immediately.",
+    "Break-even quantity N = (F2 − F1)/(u1 − u2) decides tooling investment; quantity bands are 1–100 / 100–10k / 10k+.",
+    "Match the alloy to its process family; respect geometry constraints (undercuts, walls, channels, drafts).",
+    "Run the decision workflow — function, material, quantity, shape, finish, cost — and validate with first articles."
+  ],
+  "relatedTopics": [
+    "machining-fundamentals",
+    "casting-forging-and-molding",
+    "sheet-metal-manufacturing",
+    "additive-manufacturing",
+    "cam-computer-aided-manufacturing"
+  ]
+}

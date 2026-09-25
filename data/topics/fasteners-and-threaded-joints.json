@@ -1,0 +1,74 @@
+{
+  "id": "fasteners-and-threaded-joints",
+  "title": "Fasteners & Threaded Joints",
+  "category": "Machine Design & Kinematics",
+  "categoryId": "machine-design",
+  "readTime": "8 min",
+  "difficulty": "Beginner",
+  "icon": "bolt",
+  "summary": "ISO metric threads, property classes, torque-preload relationship, and joint design rules for bolted connections that actually stay tight.",
+  "infobox": {
+    "title": "Threaded Joints",
+    "imageSymbol": "🔩",
+    "keyFormulas": [
+      {
+        "label": "Torque–Preload",
+        "math": "T = K \\cdot F \\cdot d"
+      },
+      {
+        "label": "Thread Stress Area",
+        "math": "A_s = \\frac{\\pi}{4}\\left(d - 0.9382 P \\right)^2"
+      },
+      {
+        "label": "Preload Target",
+        "math": "F \\approx 0.7 \\, F_p = 0.7 \\, A_s \\, S_p"
+      }
+    ],
+    "siUnits": "N·m (torque), kN (load), mm (diameter)"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "Bolts: The Most Common Failure",
+      "content": "Most bolted joints do not fail by the bolt **stretching** — they fail because the bolt was **never tight enough** and came loose, or because it was **overtightened** and cracked. A bolt is a spring that clamps two parts; the joint is only as good as the **preload** (tension) locked into it. Vibration loosens joints by removing preload through cyclic slip — the classic cause of \"the bolt was found on the floor\".\n\nDesigning a bolted joint means: pick the thread and property class, target a preload, choose the tightening method, and verify the joint stays tight in service."
+    },
+    {
+      "id": "thread-terms",
+      "heading": "ISO Metric Threads & Property Classes",
+      "content": "An ISO metric thread is designated **M8 × 1.25** — major diameter 8 mm, pitch 1.25 mm. Key terms: **major diameter** (nominal, the crest), **pitch diameter** (theoretical contact cylinder), **minor diameter** (root), and **pitch P** (distance between crests). Course threads (M8 × 1.25) resist stripping better; fine threads (M8 × 1) resist loosening better and give finer adjustment.\n\n**Property classes** encode strength for carbon/alloy steel bolts:\n\n- **8.8** → tensile strength $S_{ut} = 800$ MPa, yield $S_y = 640$ MPa (0.8 × 800).\n- **10.9** → $S_{ut} = 1000$ MPa, yield 900 MPa.\n- **12.9** → 1200 MPa / 1080 MPa — for high-strength applications, brittle, hydrogen-embrittlement sensitive, typically hex-socket (Allen) heads.\n\nMatch the property class to the joint load — upgrading from 8.8 to 10.9 buys 25% more preload capacity but also requires better tightening control."
+    },
+    {
+      "id": "torque-preload",
+      "heading": "Torque–Preload Relationship",
+      "content": "Tightening torque divides roughly 50% into thread friction, 40% into head/nut friction, and only **10% into useful preload**. The empirical relation:\n\n$$T = K \\cdot F \\cdot d$$\n\nwith $K$ the nut factor: 0.20 for **zinc-plated, as-received** steel; 0.15 lubricated; 0.25–0.30 for dry/rough surfaces. The scatter of $K$ means torque control gives only ±25–30% preload accuracy — acceptable for most joints, not for critical ones.\n\nDesign target: preload to about **70–90% of proof load**:\n\n$$F \\approx 0.7 \\, F_p = 0.7 \\, A_s \\, S_p$$\n\nExample — M10 class 8.8 (stress area $A_s = 58.0$ mm², proof $S_p = 580$ MPa):\n\n$$F_p = 580 \\times 58 = 33.6 \\text{ kN}, \\qquad F = 0.7 \\times 33.6 = 23.5 \\text{ kN}$$\n$$T = K \\cdot F \\cdot d = 0.20 \\times 23,500 \\times 0.010 = 47 \\text{ N·m}$$\n\nFor critical joints use **angle-controlled tightening** (turn-to-yield) or hydraulic tensioners, which cut preload scatter to ±5–10%."
+    },
+    {
+      "id": "joint-design",
+      "heading": "Joint Stiffness & the Load Triangle",
+      "content": "Preloaded parts carry external load as a **reduction of clamping** first, before the bolt sees additional tension. The stiffer the clamped parts relative to the bolt, the smaller the bolt load amplitude under fluctuating external load — the load triangle: external load $F_e$ splits into $F_e \\cdot k_b/(k_b + k_c)$ on the bolt and the rest on the joint.\n\nDesign rules that keep joints tight:\n\n- **Clamp length ≥ 2–3× bolt diameter** — short clamps (thin flanges) are springy and loosen easily.\n- Use **through-bolts with nuts** over tapped blind holes when possible; a tapped hole concentrates stress in the housing threads.\n- Include **hardened washers** under the head and nut to spread load and prevent embedment relaxation.\n- Watch **embedment**: soft materials (aluminium, composites) settle under preload — retighten or over-preload to compensate.\n- Keep the joint **under compression** in service: the joint separates when external load exceeds preload plus the joint's share — separation is usually a design failure, not a bolt failure."
+    },
+    {
+      "id": "locking",
+      "heading": "Anti-Loosening Methods",
+      "content": "Choose the locking method by vibration severity and reusability:\n\n| Method | Principle | Reusable | Vibration rating |\n|---|---|---|---|\n| Nyloc / prevailing torque | Nylon insert creates drag | Somewhat | Good |\n| Serrated flange | Teeth bite into surface | Yes | Good |\n| Thread adhesive (Loctite) | Wicking anaerobe fills thread | No (reapply) | Very good |\n| Lock washers (split) | Spring action | Yes | **Poor** — often useless in practice |\n| Castellated + cotter pin | Positive lock | Yes | Excellent |\n| Prevailing-torque wedge | Elastic wedge at 60° offset | Yes | Excellent (Stover/Nord-Lock family) |\n\nSplit lock washers remain the most *commonly specified* and *least effective* solution in real vibration tests. For safety-critical joints, prefer positive locks (cotter pins, stake nuts) or wedge-action washers."
+    },
+    {
+      "id": "materials-and-washers",
+      "heading": "Materials, Washers & Galvanic Care",
+      "content": "Fastener selection crosses into materials:\n\n- **Stainless A2/A4** — corrosion-resistant but prone to **galling** (cold-weld seizure) when tightened; use lubricant on threads.\n- **Zinc-plated carbon steel** — the everyday default; plating thickness affects the nut factor $K$, so recalibrate torque after changing finish.\n- **Aluminium + steel contact** — galvanic corrosion at the interface; use coated bolts or isolating washers in moist or marine environments.\n\nWasher roles: **plain** spreads load and protects the surface; **hardened** under hardened heads/nuts prevents Brinelling of soft flanges; **Belleville (disc) springs** maintain preload through thermal expansion and long-term settlement of springy joints. A Belleville stack under a bolt can convert a \"loosening\" joint into a stable one without any thread-locking device."
+    }
+  ],
+  "keyTakeaways": [
+    "Torque is ~10% useful preload: T = K·F·d with K ≈ 0.20 for plated steel; target F ≈ 0.7·proof load.",
+    "Tighten by angle or hydraulic tension for critical joints — torque control scatters ±25–30%.",
+    "Keep clamp length ≥ 2–3× bolt diameter and keep the joint under compression in service.",
+    "Split lock washers are poor anti-loosening devices; use prevailing-torque, wedge-action, or positive locks."
+  ],
+  "relatedTopics": [
+    "engineering-drawings-and-bom",
+    "mechanical-power-transmission",
+    "springs-seals-and-keys",
+    "machining-fundamentals",
+    "quality-control-and-spc"
+  ]
+}

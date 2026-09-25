@@ -1,0 +1,76 @@
+{
+  "id": "cam-computer-aided-manufacturing",
+  "title": "Computer-Aided Manufacturing (CAM)",
+  "category": "Manufacturing & CAM",
+  "categoryId": "manufacturing",
+  "readTime": "9 min",
+  "difficulty": "Intermediate",
+  "icon": "robot",
+  "summary": "Toolpath generation, CNC programming, G-code fundamentals, post-processing, and machine simulation.",
+  "infobox": {
+    "title": "CAM Core Formulas",
+    "imageSymbol": "🤖⚙️",
+    "keyFormulas": [
+      { "label": "Feed Rate", "math": "F = f_z \\times z \\times N" },
+      { "label": "Cutting Time", "math": "T_c = \\frac{L}{F}" },
+      { "label": "MRR (Milling)", "math": "MRR = a_p \\times a_e \\times f_z \\times z \\times N" }
+    ],
+    "siUnits": "mm/min, RPM, min, cm³/min",
+    "primaryFields": "CNC Machining, Automation, Manufacturing",
+    "keyConstants": "ISO 6983 G-code / STEP-NC (ISO 14649)"
+  },
+  "sections": [
+    {
+      "id": "overview",
+      "heading": "What Is CAM?",
+      "content": "**Computer-Aided Manufacturing (CAM)** converts CAD geometry into machine instructions. CAM software generates **toolpaths** — the exact trajectories a cutting tool must follow — then converts them into **G-code** that a CNC machine executes. CAM sits between [[cad-computer-aided-design|CAD]] (the model) and [[machining-fundamentals|machining]] (the physical process)."
+    },
+    {
+      "id": "cad-cam-workflow",
+      "heading": "The CAD-to-CAM Workflow",
+      "content": "1. **Import geometry** — STEP or native CAD model into CAM\n2. **Define stock & work coordinate system (WCS)** — the raw material and part zero\n3. **Select operations** — facing, pocketing, contouring, drilling\n4. **Choose tooling** — end mills, drills, inserts, with speeds and feeds\n5. **Generate toolpaths** — the software computes cutter motion\n6. **Simulate & verify** — detect gouges and collisions virtually\n7. **Post-process** — translate generic toolpaths into machine-specific G-code\n8. **Transfer to machine** — via USB, network, or DNC\n\nThe WCS must exactly match how the part is fixtured on the machine — a common source of crashed parts."
+    },
+    {
+      "id": "toolpaths-strategies",
+      "heading": "Toolpath Strategies",
+      "content": "| Operation | Strategy | Purpose |\n|---|---|---|\n| **2.5D** | Pocket, contour, drill cycles | Flat features at fixed Z levels — majority of machining |\n| **3D** | Surface finishing, Z-level, parallel | Sculpted surfaces, molds, dies |\n| **High-Speed (HSM)** | Trochoidal, adaptive clearing | Constant tool engagement for faster roughing |\n| **Turning** | Rough, finish, grooving, threading | Lathe operations |\n| **Multi-axis** | 3+2 positioning, full 5-axis | Undercuts, impellers, complex aerospace parts |\n\nEffective CAM is about **strategy choice first, parameters second**: a good strategy with moderate parameters usually beats a poor strategy with optimal feeds and speeds."
+    },
+    {
+      "id": "gcode-fundamentals",
+      "heading": "G-Code Fundamentals",
+      "content": "G-code (ISO 6983) is the universal machine instruction language:\n\n| Code | Meaning |\n|---|---|\n| `G00` | Rapid positioning (no cutting) |\n| `G01` | Linear interpolation (cutting feed) |\n| `G02 / G03` | Circular interpolation CW / CCW |\n| `G90 / G91` | Absolute / incremental positioning |\n| `G54` | Work coordinate system selection |\n| `M03 / M05` | Spindle on CW / spindle stop |\n| `M06` | Tool change |\n| `M08 / M09` | Coolant on / off |\n\nA typical line: `N120 G01 X50.0 Y25.0 F200.0` — feed in a straight line to X=50, Y=25 at 200 mm/min. Feed rate is set by the CAM strategy and verified against the machine's capability."
+    },
+    {
+      "id": "feed-rate-formulas",
+      "heading": "Feeds, Speeds & Machining Time",
+      "content": "CAM software computes the critical cutting parameters automatically:\n\n$$F = f_z \\times z \\times N$$\n\n$$T_c = \\frac{L}{F}$$\n\n$$MRR = a_p \\times a_e \\times f_z \\times z \\times N$$\n\nwhere $f_z$ = feed per tooth (mm/tooth), $z$ = number of flutes, $N$ = spindle speed (RPM), $L$ = cutting length (mm), $a_p$ = axial depth of cut, $a_e$ = radial depth of cut. See the [[machining-fundamentals|Machining]] topic for the interactive cutting-calculator that computes these values live."
+    },
+    {
+      "id": "postprocessors",
+      "heading": "Post-Processors & Machine Kinematics",
+      "content": "A **post-processor** translates generic toolpath data into the dialect of a specific machine controller (Fanuc, Siemens, Heidenhain, Haas). Different machines speak different G-code flavors, and multi-axis machines additionally need **kinematic transforms** — the post-processor must account for rotary-axis geometry to keep the tool tip accurate in five-axis work.\n\nPost-processor errors cause real crashes. Always: simulate **after** post-processing, not before, and dry-run critical programs with single-block execution on the machine."
+    },
+    {
+      "id": "simulation-verification",
+      "heading": "Simulation & Verification",
+      "content": "Modern CAM includes full **machine simulation**: the virtual model of the actual machine, fixture, stock, and tool runs the posted program to catch:\n\n- **Gouging** — tool cutting into the part geometry\n- **Collisions** — tool holder or spindle hitting fixtures and clamps\n- **Rapid-motion errors** — unexpected moves across the table\n- **Excessive air cutting** — wasted cycle time\n\nVerify before you run: the cost of a crash is measured in machine-hours and broken tooling, not minutes of simulation time."
+    },
+    {
+      "id": "multi-axis",
+      "heading": "Multi-Axis Machining",
+      "content": "**3+2 (positional) machining** tilts the workpiece to five sides using a rotary table, then machines each face with standard 3-axis moves — ideal for prismatic parts. **Full 5-axis (simultaneous)** moves all five axes at once, enabling:\n\n- One-setup machining of complex surfaces (impellers, turbine blades, molds)\n- Shorter, stiffer tools (tilted away from interference)\n- Better surface finish through constant tool engagement\n\n5-axis costs more in machines, CAM software, and programming skill — justify it when multi-setup 3-axis work would accumulate tolerance error or when geometry is unreachable otherwise."
+    }
+  ],
+  "keyTakeaways": [
+    "CAM converts CAD geometry into verified toolpaths, then into machine-specific G-code via a post-processor.",
+    "The Work Coordinate System in CAM must exactly match the physical fixture on the machine.",
+    "Feed rate F = fz × z × N and cutting time Tc = L/F govern cycle time and tool load.",
+    "Always simulate the posted program — gouging and collisions are expensive to discover on the machine.",
+    "Choose the toolpath strategy first; feeds and speeds are secondary tuning parameters."
+  ],
+  "relatedTopics": [
+    "machining-fundamentals",
+    "cad-computer-aided-design",
+    "new-product-design"
+  ]
+}

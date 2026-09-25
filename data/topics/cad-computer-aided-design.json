@@ -1,0 +1,71 @@
+{
+  "id": "cad-computer-aided-design",
+  "title": "Computer-Aided Design (CAD)",
+  "category": "Product Design & CAD",
+  "categoryId": "product-design",
+  "readTime": "8 min",
+  "difficulty": "Beginner",
+  "icon": "pen",
+  "summary": "Parametric 3D modeling, wireframe/surface/solid paradigms, assemblies, drawings, and STEP/IGES data exchange.",
+  "infobox": {
+    "title": "CAD Core Concepts",
+    "imageSymbol": "🧊📐",
+    "keyFormulas": [
+      { "label": "Bézier Curve", "math": "B(t) = \\sum_{i=0}^{n} \\binom{n}{i} (1-t)^{n-i} t^i P_i" },
+      { "label": "NURBS Curve", "math": "C(u) = \\frac{\\sum_{i=0}^{n} N_{i,p}(u) \\, w_i \\, P_i}{\\sum_{i=0}^{n} N_{i,p}(u) \\, w_i}" }
+    ],
+    "siUnits": "Millimetre (mm), degrees (°)",
+    "primaryFields": "Product Design, Drafting, Engineering",
+    "keyConstants": "STEP (ISO 10303) / IGES / Parasolid / ACIS kernels"
+  },
+  "sections": [
+    {
+      "id": "overview",
+      "heading": "What Is CAD?",
+      "content": "**Computer-Aided Design (CAD)** is the use of software to create, modify, analyze, and document engineering geometry. CAD replaced the manual drafting board and is now the master repository of product geometry: every downstream consumer — drawings, [[gdnt-fundamentals|GD&T]] callouts, [[cae-analysis|simulation]], [[cam-computer-aided-manufacturing|CAM]], and inspection — reads from the CAD model."
+    },
+    {
+      "id": "2d-vs-3d",
+      "heading": "2D Drafting vs. 3D Modeling",
+      "content": "**2D CAD** produces orthographic drawings directly — views, dimensions, title blocks. It is fast for simple flat parts but error-prone because geometry exists only as lines.\n\n**3D CAD** builds a solid model once, then derives 2D drawings from it automatically, which guarantees views agree with each other. Modern practice is *model-centric*: design in 3D, derive drawings, and share the 3D file for simulation and manufacturing. 2D remains essential at the inspection and shop-floor level."
+    },
+    {
+      "id": "modeling-paradigms",
+      "heading": "Wireframe, Surface & Solid Modeling",
+      "content": "| Paradigm | Geometry | Best For | Limitations |\n|---|---|---|---|\n| **Wireframe** | Edges only (lines/arcs) | Simple layouts, math definitions | No faces — ambiguous, cannot shade |\n| **Surface** | Bounded faces (NURBS patches) | Aerodynamic bodies, consumer shells | No enclosed volume by itself |\n| **Solid** | Closed volume (B-rep / CSG) | Machined parts, mass properties | Complex freeform shapes are hard |\n\nMost production design is **solid modeling** with surface features for freeform regions. **Hybrid modeling** mixes both.\n\nMathematically, freeform curves and surfaces are built from **Bézier** or **NURBS** (Non-Uniform Rational B-Spline) representations:\n\n$$B(t) = \\sum_{i=0}^{n} \\binom{n}{i} (1-t)^{n-i} t^i P_i$$\n\nwhere $P_i$ are control points and $t \\in [0,1]$ parameterizes the curve."
+    },
+    {
+      "id": "parametric-feature-based",
+      "heading": "Parametric & Feature-Based Modeling",
+      "content": "Modern CAD is **parametric**: geometry is driven by dimensions and relationships that can be edited. A **feature tree** (history tree) records the construction sequence — sketch, extrude, fillet, hole, pattern — and any dimension or feature can be edited later to regenerate the model.\n\nDesign intent is captured through:\n- **Constraints** — coincident, parallel, tangent, concentric\n- **Equations & global variables** — e.g., wall thickness = 0.1 × overall length\n- **Design tables / configurations** — families of parts from one base model\n\nThis is what makes engineering changes cheap: edit one number, and the whole model (and its drawings) updates consistently."
+    },
+    {
+      "id": "assemblies",
+      "heading": "Assemblies & Constraints",
+      "content": "An **assembly** positions multiple parts relative to each other using **mates/constraints**: coincident, concentric, distance, angle, tangent. A fully constrained assembly leaves **zero degrees of freedom** and matches the intended mechanism behavior.\n\nAssembly analysis includes:\n- **Interference detection** — find overlapping solids before manufacturing\n- **Motion studies** — simulate linkages and mechanisms\n- **Bill of Materials (BOM)** — automatic parts lists for purchasing\n- **Tolerance analysis** — stack-up of [[gdnt-fundamentals|GD&T]] tolerances across the assembly"
+    },
+    {
+      "id": "drawings-gdnt",
+      "heading": "Drawings & GD&T Integration",
+      "content": "Drawings are the legal communication between design and the shop floor. Derived views (front, section, detail, isometric) are projected automatically from the 3D model, and dimensions plus [[gdnt-fundamentals|GD&T]] feature control frames are applied per **ASME Y14.5**.\n\nModern practice embeds the GD&T tolerance data digitally (PMI — Product and Manufacturing Information) so downstream inspection and [[cae-analysis|CAE]] can consume the same tolerance model used on the drawing."
+    },
+    {
+      "id": "interoperability",
+      "heading": "File Formats & Data Exchange",
+      "content": "Not every CAD system speaks the same format. Neutral exchange formats break vendor lock-in:\n\n| Format | Type | Use Case |\n|---|---|---|\n| **STEP (.stp)** | ISO 10303 solid | The industry-standard exchange format |\n| **IGES (.igs)** | Legacy surface/curve | Older systems, surface data |\n| **STL** | Triangle mesh | 3D printing, visualization |\n| **Parasolid / ACIS** | Kernel formats | Native exchange between kernel partners |\n| **DXF/DWG** | 2D drawing | Shop-floor drawings, laser/waterjet cutting |\n\nRule of thumb: use STEP for solids, STL for printing, DXF for 2D cutting — and always check tolerance and units after conversion."
+    }
+  ],
+  "keyTakeaways": [
+    "The 3D model is the single source of truth; drawings are derived views of it.",
+    "Parametric, feature-based modeling makes engineering changes cheap and consistent.",
+    "Solid modeling covers most machined parts; surface/NURBS handles freeform aesthetics.",
+    "Mates/constraints fully define assemblies and enable interference and motion checks.",
+    "STEP is the default neutral exchange format for transferring solid geometry between systems."
+  ],
+  "relatedTopics": [
+    "gdnt-fundamentals",
+    "new-product-design",
+    "cae-analysis",
+    "cam-computer-aided-manufacturing"
+  ]
+}

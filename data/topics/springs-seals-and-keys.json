@@ -1,0 +1,69 @@
+{
+  "id": "springs-seals-and-keys",
+  "title": "Springs, Seals & Keys",
+  "category": "Machine Design & Kinematics",
+  "categoryId": "machine-design",
+  "readTime": "8 min",
+  "difficulty": "Intermediate",
+  "icon": "coil",
+  "summary": "Helical spring rate and Wahl stress factor, O-ring gland design, and key joint shear/crushing checks for shafts.",
+  "infobox": {
+    "title": "Springs, Seals & Keys",
+    "imageSymbol": "🌀",
+    "keyFormulas": [
+      {
+        "label": "Helical Spring Rate",
+        "math": "k = \\frac{G d^4}{8 D^3 N_a}"
+      },
+      {
+        "label": "Wahl Factor",
+        "math": "K_w = \\frac{4C-1}{4C-4} + \\frac{0.615}{C}"
+      },
+      {
+        "label": "Key Shear Stress",
+        "math": "\\tau = \\frac{2T}{d \\, b \\, l}"
+      }
+    ],
+    "siUnits": "N/mm (rate), MPa (stress), mm (geometry), N·m (torque)"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "Small Elements, Big Responsibilities",
+      "content": "Springs, seals, and keys are the \"small parts\" that decide whether a machine **returns** to its position, **keeps its fluid**, and **transmits its torque**. They are cheap, ubiquitous, and — precisely because they are treated as trivial — a common source of field failures: a spring that sags, an O-ring that extrudes, a key that shears. Each is a designed element with real formulas behind it."
+    },
+    {
+      "id": "spring-rate",
+      "heading": "Helical Compression Spring Rate",
+      "content": "A helical spring's **rate** (force per unit deflection) for round wire is:\n\n$$k = \\frac{G d^4}{8 D^3 N_a}$$\n\nwith $G$ the shear modulus (79.3 GPa for steel), $d$ wire diameter, $D$ mean coil diameter, $N_a$ active coils.\n\nExample — $G = 79.3$ GPa, $d = 3$ mm, $D = 20$ mm, $N_a = 8$:\n\n$$k = \\frac{79\\,300 \\times 3^4}{8 \\times 20^3 \\times 8} = \\frac{6.42 \\times 10^6}{512\\,000} = 12.5 \\text{ N/mm}$$\n\nNote the sensitivity: rate scales with $d^4$ and $1/D^3$ — a 10% wire-diameter change alters the rate by ~46%. Never order \"springs like that one\" without the wire size on the drawing. Design limits: the spring must not exceed its **solid length** (all coils touching) at maximum deflection, and buckling must be checked when free length / mean diameter exceeds ~4."
+    },
+    {
+      "id": "spring-stress",
+      "heading": "Stress & the Wahl Factor",
+      "content": "Direct shear plus the **curvature effect** on the inside of the coil raise the maximum shear stress. The correction is the **Wahl factor**:\n\n$$K_w = \\frac{4C-1}{4C-4} + \\frac{0.615}{C}$$\n\nwhere the spring index $C = D/d$ (typical 4–12; below ~4 the spring is hard to wind, above ~12 it is unstable). The corrected stress:\n\n$$\\tau = K_w \\, \\frac{8 F D}{\\pi d^3} \\, \\leq \\, \\tau_{allow}$$\n\nCheck **fatigue** with $\\tau_{min} \\to \\tau_{max}$ cycling (springs cycle in service far more than they are statically loaded — see [[fatigue-and-failure-analysis|fatigue]]), and for compression springs verify bucking stability and set (permanent set removal) by **scragging** — pre-compressing to solid to stabilize the free length."
+    },
+    {
+      "id": "o-rings",
+      "heading": "O-Rings & Seal Design",
+      "content": "An O-ring seals by **radial squeeze**: installed, it deforms a controlled amount and the fluid pressure pushes it against the groove wall. Gland design rules:\n\n- **Squeeze 15–25%** of the cross-section for static seals; less (~10%) for dynamic (low friction), more with low-temperature or vacuum service.\n- **Gland fill** — the groove volume must exceed the O-ring volume (typically 75–90% fill) so pressure does not hydraulically burst the ring.\n- **Extrusion gap** — keep the radial clearance ≤ 0.1 mm at max pressure, or add **backup rings**; hot, high-pressure fluid extrudes unsupported O-rings through the gap.\n- Diameter stretch 2–5% (never more than 5% for NBR/FKM; silicone tolerates more), and cut the groove for a **hard**, fine-finished seat (Ra ≤ 0.8 µm, no spiral machining marks) so the seal does not leak along its own groove.\n\nMaterial: NBR (nitrile) for oils/water, FKM (Viton) for temperature and chemicals, EPDM for water/brake fluid but never oil. Dynamic rod seals (hydraulics) are covered by the same squeeze logic plus a wiper/scraper in front."
+    },
+    {
+      "id": "keys",
+      "heading": "Keys: Shear & Crushing",
+      "content": "A **parallel key** transmits torque from shaft to hub through shear on the key cross-section and crushing on the flank:\n\n$$\\tau = \\frac{2T}{d \\, b \\, l} \\, \\leq \\, \\tau_{allow}, \\qquad \\sigma_c = \\frac{4T}{d \\, h \\, l} \\, \\leq \\, \\sigma_{c,allow}$$\n\nwith $d$ shaft diameter, $b$ key width, $h$ key height, $l$ key length.\n\nExample — $T = 200$ N·m, $d = 30$ mm, key 8×7, length 40 mm:\n\n$$\\tau = \\frac{2 \\times 200\\,000}{30 \\times 8 \\times 40} = 41.7 \\text{ MPa}, \\qquad \\sigma_c = \\frac{4 \\times 200\\,000}{30 \\times 7 \\times 40} = 95.2 \\text{ MPa}$$\n\nDesign guidance: shear usually governs for **soft** keys, crush for hardened hubs; standard key sizes follow shaft diameter ($b \\approx d/4$); keyway **stress concentration** at the shaft corner is typically the real limiter on fatigue-loaded shafts — prefer involute splines or press fits (see [[bearings-and-shafts|bearings & shafts]]) when torque is high and cyclic. Multiple keys do NOT multiply capacity linearly — the first key carries the majority; use one properly sized key instead."
+    }
+  ],
+  "keyTakeaways": [
+    "Spring rate k = G·d⁴/(8D³·N_a): d⁴ and 1/D³ sensitivity means wire size must be on the drawing.",
+    "Apply the Wahl factor for curved-wire stress; check solid length, buckling, and fatigue cycling.",
+    "O-rings need 15–25% squeeze, ≤90% gland fill, extrusion-gap control, and smooth (Ra ≤ 0.8 µm) groove seats.",
+    "Keys are sized by shear and crushing checks; the keyway stress concentration usually governs fatigue shafts."
+  ],
+  "relatedTopics": [
+    "bearings-and-shafts",
+    "mechanical-power-transmission",
+    "fatigue-and-failure-analysis",
+    "iso-fits-and-surface-finish",
+    "machining-fundamentals"
+  ]
+}

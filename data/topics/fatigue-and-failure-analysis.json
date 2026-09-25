@@ -1,0 +1,74 @@
+{
+  "id": "fatigue-and-failure-analysis",
+  "title": "Fatigue & Failure Analysis",
+  "category": "Simulation & Analysis (CAE)",
+  "categoryId": "cae",
+  "readTime": "10 min",
+  "difficulty": "Advanced",
+  "icon": "fatigue",
+  "summary": "S-N curves, endurance limit modifiers, Goodman and Miner cumulative damage for predicting and preventing fatigue failures.",
+  "infobox": {
+    "title": "Fatigue Analysis",
+    "imageSymbol": "📉",
+    "keyFormulas": [
+      {
+        "label": "Endurance Limit (steel)",
+        "math": "S_e' \\approx 0.5 \\, S_{ut}"
+      },
+      {
+        "label": "Goodman Criterion",
+        "math": "\\frac{\\sigma_a}{S_e} + \\frac{\\sigma_m}{S_{ut}} = \\frac{1}{n}"
+      },
+      {
+        "label": "Miner Cumulative Damage",
+        "math": "\\sum \\frac{n_i}{N_i} \\leq 1"
+      }
+    ],
+    "siUnits": "MPa (stress), cycles (N)"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "Why Parts Fail Under Repeated Load",
+      "content": "Most mechanical failures — roughly 80% of service fractures — are **fatigue**: failure under repeated stress far below the static yield strength. The damage accumulates invisibly: a crack nucleates at a stress concentration, grows one load cycle at a time, and finally propagates to sudden fracture. The part looks perfect one day and broken the next.\n\nFatigue analysis answers three questions: *Will it survive N cycles? How much margin? What governs?* — before production, not after field failure."
+    },
+    {
+      "id": "s-n-curves",
+      "heading": "S-N Curves & the Endurance Limit",
+      "content": "The **S-N (Wöhler) curve** plots cyclic stress amplitude vs cycles to failure on log scales. For **steels**, the curve flattens at a **knee** (~10⁶–10⁷ cycles for most engineering steels): below the **endurance limit** $S_e$, the part can cycle indefinitely. For steels:\n\n$$S_e' \\approx 0.5 \\, S_{ut} \\quad (S_{ut} < 1400 \\text{ MPa})$$\n\n- **Steels and titanium**: true endurance limit; design for infinite life below it.\n- **Aluminium, magnesium, most non-ferrous**: **no** endurance limit — the curve keeps falling; design for a *finite* life at a specified cycle count.\n- **Cast iron**: flake graphite blunts crack tips; endurance limit ~0.4 S_ut and, counterintuitively, **compressive preloads** from casting help.\n\n$S_e'$ is the *idealized* rotating-beam value; the *actual* part endurance limit is much lower once all the modifiers below are applied."
+    },
+    {
+      "id": "modifiers",
+      "heading": "Endurance Limit Modifiers",
+      "content": "The part endurance limit multiplies a series of correction factors onto the ideal value:\n\n$$S_e = k_a \\, k_b \\, k_c \\, k_d \\, k_e \\, S_e'$$\n\nwith (typical values):\n\n- **$k_a$ — surface finish**: machined 0.9, ground 0.95, hot-rolled 0.7, as-forged ~0.5. Surface roughness is where real parts lose fatigue life first.\n- **$k_b$ — size**: larger sections have more defect probability: ~1.0 for d ≤ 8 mm, falling to ~0.85 at d = 50 mm (non-rotating loading scales differently).\n- **$k_c$ — loading**: bending 1.0, axial 0.7, torsion 0.577 (the von Mises ratio for pure shear).\n- **$k_d$ — temperature**: falls above ~350 °C; **$k_e$ — reliability**: 1.0 (50%) down to 0.70 (99.9%) via the normal-distribution z-score.\n\nA machined, bent steel shaft rarely keeps more than ~30–40% of its ideal endurance limit — this is why catalog \"material strength\" numbers cannot be used as part design allowables."
+    },
+    {
+      "id": "goodman",
+      "heading": "Fluctuating Stress & Goodman",
+      "content": "Real loads fluctuate between a minimum and maximum — decomposed into a **mean** $\\sigma_m = (\\sigma_{max}+\\sigma_{min})/2$ and **amplitude** $\\sigma_a = (\\sigma_{max}-\\sigma_{min})/2$. Mean stress is harmful: a tensile mean reduces the allowable amplitude. The **Goodman criterion**:\n\n$$\\frac{\\sigma_a}{S_e} + \\frac{\\sigma_m}{S_{ut}} = \\frac{1}{n}$$\n\nExample — $\\sigma_a = 80$ MPa, $\\sigma_m = 120$ MPa, $S_e = 200$ MPa, $S_{ut} = 600$ MPa:\n\n$$\\frac{80}{200} + \\frac{120}{600} = 0.4 + 0.2 = 0.6 \\quad \\Rightarrow \\quad n = \\frac{1}{0.6} = 1.67$$\n\nGoodman is the **conservative** straight-line criterion; Gerber (parabolic) is closer to mean test data but less used for design. Note the practical lever: **compressive mean stress helps** (bolt preload, shot peening, interference fits) — one reason preloaded joints and peened surfaces outlive as-machined ones (see [[fasteners-and-threaded-joints|bolted joints]])."
+    },
+    {
+      "id": "miner",
+      "heading": "Cumulative Damage (Miner)",
+      "content": "Service loads rarely have one amplitude — they are a **spectrum** (startup, cruise, overloads). **Miner's rule** accumulates fractional damage:\n\n$$\\sum \\frac{n_i}{N_i} \\leq 1$$\n\nwhere $n_i$ cycles applied at level $i$, and $N_i$ the life at that level from the S-N curve. Example block: 10⁴ cycles at a level good for 10⁵ (0.1), then 10³ at a level good for 10⁴ (0.1) → damage 0.2, remaining life fraction 0.8 at the continuing level.\n\nMiner's caveats: damage fractions sum to ~1 only for **steels in the finite-life region**; below the endurance limit Miner says damage = 0 (true for clean steel), but corrosion and fretting create real damage below S_e; sequence effects (underload-overload interactions) can shift the rule either way. For safety-critical variable-load parts use **modified Miner with a safety margin (damage ≤ 0.5)** or switch to fracture mechanics."
+    },
+    {
+      "id": "stress-concentration",
+      "heading": "Stress Concentrations & Notch Sensitivity",
+      "content": "Fatigue cracks virtually always start at a **notch**: shoulder fillet, keyway, thread root, oil hole. The elastic stress concentration factor $K_t$ is geometry-defined (charts or FEA), but real materials do not feel the full theoretical peak. The **fatigue stress concentration factor**:\n\n$$K_f = 1 + q(K_t - 1)$$\n\nwith **notch sensitivity** $q$ (0 = insensitive, 1 = fully sensitive). For steels, $q$ rises with hardness and notch radius — a fine thread in quenched steel feels nearly the full $K_t$; a sharp keyway corner in mild steel feels less. Practical consequences:\n\n- **Generous fillet radii** ($r \\geq 0.1\\,d$ at shoulders) are the cheapest fatigue fix in design.\n- Threads, keyways, and press-fit ends concentrate stress: relocate them out of the highest-bending zone or step the shaft.\n- **Surface treatments** (shot peening, rolling, nitriding) put the surface in compression — losing $K_t$ sensitivity while gaining $S_e$.\n\nFatigue analysis software and the [[cae-analysis|CAE]] workflow apply exactly these rules in FEA: mesh the notch, extract $\\sigma_a$, $\\sigma_m$ per node, run Goodman, and flag the worst node as the governing fatigue location."
+    }
+  ],
+  "keyTakeaways": [
+    "Steel has a true endurance limit ≈ 0.5·Sut; aluminium does not — size it for finite life.",
+    "Apply the full modifier stack (surface, size, loading, temperature, reliability) — ideal Se is never the part Se.",
+    "Goodman 1/n = σa/Se + σm/Sut catches mean-stress effects; compressive mean stress is your friend.",
+    "Miner accumulates spectrum damage; keep damage ≤ 0.5–1.0 and watch notches — Kf = 1 + q(Kt − 1)."
+  ],
+  "relatedTopics": [
+    "stress-strain-analysis",
+    "cae-analysis",
+    "bearings-and-shafts",
+    "prototype-testing-and-validation",
+    "metrology-and-inspection"
+  ]
+}

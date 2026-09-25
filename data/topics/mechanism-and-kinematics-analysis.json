@@ -1,0 +1,74 @@
+{
+  "id": "mechanism-and-kinematics-analysis",
+  "title": "Mechanisms & Kinematics Analysis",
+  "category": "Machine Design & Kinematics",
+  "categoryId": "machine-design",
+  "readTime": "9 min",
+  "difficulty": "Advanced",
+  "icon": "linkage",
+  "summary": "Degrees of freedom, Grashof and four-bar classification, slider-crank kinematics, and cam follower motion programs.",
+  "infobox": {
+    "title": "Mechanisms",
+    "imageSymbol": "🦾",
+    "keyFormulas": [
+      {
+        "label": "Degrees of Freedom",
+        "math": "DOF = 3(L-1) - 2J_1 - J_2"
+      },
+      {
+        "label": "Grashof Condition",
+        "math": "s + l \\leq p + q"
+      },
+      {
+        "label": "Slider-Crank Position",
+        "math": "x = r\\cos\\theta + l\\sqrt{1 - \\left(\\frac{r}{l}\\sin\\theta\\right)^2}"
+      }
+    ],
+    "siUnits": "mm (links), deg (angles), rad/s (angular velocity)"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "Machines as Constrained Motion",
+      "content": "A **mechanism** converts input motion (rotation, linear stroke) into a desired output motion using links, joints, and a fixed frame. Kinematics analysis answers *where and how fast things move* — the geometry of motion, independent of forces. The same mechanism family — the four-bar, the slider-crank, the cam — appears in engines, robots, presses, and feeders, so mastering these few archetypes covers most of industrial machinery."
+    },
+    {
+      "id": "dof",
+      "heading": "Degrees of Freedom (Gruebler)",
+      "content": "The **mobility** of a planar mechanism — how many independent inputs it needs — is given by the Gruebler/Kutzbach equation:\n\n$$DOF = 3(L-1) - 2J_1 - J_2$$\n\nwith $L$ links (including ground), $J_1$ one-dof joints (pins, sliders), $J_2$ two-dof joints (rolling contact). Examples:\n\n- **Four-bar**: $3(4-1) - 2(4) - 0 = 1$ → one input (the crank) fully determines the motion.\n- **Slider-crank**: 4 links, 4 one-dof joints (3 pins + 1 slider) → $DOF = 1$.\n- A **double-parallelogram** (e.g. some suspension linkages): $DOF = 2$ — the classic \"overconstrained but intended\" case that needs the designer to notice the second freedom.\n\nIf $DOF < 1$ the mechanism is locked (a structure); if > 1, it needs more actuators or it flops. Special cases (three collinear joints, coincident links) give the equation wrong answers — always sanity-check by hand."
+    },
+    {
+      "id": "four-bar",
+      "heading": "Four-Bar: Grashof & Classification",
+      "content": "The four-bar linkage (ground, crank, coupler, rocker) is the workhorse of mechanisms. Its behavior is decided by the **Grashof condition**:\n\n$$s + l \\leq p + q$$\n\n($s$ shortest link, $l$ longest, $p$, $q$ the other two). Grashof linkages have continuous rotation of the shortest link; non-Grashof linkages only rock.\n\nExample — links 2, 7, 5, 6 mm: $s + l = 2 + 7 = 9 \\leq p + q = 5 + 6 = 11$ → **Grashof**. The shortest link (2 mm) can rotate fully, and the mechanism is a:\n\n- **Crank-rocker** if the ground is fixed to a link adjacent to the shortest (input crank rotates, output rocks);\n- **Double-crank** if ground is the shortest link (both side links rotate fully);\n- **Double-rocker** if ground is opposite the shortest (everything rocks, coupling only).\n\nApplications: crank-rocker = the classic \"(rocker) output rocker\" — pump linkages, windshield wipers; double-crank = drag-link feed mechanisms; the **quick-return** family gives a slow power stroke and fast return stroke by geometry alone — a 3:1 time ratio comes free with the right proportions."
+    },
+    {
+      "id": "slider-crank",
+      "heading": "Slider-Crank Kinematics",
+      "content": "The **slider-crank** (crank, connecting rod, slider) converts rotation to reciprocation — the heart of IC engines, piston pumps, and presses. The piston position from crank angle:\n\n$$x = r\\cos\\theta + l\\sqrt{1 - \\left(\\frac{r}{l}\\sin\\theta\\right)^2}$$\n\nExample — crank $r = 50$ mm, rod $l = 200$ mm, at $\\theta = 45°$:\n\n$$x = 50 \\times 0.7071 + 200\\sqrt{1 - (0.25 \\times 0.7071)^2} = 35.4 + 200 \\times 0.9843 = 232.2 \\text{ mm}$$\n\nThe velocity of the slider is **not** sinusoidal — dwell near the crank dead centers and acceleration spikes near stroke ends are geometry, not control error. Short connecting rods relative to crank ($r/l$ ~ 1/4 typical, 1/3 aggressive) give larger strokes but harsher acceleration; engine rod ratios ~3.0–4.0 balance this against piston side thrust and height."
+    },
+    {
+      "id": "cams",
+      "heading": "Cam-Follower Motion Programs",
+      "content": "A **cam** generates a prescribed output motion from continuous rotation: the follower profile traces the cam surface. The motion program is the design decision — follower displacement, velocity, acceleration vs cam angle:\n\n- **Constant velocity** — sharp acceleration impulses at the transitions: usable at slow speed only (worst dynamic behavior).\n- **Simple harmonic motion (SHM)** — smooth velocity, but acceleration spikes at start/stop: moderate speeds.\n- **Cycloidal** — displacement $y = h\\left(\\frac{\\theta}{\\beta} - \\frac{1}{2\\pi}\\sin\\frac{2\\pi\\theta}{\\beta}\\right)$ — zero acceleration at start AND end, continuous throughout: the standard for high-speed cams.\n\nFollower types: flat-faced (needs positive offset; good for force), roller (low friction, industry standard), knife (cheap, wears). Check the **pressure angle** — the angle between cam normal and follower direction; above ~30° the follower side-loads its guide and jams. Re-profile the cam or enlarge the base circle when the pressure angle fails."
+    },
+    {
+      "id": "applications",
+      "heading": "From Kinematics to Machines",
+      "content": "Mechanism analysis is the skeleton under machine design:\n\n- **Quick-return mechanisms** (Whitworth, crank-shaper) convert a uniform input rotation into an uneven output stroke — used in shapers and indexing machines to spend more time on the cutting stroke.\n- **Geneva mechanisms** convert continuous rotation into indexed partial turns with smooth engagement — the classic film projector and rotary-table indexer.\n- **Toggle mechanisms** (linkages near dead-center) multiply force enormously near lockup — used in clamps and presses precisely where motion nearly stops.\n- **Four-bar dwell approximations** give near-stationary output for part of the cycle without a cam — cheaper in production than cam profiles.\n\nThe design loop closes with **forces**: once velocities and accelerations are known, the required torques and joint reactions follow from Newton's laws — feeding directly into the [[bearings-and-shafts|bearing]] and [[fatigue-and-failure-analysis|fatigue]] sizing of every link."
+    }
+  ],
+  "keyTakeaways": [
+    "Mobility DOF = 3(L−1) − 2J1 − J2; one dof = one input per mechanism.",
+    "Grashof (s + l ≤ p + q) decides whether a four-bar has continuous rotation — and which type it is.",
+    "Slider-crank motion is non-sinusoidal; acceleration spikes near dead centers are geometric.",
+    "Cycloidal cam profiles run smoothest at speed; keep pressure angle under ~30°."
+  ],
+  "relatedTopics": [
+    "spur-gear-design",
+    "mechanical-power-transmission",
+    "bearings-and-shafts",
+    "cad-computer-aided-design",
+    "cae-analysis"
+  ]
+}

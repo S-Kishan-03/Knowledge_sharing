@@ -1,0 +1,572 @@
+{
+  "thermodynamics-laws": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Laws of Thermodynamics & Power Cycles",
+    "description": "Core principles governing energy conservation, entropy, Carnot efficiency, and thermal systems.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/thermodynamics-laws",
+    "about": {
+      "@type": "Thing",
+      "name": "Thermal & Energy Engineering"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT8M",
+    "keywords": "Thermodynamics, Energy, Entropy, Carnot Cycle, Heat Transfer",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "bernoulli-fluid-mechanics": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Fluid Dynamics & Bernoulli's Principle",
+    "description": "Conservation of energy in fluid flow, pressure heads, Venturi meters, and flow rate calculations.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/bernoulli-fluid-mechanics",
+    "about": {
+      "@type": "Thing",
+      "name": "Fluid Mechanics & Hydraulics"
+    },
+    "educationalLevel": "Beginner",
+    "timeRequired": "PT7M",
+    "keywords": "Fluid Mechanics, Bernoulli Equation, Pressure, Flow Rate, Hydraulics",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "stress-strain-analysis": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Stress, Strain & Hooke's Law",
+    "description": "Normal and shear stresses, Young's Modulus, Hooke's Law, Poisson's ratio, and stress-strain curves.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/stress-strain-analysis",
+    "about": {
+      "@type": "Thing",
+      "name": "Solid Mechanics & Materials"
+    },
+    "educationalLevel": "Beginner",
+    "timeRequired": "PT9M",
+    "keywords": "Solid Mechanics, Stress, Strain, Hooke's Law, Elasticity, Materials",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "spur-gear-design": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Spur Gear Kinematics & Design Ratios",
+    "description": "Gear tooth terminology, module calculations, pitch diameter, gear ratios, and torque transmission.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/spur-gear-design",
+    "about": {
+      "@type": "Thing",
+      "name": "Machine Design & Kinematics"
+    },
+    "educationalLevel": "Advanced",
+    "timeRequired": "PT10M",
+    "keywords": "Machine Design, Gears, Kinematics, Torque, Velocity Ratio",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "gdnt-fundamentals": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Geometric Dimensioning & Tolerancing (GD&T)",
+    "description": "The GD&T language for defining and controlling form, orientation, location, profile, and runout using datums and feature control frames.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/gdnt-fundamentals",
+    "about": {
+      "@type": "Thing",
+      "name": "Product Design & CAD"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT10M",
+    "keywords": "GD&T, Tolerancing, Datums, ASME Y14.5, MMC, Quality",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "new-product-design": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "New Product Design & Development",
+    "description": "The structured NPD workflow: voice of customer, concept generation, DFM/DFA, prototyping, and design reviews.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/new-product-design",
+    "about": {
+      "@type": "Thing",
+      "name": "Product Design & CAD"
+    },
+    "educationalLevel": "Beginner",
+    "timeRequired": "PT9M",
+    "keywords": "Product Design, NPD, DFM, DFA, Prototyping, FMEA",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cad-computer-aided-design": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Computer-Aided Design (CAD)",
+    "description": "Parametric 3D modeling, wireframe/surface/solid paradigms, assemblies, drawings, and STEP/IGES data exchange.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/cad-computer-aided-design",
+    "about": {
+      "@type": "Thing",
+      "name": "Product Design & CAD"
+    },
+    "educationalLevel": "Beginner",
+    "timeRequired": "PT8M",
+    "keywords": "CAD, Parametric Modeling, 3D Modeling, STEP, Design",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cae-analysis": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Computer-Aided Engineering & FEA",
+    "description": "Finite element analysis workflow, meshing, boundary conditions, and interpretation of structural, modal, and thermal simulations.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/cae-analysis",
+    "about": {
+      "@type": "Thing",
+      "name": "Simulation & Analysis (CAE)"
+    },
+    "educationalLevel": "Advanced",
+    "timeRequired": "PT11M",
+    "keywords": "CAE, FEA, Simulation, Meshing, Von Mises, Convergence",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cam-computer-aided-manufacturing": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Computer-Aided Manufacturing (CAM)",
+    "description": "Toolpath generation, CNC programming, G-code fundamentals, post-processing, and machine simulation.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/cam-computer-aided-manufacturing",
+    "about": {
+      "@type": "Thing",
+      "name": "Manufacturing & CAM"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT9M",
+    "keywords": "CAM, CNC, G-Code, Toolpaths, Post-Processor",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "machining-fundamentals": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Machining & Cutting Fundamentals",
+    "description": "Material removal processes, cutting speed, feed, and depth of cut parameters, tooling, and surface finish control.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/machining-fundamentals",
+    "about": {
+      "@type": "Thing",
+      "name": "Manufacturing & CAM"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT10M",
+    "keywords": "Machining, Turning, Milling, Cutting Speed, MRR, Tooling",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "engineering-specifications": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Engineering Specifications & Requirements",
+    "description": "Turning functional requirements into measurable engineering specifications with design inputs, outputs, and spec sheets.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/engineering-specifications",
+    "about": {
+      "@type": "Thing",
+      "name": "Product Design & CAD"
+    },
+    "educationalLevel": "Beginner",
+    "timeRequired": "PT7M",
+    "keywords": "Specifications, Requirements, Design Inputs, QFD, Documentation",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "tolerance-stack-up-analysis": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Tolerance Stack-Up Analysis",
+    "description": "Worst-case, RSS, and Monte Carlo analysis of dimension chains to verify assemblies meet fit and function.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/tolerance-stack-up-analysis",
+    "about": {
+      "@type": "Thing",
+      "name": "Product Design & CAD"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT9M",
+    "keywords": "Tolerance, Stack-Up, RSS, Dimension Chain, GD&T",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "engineering-drawings-and-bom": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Engineering Drawings & BOM",
+    "description": "Orthographic views, section views, title blocks, dimensioning rules, and bill of materials for manufacturing release.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/engineering-drawings-and-bom",
+    "about": {
+      "@type": "Thing",
+      "name": "Product Design & CAD"
+    },
+    "educationalLevel": "Beginner",
+    "timeRequired": "PT7M",
+    "keywords": "Drawings, BOM, Orthographic, Title Block, Documentation",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "iso-fits-and-surface-finish": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "ISO Fits & Surface Finish",
+    "description": "ISO 286 hole and shaft tolerance systems, limit fits, tolerance grades, and surface finish Ra/Rz per process.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/iso-fits-and-surface-finish",
+    "about": {
+      "@type": "Thing",
+      "name": "Product Design & CAD"
+    },
+    "educationalLevel": "Beginner",
+    "timeRequired": "PT7M",
+    "keywords": "Fits, ISO 286, H7, Surface Finish, Tolerances",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "prototype-testing-and-validation": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Prototype Testing & Validation",
+    "description": "DVP&R test planning, functional and environmental testing, instrumentation, and design validation sign-off.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/prototype-testing-and-validation",
+    "about": {
+      "@type": "Thing",
+      "name": "Product Design & CAD"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT9M",
+    "keywords": "Prototyping, DVP&R, Validation, Testing, FMEA",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "bearings-and-shafts": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Bearings & Shaft Design",
+    "description": "Bearing types, L10 life rating, equivalent load, and combined bending-torsion shaft design.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/bearings-and-shafts",
+    "about": {
+      "@type": "Thing",
+      "name": "Machine Design & Kinematics"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT9M",
+    "keywords": "Bearings, Shafts, L10 Life, Machine Design, Torque",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "fasteners-and-threaded-joints": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Fasteners & Threaded Joints",
+    "description": "Thread terminology, ISO metric fasteners, torque-preload relations, and joint locking methods.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/fasteners-and-threaded-joints",
+    "about": {
+      "@type": "Thing",
+      "name": "Machine Design & Kinematics"
+    },
+    "educationalLevel": "Beginner",
+    "timeRequired": "PT8M",
+    "keywords": "Fasteners, Bolts, Threads, Preload, Torque",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "springs-seals-and-keys": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Springs, Seals & Key Connections",
+    "description": "Helical spring rate and stress, O-ring gland design, and parallel key shear strength for torque transmission.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/springs-seals-and-keys",
+    "about": {
+      "@type": "Thing",
+      "name": "Machine Design & Kinematics"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT9M",
+    "keywords": "Springs, Seals, Keys, Machine Design, Elasticity",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "mechanical-power-transmission": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Mechanical Power Transmission",
+    "description": "Belt and chain drives, speed ratios, tension relationships, couplings, and torque-power-speed conversions.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/mechanical-power-transmission",
+    "about": {
+      "@type": "Thing",
+      "name": "Machine Design & Kinematics"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT9M",
+    "keywords": "Belts, Chains, Couplings, Power Transmission, Speed Ratio",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "mechanism-and-kinematics-analysis": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Mechanisms & Kinematics",
+    "description": "Degrees of freedom, four-bar linkages, Grashof criterion, cam followers, and slider-crank kinematics.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/mechanism-and-kinematics-analysis",
+    "about": {
+      "@type": "Thing",
+      "name": "Machine Design & Kinematics"
+    },
+    "educationalLevel": "Advanced",
+    "timeRequired": "PT10M",
+    "keywords": "Mechanisms, Kinematics, Four-Bar, Cams, DOF",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "fatigue-and-failure-analysis": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Fatigue & Failure Analysis",
+    "description": "S-N curves, endurance limit, Goodman criteria, Miner's rule, and stress concentration in cyclic loading design.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/fatigue-and-failure-analysis",
+    "about": {
+      "@type": "Thing",
+      "name": "Simulation & Analysis (CAE)"
+    },
+    "educationalLevel": "Advanced",
+    "timeRequired": "PT10M",
+    "keywords": "Fatigue, S-N Curve, Goodman, Miner, Endurance Limit",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "thermal-and-cfd-analysis": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Thermal & CFD Analysis",
+    "description": "Conduction, convection, and radiation modes, thermal resistance networks, and CFD fundamentals with Reynolds classification.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/thermal-and-cfd-analysis",
+    "about": {
+      "@type": "Thing",
+      "name": "Simulation & Analysis (CAE)"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT9M",
+    "keywords": "Heat Transfer, CFD, Thermal, Navier-Stokes, Reynolds",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "metrology-and-inspection": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Metrology & Inspection",
+    "description": "Measurement instruments, uncertainty, CMM inspection, gauge R&R, and calibration for verifying manufactured parts.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/metrology-and-inspection",
+    "about": {
+      "@type": "Thing",
+      "name": "Manufacturing & CAM"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT8M",
+    "keywords": "Metrology, Inspection, CMM, Uncertainty, Calibration",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "sheet-metal-manufacturing": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Sheet Metal Manufacturing",
+    "description": "Shearing, punching, bending with K-factor, springback, nesting, and tolerances for sheet metal parts.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/sheet-metal-manufacturing",
+    "about": {
+      "@type": "Thing",
+      "name": "Manufacturing & CAM"
+    },
+    "educationalLevel": "Beginner",
+    "timeRequired": "PT7M",
+    "keywords": "Sheet Metal, Bending, K-Factor, Nesting, Fabrication",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "casting-forging-and-molding": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Casting, Forging & Molding",
+    "description": "Sand, investment, and die casting; hot and cold forging; injection molding; shrinkage, draft, and defect control.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/casting-forging-and-molding",
+    "about": {
+      "@type": "Thing",
+      "name": "Manufacturing & CAM"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT9M",
+    "keywords": "Casting, Forging, Injection Molding, Shrinkage, Defects",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "welding-and-joining": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Welding & Joining",
+    "description": "Arc welding processes, weld symbols, joint design, heat input, distortion control, and weld inspection.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/welding-and-joining",
+    "about": {
+      "@type": "Thing",
+      "name": "Manufacturing & CAM"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT8M",
+    "keywords": "Welding, Joining, SMAW, GMAW, Heat Input",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "manufacturing-process-selection": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Manufacturing Process Selection",
+    "description": "Process capability tables, quantity-driven process choice, cost break-even, and DFM-informed selection logic.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/manufacturing-process-selection",
+    "about": {
+      "@type": "Thing",
+      "name": "Manufacturing & CAM"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT10M",
+    "keywords": "Process Selection, Capability, Cost, DFM, Manufacturing",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "quality-control-and-spc": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Quality Control & SPC",
+    "description": "Cp/Cpk capability indices, control charts, common vs special cause, Six Sigma, and inspection strategies.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/quality-control-and-spc",
+    "about": {
+      "@type": "Thing",
+      "name": "Manufacturing & CAM"
+    },
+    "educationalLevel": "Intermediate",
+    "timeRequired": "PT9M",
+    "keywords": "Quality, SPC, Cpk, Control Charts, Six Sigma",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "additive-manufacturing": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Additive Manufacturing (3D Printing)",
+    "description": "FDM, SLA, SLS, and metal AM processes, design rules, orientation, supports, and post-processing.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/additive-manufacturing",
+    "about": {
+      "@type": "Thing",
+      "name": "Manufacturing & CAM"
+    },
+    "educationalLevel": "Beginner",
+    "timeRequired": "PT8M",
+    "keywords": "3D Printing, Additive, FDM, SLS, DMLS",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cad-customization-automation": {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "CAD Customization & Automation Across Platforms",
+    "description": "Compare NXOpen, Creo TOOLKIT/OTK, SolidWorks API, CATIA CAA/3DX, and Inventor iLogic APIs. Covers architecture, code examples, licensing, kernel access, PLM integration, and selection criteria.",
+    "url": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/#topic/cad-customization-automation",
+    "about": {
+      "@type": "Thing",
+      "name": "Product Design & CAD"
+    },
+    "educationalLevel": "Advanced",
+    "timeRequired": "PT15M",
+    "keywords": "CAD Automation, NXOpen, Creo, SolidWorks API, CATIA, Inventor iLogic, PLM",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MechWiki"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}

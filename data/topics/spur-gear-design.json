@@ -1,0 +1,60 @@
+{
+  "id": "spur-gear-design",
+  "title": "Spur Gear Kinematics & Design Ratios",
+  "category": "Machine Design & Kinematics",
+  "categoryId": "machine-design",
+  "readTime": "10 min",
+  "difficulty": "Advanced",
+  "icon": "settings",
+  "summary": "Gear tooth terminology, module calculations, pitch diameter, gear ratios, and torque transmission.",
+  "infobox": {
+    "title": "Spur Gear Design Specs",
+    "imageSymbol": "⚙️🔩",
+    "keyFormulas": [
+      { "label": "Module", "math": "m = \\frac{D}{Z}" },
+      { "label": "Velocity Ratio", "math": "i = \\frac{N_1}{N_2} = \\frac{Z_2}{Z_1}" },
+      { "label": "Torque Transmission", "math": "T_2 = T_1 \\cdot \\left(\\frac{Z_2}{Z_1}\\right) \\cdot \\eta" }
+    ],
+    "siUnits": "Millimeter (mm), RPM, N·m",
+    "primaryFields": "Gearboxes, Automotive, Robotics, Industrial Drives",
+    "keyConstants": "Standard Pressure Angles α = 20° or 14.5°"
+  },
+  "sections": [
+    {
+      "id": "introduction",
+      "heading": "Introduction to Spur Gears",
+      "content": "Spur gears are cylindrical gears with teeth parallel to the axis of rotation. They are the simplest and most widely used gear type for transmitting motion and power between parallel shafts."
+    },
+    {
+      "id": "terminology",
+      "heading": "Essential Gear Terminology",
+      "content": "- **Pitch Circle Diameter ($D$)**: The imaginary circle along which meshing gears contact.\n- **Number of Teeth ($Z$ or $N$)**: Total count of teeth on gear or pinion.\n- **Module ($m$)**: Ratio of pitch diameter to number of teeth:\n\n$$m = \\frac{D}{Z} \\quad [\\text{mm}]$$\n\n> *Two meshing gears **MUST** have the same module to mesh properly!*\n\n- **Circular Pitch ($p$)**: Distance measured along pitch circle between corresponding points of adjacent teeth:\n\n$$p = \\pi \\cdot m$$\n\n- **Center Distance ($a$)**: Distance between shaft centers of two meshing gears:\n\n$$a = \\frac{D_1 + D_2}{2} = \\frac{m(Z_1 + Z_2)}{2}$$"
+    },
+    {
+      "id": "kinematics",
+      "heading": "Gear Ratio, Speed & Torque",
+      "content": "The speed ratio (Gear Ratio $i$) between driving gear (Pinion 1) and driven gear (Gear 2):\n\n$$i = \\frac{N_1}{N_2} = \\frac{Z_2}{Z_1} = \\frac{D_2}{D_1}$$\n\nWhere:\n- $N_1, N_2$ are rotational speeds in RPM\n- $Z_1, Z_2$ are tooth counts\n\n### Torque Transformation\nAssuming negligible friction losses:\n\n$$P = \\frac{2\\pi N T}{60} \\implies T_2 = T_1 \\cdot \\frac{Z_2}{Z_1}$$"
+    },
+    {
+      "id": "interactive-calculator",
+      "heading": "Interactive Gear Ratio & Torque Calculator",
+      "content": "Specify pinion and gear teeth, module, input speed, and torque to compute pitch diameters, center distance, output RPM, and torque.",
+      "calculator": "gear_calculator"
+    },
+    {
+      "id": "lewis-equation",
+      "heading": "Bending Stress: Lewis Equation",
+      "content": "The fundamental formula for calculating bending stress $\\sigma_b$ at the tooth root:\n\n$$\\sigma_b = \\frac{F_t}{b \\cdot m \\cdot Y}$$\n\nWhere:\n- $F_t$ is tangential force ($N$)\n- $b$ is face width ($mm$)\n- $m$ is gear module ($mm$)\n- $Y$ is Lewis form factor based on tooth count."
+    }
+  ],
+  "keyTakeaways": [
+    "Meshing gears must share the exact same Module.",
+    "Speed ratio is inversely proportional to tooth counts.",
+    "Torque increases in proportion to gear ratio reduction.",
+    "Standard pressure angle for modern spur gears is 20°."
+  ],
+  "relatedTopics": [
+    "stress-strain-analysis",
+    "bernoulli-fluid-mechanics"
+  ]
+}

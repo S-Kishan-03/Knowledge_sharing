@@ -1,0 +1,74 @@
+{
+  "id": "welding-and-joining",
+  "title": "Welding & Joining",
+  "category": "Manufacturing & CAM",
+  "categoryId": "manufacturing",
+  "readTime": "8 min",
+  "difficulty": "Intermediate",
+  "icon": "weld",
+  "summary": "Arc welding processes, weld symbols and joint types, heat input and distortion control, and weld inspection methods.",
+  "infobox": {
+    "title": "Welding & Joining",
+    "imageSymbol": "🤝",
+    "keyFormulas": [
+      {
+        "label": "Heat Input",
+        "math": "H = \\frac{V \\cdot I}{v} \\; [\\text{kJ/mm}]"
+      },
+      {
+        "label": "Carbon Equivalent",
+        "math": "CE = C + \\frac{Mn}{6} + \\frac{Cr+Mo+V}{5} + \\frac{Ni+Cu}{15}"
+      },
+      {
+        "label": "Fillet Weld Size (shear)",
+        "math": "\\tau \\approx \\frac{F}{0.707 \\, a \\, L}"
+      }
+    ],
+    "siUnits": "kJ/mm (heat input), mm (leg size), MPa (stress)"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "Welding as a Design Decision",
+      "content": "Welding fuses parent metal + filler into a **continuous metallurgical joint** — stronger and lighter than bolted joints, but permanent and heat-affected. Welded structures (frames, enclosures, pressure vessels, machinery beds) dominate fabrication because they turn flat stock and sections into rigid, sealed monoliths. The designer's job: choose the process, define the weld with symbols, control distortion, and specify the inspection that proves the weld is sound (see [[sheet-metal-manufacturing|sheet metal]] for the flat-stock world welding belongs to)."
+    },
+    {
+      "id": "arc-processes",
+      "heading": "Arc Welding Processes",
+      "content": "The four main arc processes cover nearly all structural fabrication:\n\n| Process | Principle | Strengths | Typical use |\n|---|---|---|---|\n| SMAW (stick) | Coated electrode | Simple, portable, cheap | Site work, repair |\n| GMAW (MIG) | Continuous wire + gas shield | High rate, easy automation | Production fabrication |\n| FCAW | Tubular wire, self/cos-shielded | Fast, outdoor-capable, thick plate | Structural steel |\n| GTAW (TIG) | Tungsten arc + separate filler | Cleanest, precise, all metals | Stainless, aluminium, thin, critical |\n\nSelection drivers: material (aluminium → TIG/MIG), thickness (thin → TIG controls heat; thick → FCAW/saw), position (overhead → stick or flux-cored), environment (outdoor wind kills MIG shielding gas), and rate. TIG is the quality king but the slowest; MIG is the volume workhorse; stick is the survivor. **Welder qualification** (e.g. ISO 9606 / AWS D1.1) — the joint is only as good as the qualified welder who made it, and codes require documented qualification."
+    },
+    {
+      "id": "symbols",
+      "heading": "Weld Symbols & Joint Types",
+      "content": "Weld symbols put the entire weld specification on the drawing line (see [[engineering-drawings-and-bom|drawings]]):\n\n- **Reference line + arrow** — arrow points at the joint; the symbol sits on the reference line (near side = arrow side, far side = other side, both sides = above and below the line).\n- **Fillet weld** — right-angle triangle symbol: 6 (mm leg size) on the left, length on the right: a 6 mm fillet, 100 mm long on the arrow side.\n- **Groove welds** — V, bevel, U, J symbols carry included angle and root opening: a V-groove \"60° included, 3 mm root gap\" needs **backing or back-gouging** for full penetration.\n- **Weld-all-around** (circle at the junction) and field-weld (flag) flags complete the vocabulary.\n\nJoint types: **butt** (full strength potential), **lap/T** (fillet welds, cheap, shear-loaded), **corner/edge** (thin-section enclosures). A fillet weld's throat is 0.707 × leg — the shear check uses the throat: $\\tau \\approx F/(0.707 \\, a \\, L)$ for leg $a$ and length $L$. Design rule: put the weld where the load **flows**; an undersized fillet on a stiff frame fails at the first vibration cycle, not under static load."
+    },
+    {
+      "id": "heat-input",
+      "heading": "Heat Input & the HAZ",
+      "content": "Heat input controls the **heat-affected zone** (HAZ) — the metal adjacent to the weld that was heated but not melted, where grain growth and hard phases decide properties:\n\n$$H = \\frac{V \\cdot I}{v} \\; [\\text{kJ/mm}]$$\n\nExample — 25 V, 200 A, travel speed 5 mm/s:\n\n$$H = \\frac{25 \\times 200}{5} = 1000 \\text{ J/mm} = 1.0 \\text{ kJ/mm}$$\n\n- **Too high** → wide HAZ, grain growth, distortion, softened HAZ in work-hardened alloys.\n- **Too low** → fast cooling → hard, brittle martensite in steels (cracking risk) and lack of fusion.\n- For hardenable steels, **preheat** slows the cooling rate: rule of thumb — preheat ~100 °C for carbon steel above ~25 mm or above ~0.4% carbon; from the carbon equivalent:\n\n$$CE = C + \\frac{Mn}{6} + \\frac{Cr+Mo+V}{5} + \\frac{Ni+Cu}{15}$$\n\nCE > 0.4–0.5 warns \"preheat or crack\"; the CE is why the same steel grades behave differently across suppliers."
+    },
+    {
+      "id": "distortion",
+      "heading": "Distortion Control",
+      "content": "Welding shrinks as it cools; restrained shrinkage becomes **distortion** (angular, longitudinal, buckling). Since it cannot be eliminated, it must be **managed**:\n\n- **Balance the welds** — weld symmetrically about the neutral axis; sequence the passes to balance contraction (center-out, backstep, skip-weld).\n- **Tack and clamp** — fixturing restrains the part during cooling; release only when below ~100 °C to reduce springback.\n- **Reduce heat input** — more passes with smaller legs beat one huge pass; intermittent (skip) fillets instead of continuous when sealing allows.\n- **Pre-set** — lean the joint opposite the expected distortion so it straightens on cooling.\n- **Post-weld straightening** — flame straightening, peening, or thermal stress relief where the code allows.\n\nRule of thumb: weld **as little as the design allows** — each kilogram of deposited weld metal is a kilogram of potential distortion. Symmetric sections and minimum-leg fillets are the highest-value distortion controls in fabrication."
+    },
+    {
+      "id": "inspection",
+      "heading": "Weld Inspection & Quality",
+      "content": "A weld's internal quality is invisible; inspection is the proof:\n\n- **Visual (VT)** — every weld: size, contour, undercut, porosity on the surface, cracks. Catches most rejects at the cheapest cost.\n- **Surface NDT**: **PT** (penetrant — dye, surface cracks), **MT** (magnetic particle — surface/near-surface, ferromagnetic).\n- **Volumetric NDT**: **UT** (ultrasonic — thickness, embedded flaws, no radiation) and **RT** (radiographic — records, best for pressure vessels, requires access and safety controls).\n- **Mechanical**: bend tests, macro-etch (see the fusion zone), hardness traverses, and **coupon tests** per code.\n\nQuality classes (e.g. ISO 5817 for fusion welds) grade acceptable imperfection levels — a class B (stringent) weld on a crane beam vs class D (lenient) on a cosmetic enclosure. The inspection level must match the component risk class; specifying RT-grade quality on a cosmetic bracket is paying for nothing. Feed weld failures into the [[quality-control-and-spc|quality]] loop — weld defects repeat until the process changes."
+    }
+  ],
+  "keyTakeaways": [
+    "Pick the process by material, thickness, position, environment, and rate: TIG quality, MIG volume, SMAW portability, FCAW thick outdoor.",
+    "Weld symbols on the drawing (reference line, arrow side, size, length) fully define the joint — read and write them fluently.",
+    "Control heat input H = V·I/v, preheat by carbon equivalent, and manage distortion with balanced sequences, clamps, and minimum weld metal.",
+    "Inspection escalates VT → PT/MT → UT/RT; match the NDT class to the component risk."
+  ],
+  "relatedTopics": [
+    "sheet-metal-manufacturing",
+    "manufacturing-process-selection",
+    "machining-fundamentals",
+    "metrology-and-inspection",
+    "engineering-drawings-and-bom"
+  ]
+}

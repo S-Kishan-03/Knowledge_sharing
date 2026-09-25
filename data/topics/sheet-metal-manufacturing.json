@@ -1,0 +1,74 @@
+{
+  "id": "sheet-metal-manufacturing",
+  "title": "Sheet Metal Manufacturing",
+  "category": "Manufacturing & CAM",
+  "categoryId": "manufacturing",
+  "readTime": "8 min",
+  "difficulty": "Beginner",
+  "icon": "clamp",
+  "summary": "Cutting, bending math (bend allowance, bend deduction), bend design rules, springback, tolerances, and nesting for sheet metal parts.",
+  "infobox": {
+    "title": "Sheet Metal",
+    "imageSymbol": "🗜️",
+    "keyFormulas": [
+      {
+        "label": "Bend Allowance",
+        "math": "BA = \\theta \\, \\frac{\\pi}{180} (R + K t)"
+      },
+      {
+        "label": "Bend Deduction",
+        "math": "BD = 2(R + t) - BA"
+      },
+      {
+        "label": "Hole-to-Bend Distance",
+        "math": "d \\geq 2.5t + R"
+      }
+    ],
+    "siUnits": "mm (thickness, radius), ° (bend angle)"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "The Sheet Metal Process Chain",
+      "content": "Sheet metal fabrication turns flat stock into stiff, light, enclosure-capable parts through three core operations: **cutting** (separating), **forming** (bending, flanging), and **joining** (welding, fastening — see [[welding-and-joining|welding]]). The economics are excellent at medium volumes: fast cycles, low tooling for laser + press brake, and parts that are cheap to paint and assemble. The discipline is geometric: flat-blank math, bend-radius limits, and hole placement all get decided before the press brake ever runs."
+    },
+    {
+      "id": "cutting",
+      "heading": "Cutting: Punching, Laser & Waterjet",
+      "content": "The cut defines the blank and every hole before forming:\n\n- **Shearing / punching** — mechanical cut with a die; cheapest at volume, leaves a **burr** on one side and a shear zone; minimum hole diameter ~1.2× stock thickness in punching.\n- **Laser cutting** — CO2/fiber: kerf 0.1–0.3 mm, edge quality classifiable (ISO 9013), excellent for prototypes and complex contours; heat-affected edge on thicker material.\n- **Waterjet** — no heat-affected zone, cuts any material stack including thick plate; slower, more expensive per metre, square edges.\n- **Edge quality**: burr height and direction matter for operator safety and for bends — the burr side takes the **tension** in bending better; place burrs accordingly.\n\nFeature rules: minimum hole size, minimum slot width (~1×t), and **hole-to-edge distance ≥ 2×t** to prevent the hole distorting into the edge."
+    },
+    {
+      "id": "bending-math",
+      "heading": "Bend Allowance & Flat-Blank Length",
+      "content": "Bending stretches the outside and compresses the inside of the sheet around a **neutral axis** that shifts toward the inner face. The **bend allowance** is the arc length of the neutral axis over the bend:\n\n$$BA = \\theta \\, \\frac{\\pi}{180} (R + K t)$$\n\nwith $K$ the K-factor (neutral-axis position as a fraction of thickness; 0.44 for air-bent mild steel, ~0.3 for tight-radius coining). Example — 90° bend, $R = 2$ mm, $t = 1.5$ mm, $K = 0.44$:\n\n$$BA = 90 \\times 0.01745 \\times (2 + 0.44 \\times 1.5) = 1.5708 \\times 2.66 = 4.18 \\text{ mm}$$\n\nThe **bend deduction** (how much to subtract from the sum of outside dimensions for the flat blank):\n\n$$BD = 2(R + t) - BA$$\n\nFor the same bend: $BD = 2 \\times 3.5 - 4.18 = 2.82$ mm. Every CAD sheet-metal module (see [[cad-computer-aided-design|CAD]]) computes this — but the K-factor must match the shop's tooling, or your \"perfect\" flat pattern is wrong by millimetres."
+    },
+    {
+      "id": "bend-design-rules",
+      "heading": "Bend Design Rules",
+      "content": "Features adjacent to bends get distorted unless spaced properly:\n\n- **Minimum bend radius** (air bend, mild steel ≈ 0.5–1.0×t; higher-strength and some stainless need 1.5–2×t; aluminium often 2×t). Below it, the outer fiber cracks.\n- **Minimum flange length** ≈ 4×t + R — enough material for the die opening to grip.\n- **Hole-to-bend distance** $d \\geq 2.5t + R$ — holes inside the bend zone stretch into ovals; the rule keeps them clear of the deformation zone.\n- **Notch/slot to bend** similar relief needed; add **relief cuts** at bend ends of flanges to prevent tearing.\n- **Form height** ≥ 2×t for bends to be stable; tabs and lances need their own min dimensions.\n\nDimensioning bends: give the bend **inside radius** and the **outside flange dimensions** (what the operator measures) — never the neutral-axis lengths; and note **grain direction** for tight radii (bend across the rolling grain when possible)."
+    },
+    {
+      "id": "springback",
+      "heading": "Springback & Overbend",
+      "content": "After the punch releases, the elastic portion of the deformation springs the sheet back toward flat. Springback grows with:\n\n- **Higher strength** (high-strength steel, stainless, spring temper) — more elastic recovery.\n- **Smaller thickness-to-radius ratios** (sharp bends in thin sheet spring back a lot).\n\nCompensation tactics:\n\n- **Overbend** — the punch angle, air-bend die geometry, or a heel on the tool makes the part spring back to the target angle.\n- **Bottoming/coining** — pressing the sheet to the die bottom (or past yield locally) dramatically reduces springback scatter at the cost of tooling life.\n- **Bend relief / stress reversal** — in critical cases, a secondary bending operation.\n\nSpringback is **scatter**, not just offset: the same nominal bend varies across sheets. For precision formed parts, measure the first pieces, adjust the program, and hold the process within the band — pressure-brake programs live and die by this feedback loop."
+    },
+    {
+      "id": "tolerances-and-nesting",
+      "heading": "Tolerances & Nesting",
+      "content": "Realistic sheet-metal tolerances (laser-cut parts):\n\n- Cut profile (laser) ±0.1–0.2 mm; hole diameters ±0.1 mm.\n- **Bend-to-hole** positions ±0.3 mm — the bend itself is the biggest uncertainty source; bend angles ±0.5° typical air-bend.\n- **Formed part overall** ±0.5–1.0 mm across flange sets; the flat blank holds tighter than the formed result.\n\nDo not carry machining-style tolerances (±0.02 mm) onto sheet metal — the process cannot hold them flat, and you will pay for it (see [[engineering-specifications|specification]] reality).\n\n**Nesting** is the cost lever: place parts on the sheet to maximize **material utilization** (% of sheet turned into parts). Goals: common-line cutting (one cut shared by two parts), skeleton minimized, grain direction respected where required. Software nesting plus better layouts routinely lift utilization from 55% to 75%+ — at plate prices that is the difference between a profitable and a losing job."
+    }
+  ],
+  "keyTakeaways": [
+    "Flat-blank length needs bend allowance math: BA = θ·(π/180)·(R + Kt), BD = 2(R+t) − BA.",
+    "Keep holes ≥ 2.5t + R from bends and flange lengths ≥ 4t + R, or features distort.",
+    "Springback is scatter: overbend or bottom to hold angles, and iterate from first-piece measurement.",
+    "Realistic tolerances: cut ±0.1–0.2 mm, bend-to-hole ±0.3 mm — not machining tolerances."
+  ],
+  "relatedTopics": [
+    "manufacturing-process-selection",
+    "welding-and-joining",
+    "machining-fundamentals",
+    "engineering-drawings-and-bom",
+    "cad-computer-aided-design"
+  ]
+}

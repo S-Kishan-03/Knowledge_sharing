@@ -1,0 +1,77 @@
+{
+  "id": "machining-fundamentals",
+  "title": "Machining & Cutting Fundamentals",
+  "category": "Manufacturing & CAM",
+  "categoryId": "manufacturing",
+  "readTime": "10 min",
+  "difficulty": "Intermediate",
+  "icon": "machining",
+  "summary": "Material removal processes, cutting speed, feed, and depth of cut parameters, tooling, and surface finish control.",
+  "infobox": {
+    "title": "Machining Parameters",
+    "imageSymbol": "⚒️🔩",
+    "keyFormulas": [
+      { "label": "Spindle Speed", "math": "N = \\frac{1000 \\times V_c}{\\pi \\times D}" },
+      { "label": "Feed Rate", "math": "F = f_z \\times z \\times N" },
+      { "label": "MRR (Milling)", "math": "MRR = a_p \\times a_e \\times f_z \\times z \\times N" }
+    ],
+    "siUnits": "m/min, RPM, mm/rev, mm/min, cm³/min",
+    "primaryFields": "CNC Machining, Manufacturing Engineering",
+    "keyConstants": "Typical Vc: Al 300, Steel 120, Stainless 60, Ti-6Al-4V 40 m/min"
+  },
+  "sections": [
+    {
+      "id": "overview",
+      "heading": "What Is Machining?",
+      "content": "**Machining** is the family of manufacturing processes that remove material to create a desired geometry: **turning** (lathe), **milling** (spindle-driven rotary cutter), **drilling**, **grinding**, and related processes. Unlike casting or forging, machining starts from stock and cuts away what is not needed — which is why it offers the best **accuracy and surface finish** of any manufacturing process, at the cost of material waste and cycle time."
+    },
+    {
+      "id": "cutting-fundamentals",
+      "heading": "The Three Cutting Parameters",
+      "content": "Every machining operation is defined by three primary parameters:\n\n1. **Cutting speed** $V_c$ (m/min) — the relative surface velocity between tool and workpiece:\n\n$$N = \\frac{1000 \\times V_c}{\\pi \\times D}$$\n\n2. **Feed** — for turning, feed per revolution $f$ (mm/rev); for milling, feed per tooth $f_z$ (mm/tooth), converted to table feed:\n\n$$F = f_z \\times z \\times N$$\n\n3. **Depth of cut** — axial $a_p$ and radial $a_e$ engagement into the material\n\nTogether they define the **Material Removal Rate** — the productivity measure:\n\n$$MRR = a_p \\times a_e \\times f_z \\times z \\times N \\quad [\\text{mm}^3\\text{/min}]$$\n\nHigher $V_c$ and feed cut faster but wear the tool faster and degrade surface finish. Selection is a trade-off; see the interactive calculator below."
+    },
+    {
+      "id": "processes",
+      "heading": "Key Conventional Processes",
+      "content": "| Process | Machine | Motion | Typical Capability |\n|---|---|---|---|\n| **Turning** | Lathe | Workpiece rotates, tool feeds linearly | Cylinders, shafts, threads |\n| **Milling** | Mill | Rotating cutter moves across work | Slots, pockets, faces, 3D surfaces |\n| **Drilling** | Drill press / mill | Rotating drill feeds axially | Holes (then reaming/boring for accuracy) |\n| **Grinding** | Grinder | Abrasive wheel, fine cuts | Hardened surfaces, Ra 0.4 µm and better |\n| **EDM** | Spark erosion | Electrical discharges erode material | Hardened tooling, intricate cavities |\n\nChoose by **geometry + material + tolerance**: mill for prismatic features, turn for rotational parts, grind for hardened steel and tight finishes, EDM where nothing else can reach."
+    },
+    {
+      "id": "tooling",
+      "heading": "Tool Materials & Geometry",
+      "content": "Tool material selection governs the feasible cutting speed:\n\n| Tool Material | Hardness | Max Practical Vc (steel) | Use |\n|---|---|---|---|\n| **HSS** | High toughness | ~30-40 m/min | Drills, taps, form tools |\n| **Carbide** | Very hard | ~120-250 m/min | The workhorse for milling/turning |\n| **Ceramic** | Extremely hard | ~300-600 m/min | High-speed finishing of hard steels |\n| **CBN / PCD** | Hardest | 1000+ m/min | Hardened steel, aluminum, composites |\n\nTool **geometry** (rake angle, relief angle, lead angle) controls chip flow, forces, and finish. Positive rake cuts more freely (better for soft/ductile materials); negative rake survives interrupted cuts and hard materials. **Inserted carbide tooling** (indexable inserts) replaced regrinding in most production — change the insert, keep the holder."
+    },
+    {
+      "id": "chip-coolant",
+      "heading": "Chips, Coolant & Heat",
+      "content": "Most of the cutting energy converts to **heat** at the shear zone — control it or it controls you:\n\n- **Chip control** — continuous ribbons wrap around the tool and scratch the surface; chip breakers and correct feeds produce safe, short chips\n- **Coolants** — flood emulsion (general), MQL/mist (light duty), high-pressure through-tool (deep holes, titanium)\n- **Built-up edge (BUE)** — work material welding onto the cutting edge at low speeds on ductile metals; raise speed or use coated tools to avoid it\n- **Tool wear** — flank wear and crater wear are normal; monitor and replace before catastrophic failure. A dull tool raises forces and ruins finish long before it breaks"
+    },
+    {
+      "id": "surface-finish",
+      "heading": "Surface Finish & Tolerances",
+      "content": "Machining's competitive advantage is **precision**. Practical capability:\n\n| Process | Tolerance | Surface Roughness Ra |\n|---|---|---|\n| Rough milling/turning | ±0.1 mm | 3.2 - 6.3 µm |\n| Finish milling/turning | ±0.025 mm | 0.8 - 1.6 µm |\n| Grinding | ±0.005 mm | 0.2 - 0.8 µm |\n| Honing / lapping | ±0.002 mm | 0.05 - 0.2 µm |\n\nSurface finish and dimensional tolerance are linked — tighter tolerances need finer finishing passes and stable fixturing. Communicate critical features with [[gdnt-fundamentals|GD&T]] callouts so the operator and inspector know exactly what matters, and confirm achievable values with your machine shop before finalizing the drawing."
+    },
+    {
+      "id": "machining-calculator",
+      "heading": "Interactive Cutting Parameters Calculator",
+      "content": "Compute spindle speed, table feed rate, and material removal rate for a milling operation. Select a workpiece material, enter the cutter and cutting parameters, and the tool calculates the values — the same math the [[cam-computer-aided-manufacturing|CAM]] software performs internally.",
+      "calculator": "machining_calculator"
+    },
+    {
+      "id": "safety",
+      "heading": "Machining Safety",
+      "content": "Machining is unforgiving of shortcuts:\n\n- **No gloves near rotating spindles** — they get pulled in, hands follow\n- Remove **chips with brushes** — never bare hands or compressed air at the face\n- Secure the workpiece — a part that moves under cut can become a projectile\n- Use **proper eye protection** at all times\n- Respect **tool-change and setup lockouts** — never reach into the machine while the program is running"
+    }
+  ],
+  "keyTakeaways": [
+    "Machining is defined by cutting speed, feed, and depth of cut — they jointly set MRR, tool life, and finish.",
+    "Spindle speed N = (1000 × Vc) / (π × D); table feed F = fz × z × N.",
+    "Match the tool material to the workpiece: carbide for production steels, CBN/PCD for hardened or abrasive materials.",
+    "Heat and chip control determine surface quality and tool life — coolant and chip breakers are not optional.",
+    "Define critical features with GD&T so machining and inspection target the same requirement."
+  ],
+  "relatedTopics": [
+    "cam-computer-aided-manufacturing",
+    "gdnt-fundamentals",
+    "stress-strain-analysis"
+  ]
+}

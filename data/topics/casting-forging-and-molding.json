@@ -1,0 +1,74 @@
+{
+  "id": "casting-forging-and-molding",
+  "title": "Casting, Forging & Molding",
+  "category": "Manufacturing & CAM",
+  "categoryId": "manufacturing",
+  "readTime": "9 min",
+  "difficulty": "Intermediate",
+  "icon": "forge",
+  "summary": "Sand, investment and die casting; hot forging; injection molding — process capability, design rules (draft, walls, shrinkage), and defects.",
+  "infobox": {
+    "title": "Casting / Forging / Molding",
+    "imageSymbol": "🔥",
+    "keyFormulas": [
+      {
+        "label": "Shrinkage Allowance",
+        "math": "L_{pattern} = L_{part} \\, (1 + S)"
+      },
+      {
+        "label": "Rib Thickness (IM)",
+        "math": "t_{rib} \\approx 0.5\\,t_{wall}"
+      },
+      {
+        "label": "Solidification Time",
+        "math": "t_s \\propto \\left(\\frac{V}{A}\\right)^2"
+      }
+    ],
+    "siUnits": "mm (dimensions), % (shrinkage)"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "Shaping Metal by Flow and Force",
+      "content": "Casting, forging, and molding share a philosophy: shape the part **directly from bulk material** rather than cutting it away, which wastes no chip and often wins on cost and strength at volume. Each family has its personality — castings give freedom of geometry, forgings give aligned grain flow (see below), and injection molding gives the cheapest repeatable plastic part at scale. Choosing between them (and against machining, see [[manufacturing-process-selection|process selection]]) is a core early-design decision."
+    },
+    {
+      "id": "casting-processes",
+      "heading": "Casting Process Spectrum",
+      "content": "Castings pour molten metal into a cavity; the processes differ in mold quality and cost:\n\n| Process | Tolerance | Surface (Ra µm) | Min wall | Volume economy |\n|---|---|---|---|---|\n| Sand casting | ±0.5–2 mm | 6.3–25 | 3–5 mm | Low-to-mid, cheap tooling |\n| Investment (lost wax) | ±0.1–0.2 mm | 1.6–6.3 | 1–2 mm | Low-mid; complex, fine detail |\n| Die casting (HPDC) | ±0.05–0.1 mm | 1.6–6.3 | 1–2.5 mm | High — the big-volume aluminum/zinc route |\n| Gravity / low-pressure | ±0.3–0.8 mm | 3.2–12.5 | 3 mm | Mid-high; structural Al |\n\nDirection: sand for size and flexibility, investment for **complexity with precision** (turbine blades, jewelry, medical), die casting for **high-volume thin-walled** aluminium/zinc. Each has its design signature below."
+    },
+    {
+      "id": "casting-design",
+      "heading": "Casting Design Rules",
+      "content": "Cast-friendly design is mostly about **feeding** — molten metal must reach every corner and the solidifying part must not trap shrinkage:\n\n- **Draft 1–3°** on all faces parallel to the pull direction (more for sand, less for die with ejectors) — zero-draft is a machining mindset.\n- **Uniform wall thickness** — thick sections shrink-feeding neighbors and cause sinks; vary walls with **ribs and cored lightening** (see next section for the molding twin of this rule).\n- **Shrinkage allowance**: the pattern is oversized by the metal's contraction $S$ (aluminium ~1.3%, steel ~1.5–2%, zinc ~0.7%):\n\n$$L_{pattern} = L_{part} \\, (1 + S)$$\n\nFor a 200 mm aluminium casting: pattern length = $200 \\times 1.013 = 202.6$ mm.\n\n- **Avoid sharp corners** — fillet inside corners with radius ≥ wall thickness (hot tears start at corners).\n- **Solidification follows Chvorinov**: $t_s \\propto (V/A)^2$ — thin sections freeze first, thick sections last, so **feeders** (risers) are placed at the last-freezing thick sections to feed shrinkage."
+    },
+    {
+      "id": "casting-defects",
+      "heading": "Common Casting Defects & Prevention",
+      "content": "The defect list reads like a taxonomy of fluid flow and solidification:\n\n- **Porosity (gas)** — trapped air or dissolved gas; prevent with good gating design (quiescent fill), degassing, and dry molds.\n- **Shrinkage cavity** — the classic feeder failure: last-freezing region starved of feed metal; fix with **risers and chills** to steer solidification direction.\n- **Cold shut / misrun** — two fluid fronts meet and fail to fuse; the metal was too cold or the wall too thin: raise pour temperature, improve flow, thicken locally.\n- **Flash** — metal squeezed out at the parting line; a die/mold fit problem, trimmed mechanically.\n- **Hot tearing** — strain-induced cracking during solidification at restrained corners; fillet them and design for uniform cooling.\n\nEvery defect has a signature on the part (location, shape, surface look) — a casting foundry's diagnosis is pattern-recognition on failure modes. Feed the defect data back into gating design (see [[quality-control-and-spc|quality]] loop) rather than inspecting the defect out."
+    },
+    {
+      "id": "forging",
+      "heading": "Forging: Grain Flow & Properties",
+      "content": "Forging **deforms** hot metal under a press or hammer, aligning the grain structure along the part contours → superior fatigue and impact properties compared to cast or machined-from-bar (where grain is cut by machining). Key facts:\n\n- **Hot forging** (above recrystallization, e.g. steel 1100–1250 °C): complex shapes, **draft 5–7°** for die release, tolerances ±0.5–1.5 mm, flash trimmed off.\n- **Cold forging** (near room temp): excellent finish and dimensional control (±0.05–0.2 mm), work-hardened strength, limited geometry (screws, shafts, near-net gears) — but requires ductile material and high press loads.\n- **Closed-die vs open-die**: closed-die gives near-net shape at tooling cost; open-die (hammer on flat dies) shapes large ingots and bars simply (shafts, rings).\n- **Grain flow follows the dies** — design the forging so fibers run **along** the highest-stress direction, not across it: a forged crank web outlives a machined one for exactly this reason.\n- Rule of thumb economics: forging wins when volume amortizes dies and the loading justifies the property gain — connecting rods, crankshafts, flanges, fittings."
+    },
+    {
+      "id": "injection-molding",
+      "heading": "Injection Molding Design Rules",
+      "content": "Plastic injection molding (IM) is the high-volume shaping machine for polymers. The design rules are well established:\n\n- **Uniform wall 1.5–4 mm** — thick walls sink (shrinkage) and take forever to cool; vary thickness with ribs, not plate thickness.\n- **Ribs** stiffen without adding thickness: $t_{rib} \\approx 0.5\\,t_{wall}$ (0.4–0.6 practical band), height ≤ 3×t, draft 0.5–2°, and rib root fillets ≥ 0.25–0.5 mm to avoid sink and stress.\n- **Draft 0.5–2°** everywhere — ejector pins push on the part; zero-draft parts stick to the core.\n- **Gates & weld lines** — the gate marks the fill point; weld lines form where melt fronts meet around inserts/holes and are structurally weak — place holes and gates so critical regions avoid weld lines.\n- **Shrinkage** is material-dependent: amorphous ~0.3–0.7%, semi-crystalline (nylon, PP) 1–2%+ and **anisotropic** (more along flow). Mold cavities are oversized by the measured shrinkage; validate with a mold-flow analysis and first shots.\n- **Tolerances**: good IM holds ±0.1–0.3 mm per 25 mm; drafts and datums drive the achievable band (see [[manufacturing-process-selection|process selection]] for the capability table)."
+    }
+  ],
+  "keyTakeaways": [
+    "Castings give geometric freedom (sand → investment → die casting as tolerance and volume rise).",
+    "Draft, uniform walls, filleted corners and correct shrinkage allowance are non-negotiable casting/forging/molding rules.",
+    "Forging aligns grain flow for fatigue-critical parts; die castings and IM parts win at volume.",
+    "Solidification time ~ (V/A)² drives feeding design — risers go on the last-freezing sections."
+  ],
+  "relatedTopics": [
+    "manufacturing-process-selection",
+    "machining-fundamentals",
+    "additive-manufacturing",
+    "metrology-and-inspection",
+    "fatigue-and-failure-analysis"
+  ]
+}

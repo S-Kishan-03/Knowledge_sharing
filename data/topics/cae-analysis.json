@@ -1,0 +1,71 @@
+{
+  "id": "cae-analysis",
+  "title": "Computer-Aided Engineering & FEA",
+  "category": "Simulation & Analysis (CAE)",
+  "categoryId": "cae",
+  "readTime": "11 min",
+  "difficulty": "Advanced",
+  "icon": "trend",
+  "summary": "Finite element analysis workflow, meshing, boundary conditions, and interpretation of structural, modal, and thermal simulations.",
+  "infobox": {
+    "title": "CAE/FEA Core Equations",
+    "imageSymbol": "🖥️📈",
+    "keyFormulas": [
+      { "label": "Equilibrium", "math": "[K]\\,\\{u\\} = \\{F\\}" },
+      { "label": "Von Mises Stress", "math": "\\sigma_{vm} = \\sqrt{\\frac{(\\sigma_1-\\sigma_2)^2 + (\\sigma_2-\\sigma_3)^2 + (\\sigma_3-\\sigma_1)^2}{2}}" },
+      { "label": "Natural Frequency", "math": "\\omega_n = \\sqrt{\\frac{k}{m}}" }
+    ],
+    "siUnits": "N, MPa, Hz, °C",
+    "primaryFields": "Structural Analysis, Modal, Thermal, CFD",
+    "keyConstants": "FEA solver kernels: Static & dynamic implicit/explicit"
+  },
+  "sections": [
+    {
+      "id": "overview",
+      "heading": "What Is CAE?",
+      "content": "**Computer-Aided Engineering (CAE)** uses simulation software to predict how a design behaves before anything is built. The workhorse is **Finite Element Analysis (FEA)**, which splits geometry into small elements and solves the physics equations on each — yielding stresses, deformations, temperatures, and natural frequencies that would otherwise require expensive physical prototypes.\n\nCAE sits between [[cad-computer-aided-design|CAD]] and prototyping in the [[new-product-design|NPD]] workflow: validate the model, then build once."
+    },
+    {
+      "id": "cae-workflow",
+      "heading": "The FEA Workflow",
+      "content": "Every FEA study follows three phases:\n\n1. **Pre-processing** — import geometry, assign materials, define mesh, apply boundary conditions and loads\n2. **Solution** — the solver assembles the global stiffness matrix and solves the equilibrium equations\n3. **Post-processing** — visualize stress/strain/deformation contours, extract factors of safety, verify convergence\n\nThe governing equation of linear static FEA is:\n\n$$[K]\\,\\{u\\} = \\{F\\}$$\n\nwhere $[K]$ is the global stiffness matrix, $\\{u\\}$ the nodal displacement vector, and $\\{F\\}$ the applied force vector."
+    },
+    {
+      "id": "meshing",
+      "heading": "Discretization & Mesh Quality",
+      "content": "The mesh is where accuracy is won or lost. Key concepts:\n\n- **Element types** — tetrahedra (automatic, good for complex solids), hexahedra (structured, more accurate per node), shells (thin-walled parts), beams (frames)\n- **Element size** — smaller elements capture stress gradients better but cost solve time\n- **Quality metrics** — aspect ratio, skewness, and Jacobian must stay within solver limits; distorted elements corrupt results\n- **Convergence** — refine the mesh and confirm results stabilize; if the stress keeps changing with mesh size, the answer is not converged\n\nRule of thumb: **refine locally where stress concentrates** (fillets, holes, notches) rather than uniformly, so accuracy is achieved where it matters without exploding solve time."
+    },
+    {
+      "id": "loads-bcs",
+      "heading": "Boundary Conditions & Loads",
+      "content": "Boundary conditions (BCs) anchor the model to reality. Common types:\n\n- **Fixed / pinned supports** — constrain translational and/or rotational DOFs\n- **Forces & pressures** — applied loads on faces or nodes\n- **Displacement/velocity loads** — prescribed motion\n- **Thermal loads** — temperature fields driving expansion, or convection/conduction for thermal analysis\n\nErrors here are the #1 cause of wrong FEA results: an over-constrained model predicts artificially high stiffness; an under-constrained model flies apart. **Always verify**: sum of reactions should balance applied loads, and rigid-body motion must be fully restrained."
+    },
+    {
+      "id": "analysis-types",
+      "heading": "Types of Analysis",
+      "content": "| Analysis | What it predicts | Typical question |\n|---|---|---|\n| **Static structural** | Stress, deformation, FOS | Will this bracket survive 5 kN? |\n| **Modal** | Natural frequencies & mode shapes | Will this shaft resonate at 3000 RPM? |\n| **Thermal** | Temperature distribution & heat flux | How hot will the gearbox housing get? |\n| **Fatigue** | Life under cyclic loading | How many cycles before crack initiation? |\n| **Buckling** | Critical load for instability | Will this column collapse under compression? |\n| **CFD** | Fluid flow, pressure, heat transfer | What pressure drop across the manifold? |\n\nFor rotating machinery, check that excitation frequencies stay clear of natural frequencies $\\omega_n = \\sqrt{k/m}$ by a safe margin (typically ±10-20%)."
+    },
+    {
+      "id": "results-interpretation",
+      "heading": "Interpreting Results Correctly",
+      "content": "Post-processing is where simulation earns or loses trust:\n\n- **Von Mises stress** is the standard equivalent stress for ductile metals — compare it against yield strength:\n\n$$\\sigma_{vm} = \\sqrt{\\frac{(\\sigma_1-\\sigma_2)^2 + (\\sigma_2-\\sigma_3)^2 + (\\sigma_3-\\sigma_1)^2}{2}}$$\n\n- **Factor of Safety** $FOS = \\sigma_{yield} / \\sigma_{vm}$ — design for the target FOS, not just \"under yield\"\n- **Stress singularities** — sharp re-entrant corners in FEA produce infinite theoretical stress; the value at the singularity node is mesh-dependent and must be ignored (evaluate at the adjacent element or add the real fillet)\n- **Peak stress vs. allowable** — always ask: *is this a real stress or a mesh artifact?*\n\nCross-check FEA against hand calculations (like [[stress-strain-analysis|Hooke's law]] axial stress) on at least one simple load case before trusting the full model."
+    },
+    {
+      "id": "validation",
+      "heading": "Simulation-to-Test Correlation",
+      "content": "Simulation is a prediction, not proof. The gold standard is **correlation**: instrument a prototype with strain gauges or accelerometers, measure under the same loads, and confirm the FEA within an acceptable band (typically ±10-15% for linear static).\n\nA calibrated model becomes a powerful tool: once correlated on a known case, design variations can be explored virtually — accelerating the [[new-product-design|NPD]] loop and retiring physical prototypes one-by-one."
+    }
+  ],
+  "keyTakeaways": [
+    "FEA solves [K]{u} = {F} on a discretized mesh — mesh quality governs result accuracy.",
+    "Boundary conditions are the #1 source of wrong answers; check reaction balance before trusting results.",
+    "Use Von Mises stress against yield strength for ductile metals; watch for stress singularities at sharp corners.",
+    "Run a mesh convergence study — if results change with mesh size, they are not converged.",
+    "Correlate simulation against physical tests once; then use the validated model for design exploration."
+  ],
+  "relatedTopics": [
+    "stress-strain-analysis",
+    "new-product-design",
+    "cad-computer-aided-design"
+  ]
+}

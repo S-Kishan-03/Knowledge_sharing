@@ -1,0 +1,74 @@
+{
+  "id": "additive-manufacturing",
+  "title": "Additive Manufacturing (3D Printing)",
+  "category": "Manufacturing & CAM",
+  "categoryId": "manufacturing",
+  "readTime": "8 min",
+  "difficulty": "Beginner",
+  "icon": "printer",
+  "summary": "FDM, SLA, SLS and metal AM processes; design rules, orientation and anisotropy, tolerances, and when additive beats subtractive.",
+  "infobox": {
+    "title": "Additive Manufacturing",
+    "imageSymbol": "🖨️",
+    "keyFormulas": [
+      {
+        "label": "Layer Count",
+        "math": "n = \\frac{H}{h}"
+      },
+      {
+        "label": "Staircase Roughness",
+        "math": "Ra \\propto \\frac{h}{4\\cos\\varphi}"
+      },
+      {
+        "label": "Part Cost",
+        "math": "C = c_t \\, t + c_m \\, m"
+      }
+    ],
+    "siUnits": "mm (features, layer), µm (roughness)"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "The Third Manufacturing Route",
+      "content": "Additive manufacturing (AM) builds parts **layer by layer** directly from CAD — no tools, no fixtures, no stock. Its promise is not \"free complexity\" (it is), but **economic freedom from geometry**: internal channels, lattices, topologically optimized shapes, and single-piece assemblies that any subtractive route would reject as impossible or uneconomic. AM is also the fastest route from CAD to physically real parts (see [[prototype-testing-and-validation|prototype]]), which is where most of industry's AM volume actually goes."
+    },
+    {
+      "id": "processes",
+      "heading": "The AM Process Family",
+      "content": "Choose the AM process by material and required quality:\n\n| Process | Material | Tolerance / finish | Character |\n|---|---|---|---|\n| FDM (FFF) | PLA, ABS, PETG, nylon | ±0.2–0.5 mm, layered finish | Cheapest, structural-ish parts |\n| SLA / DLP | Photopolymers | ±0.05–0.1 mm, smooth | Highest polymer detail (jewelry, dental) |\n| SLS | Nylon powders | ±0.1–0.3 mm, no supports | Strong noneed-support polymer parts |\n| SLM / DMLS | Steel, Al, Ti, Ni alloys | ±0.05–0.2 mm, rough surfaces | Production metal parts, lattices |\n| MJF | Nylon | ±0.1–0.3 mm, fast | Production polymer at volume |\n| DED | Metal wire/powder | ±0.5–1 mm | Large parts, repair, near-net |\n\nMetal AM (SLM) is where \"production additive\" lives today: conformal cooling channels in injection mold inserts, orthopaedic implants, aerospace brackets — parts whose *internal geometry* pays for themselves. Polymer AM dominates prototypes, fixtures, and jigs."
+    },
+    {
+      "id": "design-rules",
+      "heading": "Design Rules for Printing",
+      "content": "Printability is a design discipline, not an afterthought:\n\n- **Minimum feature**: ~0.4–0.8 mm for FDM walls, 0.1 mm for SLA/SLS; detail below the nozzle/laser resolution disappears.\n- **Overhangs**: unsupported angles beyond ~45° (polymers) sag or need support; self-supported designs (45° chamfers, build-in-able features) save the support removal cost.\n- **Holes** print round only when their axis is vertical; horizontal holes need teardrop profiles or support.\n- **Lattices and gyroids** — the AM superpower: graded internal structure for stiffness/weight trade-offs; keep cell size ≥ 3–5× the wall resolution.\n- **Internal channels** are free (the killer feature): conformal cooling channels, manifold passages — impossible to machine, printable in one piece.\n- **Text/embossed detail**: minimum 0.5 mm text height per mm of depth; orientation matters (see next section)."
+    },
+    {
+      "id": "orientation",
+      "heading": "Orientation & Anisotropy",
+      "content": "Build orientation is the AM equivalent of grain direction:\n\n- **Staircase roughness** on slanted faces: vertical faces are smoothest, slanted faces get the layer stair-step profile ($Ra \\propto h/\\cos\\varphi$). Orient the cosmetic/critical surfaces vertical or near-vertical.\n- **Anisotropy**: layer interfaces are the weak planes — tensile strength across layers is typically **70–85%** of in-plane (worse for FDM: ~50–60%; best for SLS/MJF). Load-bearing direction should lie **in-plane** with the layers.\n- **Supports** hang below overhangs: orientation that minimizes supports lowers cost and removes surface scarring where supports touched.\n- **Build time and cost** scale with **height** (layer count $n = H/h$) and machine footprint — orient for the smallest z-height when time matters.\n\nAlways ask the question in review: *which way will the load pull?* and set the build direction accordingly — it is the difference between a printed part that survives and one that delaminates in service."
+    },
+    {
+      "id": "tolerances",
+      "heading": "Tolerances & Post-Processing",
+      "content": "AM tolerances are honest about their limits:\n\n- **As-printed**: ±0.1–0.3 mm typical (polymer), ±0.05–0.2 mm (metal) — **NOT** machining tolerance. Design fits and critical features accordingly, or plan post-machining.\n- **Shrinkage/warp**: polymers shrink and curl (especially FDM large parts); metal parts need stress relief after build and can distort off the build plate.\n- **Surface finish**: SLM surfaces are rough (Ra 3–12 µm) with adhered powder; polish, peen, or machine functional seal faces (see [[iso-fits-and-surface-finish|fits]] on why).\n- **Post-processing ladder**: support removal → surface smoothing (vapor smoothing for nylon, tumbling, sanding) → stress relief/HIP for metal → CNC machining of datums and fits → coating.\n\nPractical rule: **machine the functional features, print the rest** — a metal AM part with CNC-machined bearing seats and thread datums is the hybrid pattern that production actually uses."
+    },
+    {
+      "id": "economics",
+      "heading": "When AM Wins (and Loses)",
+      "content": "The economics, honestly stated:\n\n**AM wins when:**\n- Quantity is low (1–1000): no tooling to amortize — the break-even vs molding is far lower than most expect (see [[manufacturing-process-selection|process selection]]).\n- Geometry is complex or **single-piece** (assemblies printed as one: elimination of joints, seals, fasteners).\n- Internal features others cannot make (conformal cooling, lattices, serpentine channels).\n- Lead time dominates: days of printing vs months of tooling for prototypes and spares.\n\n**AM loses when:**\n- Quantity is high with a stable design (molding/forging win by orders of magnitude in unit cost).\n- Tolerances and finish are machining-grade across large surfaces.\n- Material properties must match wrought specs exactly (fatigue of metal AM without HIP/post-processing is inferior — see [[fatigue-and-failure-analysis|fatigue]]).\n- Cost per kilogram of raw material matters (powder is expensive).\n\nThe unit cost model is $C = c_t t + c_m m$ — machine time and material. AM competes on **avoided costs**: tooling, assembly, fixtures, inventory, and geometry-enabled performance — not on the raw cost sheet alone."
+    }
+  ],
+  "keyTakeaways": [
+    "AM frees geometry (internal channels, lattices, single-piece assemblies) but prints anisotropically — orient the load in-plane.",
+    "Respect minimum features, 45° overhang rules, and orientation-driven staircase roughness.",
+    "As-printed tolerances are ±0.1–0.3 mm, not machining grade — machine the functional features.",
+    "AM wins at low volume and high complexity; molding/forging win at high volume. Cost = ct·t + cm·m."
+  ],
+  "relatedTopics": [
+    "cad-computer-aided-design",
+    "manufacturing-process-selection",
+    "prototype-testing-and-validation",
+    "machining-fundamentals",
+    "casting-forging-and-molding"
+  ]
+}

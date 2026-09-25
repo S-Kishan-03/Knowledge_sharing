@@ -1,0 +1,60 @@
+{
+  "id": "bernoulli-fluid-mechanics",
+  "title": "Fluid Dynamics & Bernoulli's Principle",
+  "category": "Fluid Mechanics & Hydraulics",
+  "categoryId": "fluids",
+  "readTime": "7 min",
+  "difficulty": "Beginner",
+  "icon": "waves",
+  "summary": "Conservation of energy in fluid flow, pressure heads, Venturi meters, and flow rate calculations.",
+  "infobox": {
+    "title": "Fluid Dynamics Quick Specs",
+    "imageSymbol": "🌊💧",
+    "keyFormulas": [
+      { "label": "Bernoulli Equation", "math": "P + \\frac{1}{2}\\rho v^2 + \\rho g z = \\text{Constant}" },
+      { "label": "Continuity Equation", "math": "A_1 v_1 = A_2 v_2" },
+      { "label": "Volumetric Flow Rate", "math": "Q = A \\cdot v" }
+    ],
+    "siUnits": "Pascal (Pa), m³/s, m/s, kg/m³",
+    "primaryFields": "Hydraulics, Aerodynamics, Piping Systems, Turbines",
+    "keyConstants": "Water Density ρ ≈ 1000 kg/m³, Gravity g ≈ 9.81 m/s²"
+  },
+  "sections": [
+    {
+      "id": "introduction",
+      "heading": "Introduction to Fluid Dynamics",
+      "content": "Fluid dynamics studies fluids (liquids and gases) in motion. Daniel Bernoulli formulated his famous equation in 1738, demonstrating that as the velocity of a fluid increases, the static pressure exerted by the fluid decreases simultaneously."
+    },
+    {
+      "id": "continuity-equation",
+      "heading": "The Continuity Equation: Conservation of Mass",
+      "content": "For an incompressible fluid flowing through a pipe with varying cross-sectional area, mass is conserved. The volumetric flow rate $Q$ remains constant:\n\n$$Q = A_1 v_1 = A_2 v_2$$\n\nWhere:\n- $A_1, A_2$ are cross-sectional areas ($m^2$)\n- $v_1, v_2$ are fluid flow velocities ($m/s$)\n\n> **Key Insight**: When a pipe narrows ($A_2 < A_1$), fluid speed must increase ($v_2 > v_1$)."
+    },
+    {
+      "id": "bernoulli-equation",
+      "heading": "Bernoulli's Energy Equation",
+      "content": "Assuming steady, incompressible, frictionless (inviscid) flow along a streamline, the total energy per unit volume is constant:\n\n$$P_1 + \\frac{1}{2}\\rho v_1^2 + \\rho g z_1 = P_2 + \\frac{1}{2}\\rho v_2^2 + \\rho g z_2$$\n\n### Components of Bernoulli's Energy:\n1. **Static Pressure Energy**: $P$ (Pascal or $N/m^2$)\n2. **Dynamic Pressure (Kinetic Energy)**: $\\frac{1}{2}\\rho v^2$\n3. **Hydrostatic Potential Energy**: $\\rho g z$\n\n### Head Form of Bernoulli's Equation\nDividing all terms by $\\rho g$ gives terms in units of meters (Head):\n\n$$\\frac{P}{\\rho g} + \\frac{v^2}{2g} + z = H_{\\text{total}}$$"
+    },
+    {
+      "id": "interactive-calculator",
+      "heading": "Interactive Flow & Bernoulli Calculator",
+      "content": "Experiment with pipe diameters and flow rates below to see how velocity changes and pressure drop occurs according to Bernoulli's principle.",
+      "calculator": "bernoulli_calculator"
+    },
+    {
+      "id": "applications",
+      "heading": "Engineering Applications",
+      "content": "- **Venturi Meters**: Measuring pipe flow rate by sensing differential pressure across a constriction.\n- **Airplane Wings (Airfoils)**: Generating lift due to faster airflow over the top curved surface (lower pressure) than beneath.\n- **Pitot Tubes**: Measuring aircraft speed relative to surrounding air.\n- **Car Atomizers & Atomizer Sprays**: Utilizing suction created by high-speed air streams."
+    }
+  ],
+  "keyTakeaways": [
+    "Fluid speed increases when flowing through a pipe constriction.",
+    "Higher fluid velocity results in lower static pressure.",
+    "Bernoulli's equation applies to ideal (incompressible, non-viscous, steady) flows.",
+    "Total head is the sum of pressure head, velocity head, and elevation head."
+  ],
+  "relatedTopics": [
+    "thermodynamics-laws",
+    "spur-gear-design"
+  ]
+}

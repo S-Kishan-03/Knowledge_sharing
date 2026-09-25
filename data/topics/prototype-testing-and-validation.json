@@ -1,0 +1,79 @@
+{
+  "id": "prototype-testing-and-validation",
+  "title": "Prototype Testing & Validation",
+  "category": "Product Design & CAD",
+  "categoryId": "product-design",
+  "readTime": "8 min",
+  "difficulty": "Intermediate",
+  "icon": "flask",
+  "summary": "Prototype tiers, DVP-R test planning, instrumentation basics, Weibull reliability, and sample-size logic for design validation.",
+  "infobox": {
+    "title": "Testing & Validation",
+    "imageSymbol": "🧪",
+    "keyFormulas": [
+      {
+        "label": "Weibull Reliability",
+        "math": "R(t) = e^{-(t/\\eta)^\\beta}"
+      },
+      {
+        "label": "Zero-Failure Sample Size",
+        "math": "n = \\frac{\\ln(1-C)}{\\ln(R)}"
+      },
+      {
+        "label": "Success Ratio (binomial)",
+        "math": "C = 1 - R^n"
+      }
+    ],
+    "siUnits": "cycles, hours, samples (n), confidence (C)"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "heading": "Validate Before You Commit",
+      "content": "Prototyping validates the design against reality **before** tooling money is spent — the cheapest place to find errors is before the die, mold, or production line exists. Validation is a discipline with a structure: build the right *tier* of prototype, test the right *characteristics*, with enough *samples* to believe the result, and record everything in a **DVP-R** so the evidence survives the project. A validation story is what turns a design into a release (see [[engineering-specifications|specifications]] for what \"pass\" means)."
+    },
+    {
+      "id": "prototype-tiers",
+      "heading": "Prototype Tiers",
+      "content": "Match the prototype to the question being asked:\n\n| Tier | Purpose | Typical fabrication |\n|---|---|---|\n| Looks-like | Form, ergonomics, styling | 3D print, foam, SLA (see [[additive-manufacturing|AM]]) |\n| Works-like (breadboard) | Function alone, not final form | Machined, bench rigs, off-shelf parts |\n| Engineering (alpha) | Function + form, near-final materials | Machined/printed to final tolerances |\n| Production-intent (beta) | Final process validation | Soft tooling, pilot production line |\n\nCritical discipline: **functional or physical validation must use production-equivalent materials and processes** — a 3D-printed nylon bracket tells you nothing about the fatigue life of the die-cast aluminium production part ([[casting-forging-and-molding|casting]] properties and AM anisotropy differ completely). Use looks-like for appearance, works-like for physics, engineering prototypes for the actual design release."
+    },
+    {
+      "id": "dvp-r",
+      "heading": "The DVP-R: Design Verification Plan",
+      "content": "The **DVP-R** is the test specification — the only document that makes validation auditable:\n\n1. **Item** — the component/assembly and which spec it verifies.\n2. **Test method & standard** — the procedure (ISO/ASTM derivative or internal), test rig, and fixture.\n3. **Conditions** — load, temperature, cycles, media, orientation, duration.\n4. **Acceptance criteria** — the numbers from the spec sheet (see [[engineering-specifications|specs]]).\n5. **Sample size & justification** — how many units and why (statistics below).\n6. **Result & status** — pass/fail with data, photo/plot evidence, and sign-off.\n\nThe DVP-R is fed by the **FMEA** (failure modes & effects analysis): each credible failure mode with high Severity × Occurrence × Detection becomes a test line. If the FMEA says \"it could crack\" and the DVP has no test for it, the risk is unmanaged—not absent."
+    },
+    {
+      "id": "test-types",
+      "heading": "Test Families",
+      "content": "Validation tests map to the physics of the part:\n\n- **Functional** — does it do the job: torque output, flow rate, force, speed, efficiency.\n- **Structural** — strength and stiffness: 3-point bending, tensile, crush, proof load; compare to FEA prediction (see [[cae-analysis|CAE]]) — the model-vs-test correlation is the real validation product.\n- **Environmental** — thermal cycling, humidity, salt spray (corrosion), UV, dust/water ingress (IP ratings), chemical exposure.\n- **Dynamic** — vibration (sine sweep, random PSD), shock, drop; resonance search finds the natural frequencies FEA predicted.\n- **Life/fatigue** — accelerated cycling to the endurance requirement (see [[fatigue-and-failure-analysis|fatigue]]): run to failure or to proof of life.\n- **EMC/electrical** for electromechanical products; **ergonomics/human factors** for anything people operate.\n\nPlan the sequence to fail fast: functional first (cheapest), structural and life next (most information per dollar), environmental last (longest, most expensive)."
+    },
+    {
+      "id": "instrumentation",
+      "heading": "Instrumentation & Data",
+      "content": "A test rig without instrumentation is theater; instrumentation choices decide what you learn:\n\n- **Load cells / torque transducers** — force and torque at the actuation; calibrate before and after each run.\n- **Strain gauges** — the measuring tool for stress: bond to the highest-strain location (from FEA), quarter/half/full bridges, temperature-compensated. Converts to stress via $\\sigma = E \\varepsilon$.\n- **Accelerometers** — vibration and resonance; ICP (charge) types for rugged environments; mount rigidly, avoid cable whipping artifacts.\n- **Thermocouples / RTDs** — temperature at critical points; type K for general, calibrated against a reference.\n- **DAQ and sampling** — sample ≥ 10× the highest frequency of interest (Nyquist + margin); record raw + the derived channel; log metadata (serial numbers, conditions, operator).\n\nThe output is a **correlated dataset**: measured stress vs FEA stress, resonance vs simulation — this is the moment CAE earns trust for the next design iteration."
+    },
+    {
+      "id": "sample-sizes",
+      "heading": "Sample Size & Confidence",
+      "content": "How many prototypes prove the point? Statistics decide — the **Weibull** distribution models life data:\n\n$$R(t) = e^{-(t/\\eta)^\\beta}$$\n\n($\\eta$ characteristic life, $\\beta$ shape: <1 infant mortality, =1 random failure, >1 wearout.) For the common \"demonstrate reliability R with confidence C with zero failures\" case, the binomial relation $C = 1 - R^n$ inverts to:\n\n$$n = \\frac{\\ln(1-C)}{\\ln(R)}$$\n\nDemo **90% reliability at 90% confidence, zero failures**: $n = \\ln(0.10)/\\ln(0.90) = 21.85 \\to 22$ samples. Demo 95/90 → 45 samples. Fewer samples with failures need order-statistics tables (Weibayes/rank regression): 2 failures allowed → ~45 samples at 90/90. The uncomfortable truth: \"we tested one unit, it passed\" proves almost nothing about reliability — sample size is a calculable requirement, not a budget choice. Feed failures back into the design loop ([[fatigue-and-failure-analysis|failure analysis]]) and re-test to closure."
+    },
+    {
+      "id": "signoff",
+      "heading": "Test Report & Design Freeze",
+      "content": "Validation closes with a **design freeze**, not an opinion:\n\n- The test report tabulates every DVP-R line: result, evidence, deviation, and disposition (pass / conditional / fail-and-redesign).\n- **Conditional passes** get documented with the exact conditions and a deadline; silent \"it probably holds\" is not a disposition.\n- The freeze releases the design for tooling and production (see [[manufacturing-process-selection|process selection]]) with the validation evidence attached — the ECO includes test results as its justification (see [[engineering-drawings-and-bom|change control]]).\n- Production then re-validates: first-article inspection ([[metrology-and-inspection|metrology]]), SPC capability ([[quality-control-and-spc|SPC]]), and any process-qualification tests — closing the loop from specification to ship.\n\nA defensible product has a chain: spec → FMEA → DVP-R → test results → freeze. Every link documented, every deviation explained. That chain is what survives the audit, the lawsuit, and the field failure review."
+    }
+  ],
+  "keyTakeaways": [
+    "Match the prototype tier to the question: looks-like for form, works-like for physics, production-intent for the final process.",
+    "DVP-R + FMEA link every credible failure mode to a test with acceptance criteria.",
+    "Instrument to learn: strain gauges, load cells, accelerometers — sampled ≥10× the highest frequency of interest.",
+    "Zero-failure demo of 90% reliability at 90% confidence needs 22 samples: n = ln(1−C)/ln(R)."
+  ],
+  "relatedTopics": [
+    "new-product-design",
+    "cae-analysis",
+    "metrology-and-inspection",
+    "fatigue-and-failure-analysis",
+    "additive-manufacturing"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "id": "new-product-design",
+  "title": "New Product Design & Development",
+  "category": "Product Design & CAD",
+  "categoryId": "product-design",
+  "readTime": "9 min",
+  "difficulty": "Beginner",
+  "icon": "bulb",
+  "summary": "The structured NPD workflow: voice of customer, concept generation, DFM/DFA, prototyping, and design reviews.",
+  "infobox": {
+    "title": "NPD Quick Specs",
+    "imageSymbol": "💡🔧",
+    "keyFormulas": [
+      { "label": "DFA Efficiency", "math": "E_{DFA} = \\frac{3 \\times N_{min}}{T_{assembly}} \\times 100\\%" },
+      { "label": "Design Margin", "math": "M = \\frac{C - D}{C} \\times 100\\%" },
+      { "label": "Assembly Cost", "math": "C_A = T_{assembly} \\times hourly\\_rate" }
+    ],
+    "siUnits": "Time (s), Cost (currency)",
+    "primaryFields": "Product Development, Manufacturing, Quality, Project Management",
+    "keyConstants": "Stage-Gate / DFM / DFA / FMEA standards"
+  },
+  "sections": [
+    {
+      "id": "overview",
+      "heading": "What Is New Product Development?",
+      "content": "**New Product Development (NPD)** is the end-to-end process of turning a market need into a manufacturable, sellable product. It spans idea generation, engineering design, validation, and launch. A disciplined NPD process is what separates products that ship on time and budget from projects that stall in engineering change loops."
+    },
+    {
+      "id": "stage-gate-process",
+      "heading": "The Stage-Gate Process",
+      "content": "The **Stage-Gate** model breaks product development into phases separated by decision gates:\n\n1. **Discovery & Ideation** — market research, technology scouting\n2. **Scoping** — feasibility study, business case\n3. **Concept Development** — requirements and design concepts\n4. **Detail Design & Engineering** — CAD, analysis, drawings\n5. **Prototyping & Testing** — validation against requirements\n6. **Production Ramp-up & Launch** — tooling, process validation\n\nEach **gate** is a go / no-go / rework decision. Gates prevent early design errors from becoming expensive late-stage rework — the single most effective cost control in product development."
+    },
+    {
+      "id": "voice-of-customer",
+      "heading": "Requirements: Voice of the Customer",
+      "content": "Every successful product starts with a quantified requirements list, not an intuition. Capture the **Voice of the Customer (VOC)** through interviews, surveys, and field data, then translate qualitative needs into measurable engineering targets using **QFD (Quality Function Deployment)** — the \"house of quality.\"\n\nGood requirements are **SMART**: Specific, Measurable, Achievable, Relevant, Time-bound. Example: *\"the handle shall transmit 500 N of pull force for 10,000 cycles without permanent deformation\"* — not *\"the handle should be strong.\"*"
+    },
+    {
+      "id": "concept-generation",
+      "heading": "Concept Generation & Selection",
+      "content": "Generate multiple solutions before committing to one. Structured methods include:\n\n- **Morphological analysis** — combine sub-solutions per function into a solution matrix\n- **TRIZ** — resolve contradictions using known inventive principles\n- **Benchmarking** — reverse-engineer competitive solutions\n- **Brainstorming / 6-3-5** — rapid idea volume, judge later\n\nScore concepts against a **weighted decision matrix** (criteria like cost, performance, risk, manufacturability, serviceability) before detail design begins. A down-selected, documented concept is the cleanest way to kill expensive dead-ends early."
+    },
+    {
+      "id": "dfm-dfa",
+      "heading": "Design for Manufacturing & Assembly (DFM/DFA)",
+      "content": "**DFM** (Design for Manufacturing) simplifies the design so parts are easy and cheap to produce with available processes. **DFA** (Design for Assembly) minimizes assembly effort. Key rules:\n\n- Minimize the **number of parts** — combine functions into one part\n- Design parts that **self-locate and self-align** during assembly\n- Use **symmetrical or obviously asymmetrical** parts to prevent misfeeding\n- Reduce **fastener types** — standardize screws, clips, snap-fits\n- Favor **standard stock sizes** and common tolerances for machined features\n\nDFA efficiency quantifies the result:\n\n$$E_{DFA} = \\frac{3 \\times N_{min}}{T_{assembly}} \\times 100\\%$$\n\nwhere $N_{min}$ is the theoretical minimum number of parts and $T_{assembly}$ is the total manual assembly time in seconds. **Boothroyd-Dewhurst DFA** is the industry-standard methodology for this calculation."
+    },
+    {
+      "id": "prototyping-testing",
+      "heading": "Prototyping & Validation",
+      "content": "Prototypes de-risk the design before tooling investment:\n\n- **Conceptual prototypes** — 3D-printed or foam models to explore form and fit\n- **Functional prototypes** — machined or SLA parts for mechanical testing\n- **Engineering samples** — near-production parts to validate process capability\n- **Pilot production** — first articles from production tooling\n\nCouple physical testing with [[cae-analysis|CAE simulation]] so each prototype cycle is guided by predicted behavior rather than trial and error."
+    },
+    {
+      "id": "design-reviews-fmea",
+      "heading": "Design Reviews & FMEA",
+      "content": "**Formal design reviews** at each development phase bring fresh eyes onto the design. A structured **Design FMEA (Failure Mode and Effects Analysis)** identifies how the product could fail, rates Severity × Occurrence × Detection, and drives corrective actions *before* release.\n\n| FMEA Column | Meaning |\n|---|---|\n| Failure Mode | How the part could fail (e.g., fatigue crack) |\n| Severity (S) | How bad the failure is (1-10) |\n| Occurrence (O) | How likely it is (1-10) |\n| Detection (D) | How likely inspection misses it (1-10) |\n| RPN | Risk Priority Number = S × O × D |\n\nAttack the highest RPN items first. A completed FMEA also becomes the basis for test plans and quality control documentation."
+    },
+    {
+      "id": "digital-thread",
+      "heading": "The Digital Thread: CAD → CAE → CAM",
+      "content": "Modern NPD runs on a **digital thread** — one continuous data flow across tools:\n\n- [[cad-computer-aided-design|CAD]] — the master 3D model and drawings\n- [[cae-analysis|CAE]] — stress, thermal, and dynamic validation of the geometry\n- [[cam-computer-aided-manufacturing|CAM]] — toolpaths and CNC programs from the same geometry\n- [[gdnt-fundamentals|GD&T]] — the tolerancing language carried on drawings to inspection\n\nWhen the model is the single source of truth, engineering changes propagate instantly instead of requiring manual redraws — the foundation of faster, cheaper, higher-quality launches."
+    }
+  ],
+  "keyTakeaways": [
+    "Stage-Gate development with explicit go/no-go gates is the most reliable route to on-time, on-budget launches.",
+    "Quantified requirements (VOC/QFD) prevent subjective design drift.",
+    "DFM/DFA applied early typically cuts manufacturing cost by 30-50%.",
+    "Design FMEA prioritizes risk with RPN = Severity × Occurrence × Detection.",
+    "A CAD → CAE → CAM digital thread keeps the model as the single source of truth."
+  ],
+  "relatedTopics": [
+    "cad-computer-aided-design",
+    "cae-analysis",
+    "cam-computer-aided-manufacturing",
+    "gdnt-fundamentals"
+  ]
+}
