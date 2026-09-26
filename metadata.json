@@ -1,0 +1,8 @@
+{
+  "name": "MechWiki",
+  "description": "Modern Mechanical Engineering Knowledge Hub with interactive unit-aware calculators, formula references, and deep-dive technical topics.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

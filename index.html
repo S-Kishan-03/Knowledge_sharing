@@ -1,70 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MechWiki | Mechanical Engineering Knowledge Hub</title>
-  <meta name="description" content="A modern, data-driven, interactive Mechanical Engineering wiki and reference platform hosted on GitHub Pages.">
+  <meta name="description" content="Modern Mechanical Engineering Knowledge Hub with interactive unit-aware calculators, formula references, and deep-dive technical topics.">
+  <meta property="og:title" content="MechWiki | Mechanical Engineering Knowledge Hub">
+  <meta property="og:description" content="Modern Mechanical Engineering Knowledge Hub with interactive unit-aware calculators, formula references, and deep-dive technical topics.">
+  <meta property="og:type" content="website">
   
-  <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('mechwiki_theme');
+        var isDark = saved ? saved === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
 
-  <!-- KaTeX for LaTeX Math Rendering -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  <!-- Fonts: Plus Jakarta Sans & JetBrains Mono for clean engineering display & tabular math -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Marked.js for Markdown Parsing -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- KaTeX CSS for LaTeX math equations -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
 </head>
-<body>
-  <div id="app-layout">
-    <!-- Top Glassmorphism Navigation Bar -->
-    <header class="app-header">
-      <div style="display: flex; align-items: center; gap: 0.75rem;">
-        <button id="sidebar-toggle-btn" class="btn-icon" aria-label="Toggle Navigation Sidebar" aria-expanded="false" aria-controls="app-sidebar">☰</button>
-        <a class="brand-logo" onclick="Router.navigate('home')">
-          <div class="brand-icon">⚙️</div>
-          <div class="brand-title">Mech<span>Wiki</span></div>
-        </a>
-      </div>
-
-      <div class="header-center">
-        <div class="search-box">
-          <span class="search-icon" aria-hidden="true">🔍</span>
-          <input type="text" id="global-search-input" placeholder="Search topics, formulas, or keywords (e.g., stress, bernoulli, Carnot)..." aria-label="Search topics, formulas, or keywords" aria-autocomplete="list" aria-controls="search-results">
-        </div>
-        <div id="search-results" class="search-results" aria-live="polite" aria-atomic="true" hidden></div>
-      </div>
-
-      <div class="header-actions">
-        <button id="theme-toggle-btn" class="btn-icon" title="Toggle Light/Dark Theme" aria-label="Toggle Theme">
-          <span id="theme-icon">🌙</span>
-        </button>
-      </div>
-    </header>
-
-    <!-- Main Application Container -->
-    <div class="app-body">
-      <!-- Left Category & Topic Navigation Sidebar -->
-      <aside id="app-sidebar" class="app-sidebar">
-        <div id="sidebar-categories">
-          <!-- Populated dynamically by app.js -->
-        </div>
-      </aside>
-
-      <!-- Main Content View -->
-      <main id="main-content" class="app-main">
-        <!-- Rendered dynamically by renderer.js -->
-      </main>
-    </div>
-  </div>
-
-  <!-- Application Scripts -->
-  <script src="js/calculators.js"></script>
-  <script src="js/router.js"></script>
-  <script src="js/renderer.js"></script>
-  <script src="js/search.js"></script>
-  <script src="js/app.js"></script>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white min-h-screen">
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>

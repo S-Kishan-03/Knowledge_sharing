@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    color-scheme: light dark;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html:not(.dark) {
+    color-scheme: light;
+  }
+
+  body {
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Custom scrollbar for technical wiki layout */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.25);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.45);
+  }
+}
+
+/* Explicit fallback colors for Light & Dark Root */
+html.dark, html.dark body {
+  background-color: #020617;
+  color: #f8fafc;
+}
+
+html:not(.dark), html:not(.dark) body {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* KaTeX equations refinements */
+.katex-display {
+  margin: 1rem 0 !important;
+  padding: 0.75rem 1rem !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-radius: 0.75rem;
+}
+
+.dark .katex-display {
+  background-color: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html:not(.dark) .katex-display {
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+/* Prosaic markdown typography */
+.wiki-prose h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+}
+
+.dark .wiki-prose h2 {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+html:not(.dark) .wiki-prose h2 {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.wiki-prose h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.wiki-prose p {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.75;
+}
+
+.wiki-prose ul, .wiki-prose ol {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  line-height: 1.75;
+}
+
+.wiki-prose ul {
+  list-style-type: disc;
+}
+
+.wiki-prose ol {
+  list-style-type: decimal;
+}
+
+.dark .wiki-prose code:not(pre code) {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 0.15em 0.35em;
+  border-radius: 0.25rem;
+  background-color: rgba(99, 102, 241, 0.15);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+html:not(.dark) .wiki-prose code:not(pre code) {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 0.15em 0.35em;
+  border-radius: 0.25rem;
+  background-color: #ede9fe;
+  color: #4338ca;
+  border: 1px solid #ddd6fe;
+}
+
+.dark .wiki-prose pre {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  background-color: #020617;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+}
+
+html:not(.dark) .wiki-prose pre {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+}
