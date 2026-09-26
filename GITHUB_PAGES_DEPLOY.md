@@ -6,14 +6,14 @@ MechWiki is 100% client-side (built with React, TypeScript, and Vite) and uses h
 
 ## Method 1: Automatic Deployment with GitHub Actions (Recommended)
 
-An automated deployment workflow is already configured in `.github/workflows/deploy.yml`.
+An automated deployment workflow is pre-configured in `.github/workflows/deploy.yml`.
 
 ### Steps:
-1. **Push your code to GitHub**:
+1. **Push your code to GitHub (including `package-lock.json`)**:
    ```bash
    git init
    git add .
-   git commit -m "Initial MechWiki commit"
+   git commit -m "Initial MechWiki commit with lock file"
    git branch -M main
    git remote add origin https://github.com/<your-username>/<your-repo-name>.git
    git push -u origin main
@@ -26,8 +26,19 @@ An automated deployment workflow is already configured in `.github/workflows/dep
    - Under **Build and deployment** > **Source**, select **GitHub Actions**.
 
 3. **Done!**
-   - GitHub will automatically trigger the workflow and publish your site at:
+   - GitHub Actions will run the workflow and publish your site at:
      `https://<your-username>.github.io/<your-repo-name>/`
+
+---
+
+## 🛠️ Note on Lock Files (`package-lock.json`)
+
+If GitHub Actions reports:
+> *Missing dependency lock file — The workflow can't find package-lock.json, npm-shrinkwrap.json, or yarn.lock in your repository.*
+
+Both safeguards are already in place:
+1. `package-lock.json` has been generated and included in the root directory. Make sure to commit it (`git add package-lock.json`).
+2. `.github/workflows/deploy.yml` has been updated to remove the strict `cache: 'npm'` requirement on `actions/setup-node@v4` and use resilient install logic (`if [ -f package-lock.json ]; then npm ci; else npm install; fi`), ensuring builds succeed even if committed without a lockfile.
 
 ---
 
